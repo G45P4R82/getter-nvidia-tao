@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RUNTIME_DIR="${ROOT_DIR}/.runtime/tao-docker-compose"
+UPSTREAM_REPO="${UPSTREAM_REPO:-https://github.com/NVIDIA-TAO/tao-tutorials.git}"
+UPSTREAM_REF="${UPSTREAM_REF:-main}"
+CONFIG_FILE="${ROOT_DIR}/config.env"
+SECRETS_FILE="${ROOT_DIR}/secrets.json"
+
+usage() {
+  printf '%s\n' \
+    'Usage: ./tao-ftms COMMAND [OPTIONS]' \
+    '' \
+    'Commands:' \
+    '  up, up-all, down, restart, logs, status, config' \
+    '' \
+    'Options:' \
+    '  --airgapped, --no-airgapped, --ptm, --no-ptm' \
+    '  --python=VERSION, --upstream-ref=REF'
+}
+
+require_file() {
+  if [[ ! -f "$1" ]]; then
+    printf 'Missing %s. Copy the example file first.\n' "$1" >&2
+    exit 1
+  fi
+}
+
+prepare_runtime() {
+  require_file "$CONFIG_FILE"
+  require_file "$SECRETS_FILE"
+  mkdir -p "$RUNTIME_DIR"
+
+  if [[ ! -d "$RUNTIME_DIR/.git" ]]; then
+    git clone --filter=blob:none --no-checkout "$UPSTREAM_REPO" "$RUNTIME_DIR"
+  fi
+
+  git -C "$RUNTIME_DIR" fetch --depth=1 origin "$UPSTREAM_REF"
+  git -C "$RUNTIME_DIR" checkout --force FETCH_HEAD
+
+  local upstream_dir="$RUNTIME_DIR/setup/tao-docker-compose"
+  if [[ ! -f "$upstream_dir/docker-compose.yml" || ! -f "$upstream_dir/run.sh" ]]; then
+    printf 'Upstream FTMS Compose bundle is incomplete at ref %s.\n' "$UPSTREAM_REF" >&2
+    exit 1
+  fi
+
+  cp "$CONFIG_FILE" "$upstream_dir/config.env"
+  cp "$SECRETS_FILE" "$upstream_dir/secrets.json"
+  chmod 600 "$upstream_dir/secrets.json"
+}
+
+main() {
+  if [[ $# -eq 0 ]]; then
+    usage
+    exit 0
+  fi
+
+  prepare_runtime
+  local command="$1"
+  shift
+
+  case "$command" in
+    --help|-h|help)
+      usage
+      ;;
+    up|up-all|down|restart|logs|status|config|cleanup-seaweed|clear-mongo)
+      exec "$RUNTIME_DIR/setup/tao-docker-compose/run.sh" "$command" "$@"
+      ;;
+    *)
+      usage >&2
+      exit 2
+      ;;
+  esac
+}
+
+main "$@"

@@ -1,0 +1,11 @@
+config.env
+secrets.json
+.runtime/
+.env
+*.log
+*.key
+*.pem
+*.crt
+backups/
+saved-docker-images/
+airgapped-models/
