@@ -4,11 +4,12 @@ set -euo pipefail
 
 BASE_URL="${TAO_BASE_URL:-http://localhost:${NGINX_HTTP_PORT:-8090}}"
 
-printf 'Checking TAO FTMS at %s\n' "$BASE_URL"
-status_code="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "$BASE_URL")"
+health_url="${BASE_URL}/api/v2/health"
+printf 'Checking TAO FTMS at %s\n' "$health_url"
+status_code="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' "$health_url")"
 
 case "$status_code" in
-  2*|3*|401|403)
+  2*|401|403)
     printf 'TAO endpoint reachable (HTTP %s).\n' "$status_code"
     ;;
   *)

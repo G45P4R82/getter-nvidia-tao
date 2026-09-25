@@ -25,7 +25,8 @@ $EDITOR config.env secrets.json
 ./tao-ftms status
 ```
 
-The default API endpoint is `http://localhost:8090`.
+The default API endpoint is `http://localhost:8090` and its health endpoint is
+`http://localhost:8090/api/v2/health`.
 
 Run the smoke test after the services are up:
 
