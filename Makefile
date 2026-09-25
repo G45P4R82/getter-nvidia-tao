@@ -1,4 +1,4 @@
-.PHONY: init up up-all down restart logs status config smoke
+.PHONY: init up up-all down restart logs status config smoke test-safe test-auth test-integration
 
 init:
 	cp config.env.example config.env
@@ -28,3 +28,12 @@ config:
 
 smoke:
 	./scripts/smoke-test.sh
+
+test-safe:
+	pytest -m 'not auth and not integration'
+
+test-auth:
+	pytest --run-auth -m 'auth and not integration'
+
+test-integration:
+	pytest --run-auth --run-integration -m integration
