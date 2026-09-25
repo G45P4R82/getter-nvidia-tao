@@ -1,0 +1,9 @@
+---
+- name: Deploy NVIDIA TAO FTMS without touching existing services
+  hosts: tao_ftms
+  become: false
+  gather_facts: true
+  vars_files:
+    - ../inventory/group_vars/vault.yml
+  roles:
+    - role: tao_ftms

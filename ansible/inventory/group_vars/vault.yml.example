@@ -1,0 +1,6 @@
+# Copy to ansible/inventory/group_vars/vault.yml and encrypt with Ansible Vault.
+# Do not commit the resulting vault.yml.
+
+ansible_become_password: ""
+tao_ftms_ngc_api_key: ""
+tao_ftms_ptm_api_key: ""

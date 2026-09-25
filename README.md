@@ -98,6 +98,21 @@ UPSTREAM_REF=<reviewed-commit> ./tao-ftms up-all
 - The official FTMS services require Docker access to launch TAO job containers;
   review that trust boundary before exposing the host to untrusted users.
 
+## Ansible Deployment
+
+The checked-in Ansible playbook deploys this repository to a dedicated host
+directory and checks ports before it starts anything:
+
+```bash
+cp ansible/inventory/group_vars/vault.yml.example \
+   ansible/inventory/group_vars/vault.yml
+ansible-vault encrypt ansible/inventory/group_vars/vault.yml
+ansible-playbook --check ansible/playbooks/deploy.yml
+```
+
+See [`ansible/README.md`](ansible/README.md) for the production sequence. The
+playbook never runs a global Docker shutdown or cleanup command.
+
 ## License
 
 This wrapper is Apache-2.0. NVIDIA TAO images, pretrained models, and their

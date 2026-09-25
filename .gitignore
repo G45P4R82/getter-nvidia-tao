@@ -9,3 +9,5 @@ secrets.json
 backups/
 saved-docker-images/
 airgapped-models/
+ansible/inventory/production.local.ini
+ansible/inventory/group_vars/vault.yml

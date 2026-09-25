@@ -1,0 +1,113 @@
+---
+- name: Validate target operating system
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.os_family == "Debian"
+    fail_msg: "The TAO Compose bundle is currently approved only for Debian-family hosts."
+
+- name: Validate required secret variables
+  ansible.builtin.assert:
+    that:
+      - tao_ftms_ngc_api_key | length > 0
+    fail_msg: "tao_ftms_ngc_api_key is required. Provide it through encrypted Ansible Vault."
+
+- name: Check Docker availability
+  ansible.builtin.command: docker version --format '{{ "{{.Server.Version}}" }}'
+  register: tao_ftms_docker_version
+  changed_when: false
+  check_mode: false
+
+- name: Check NVIDIA runtime availability
+  ansible.builtin.command: nvidia-smi --query-gpu=name --format=csv,noheader
+  register: tao_ftms_gpu
+  changed_when: false
+  check_mode: false
+
+- name: Check configured ports without changing services
+  ansible.builtin.shell: >-
+    ss -ltn |
+    awk 'NR > 1 {print $4}' |
+    grep -E '(:{{ item }})$' || true
+  args:
+    executable: /bin/bash
+  loop:
+    - "{{ tao_ftms_http_port }}"
+    - "{{ tao_ftms_https_port }}"
+    - "{{ tao_ftms_seaweedfs_master_port }}"
+    - "{{ tao_ftms_seaweedfs_volume_port }}"
+    - "{{ tao_ftms_seaweedfs_filer_port }}"
+    - "{{ tao_ftms_seaweedfs_s3_port }}"
+  register: tao_ftms_port_checks
+  changed_when: false
+  check_mode: false
+
+- name: Stop if a configured port is already bound
+  ansible.builtin.assert:
+    that: item.stdout | length == 0
+    fail_msg: "TAO port {{ item.item }} is already in use. No service was changed."
+  loop: "{{ tao_ftms_port_checks.results }}"
+
+- name: Create isolated installation directory
+  ansible.builtin.file:
+    path: "{{ tao_ftms_install_dir }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0750"
+
+- name: Checkout deployment repository
+  become: false
+  ansible.builtin.git:
+    repo: "{{ tao_ftms_repo }}"
+    dest: "{{ tao_ftms_install_dir }}"
+    version: "{{ tao_ftms_version }}"
+    update: true
+    force: false
+
+- name: Render private TAO configuration
+  ansible.builtin.template:
+    src: config.env.j2
+    dest: "{{ tao_ftms_install_dir }}/config.env"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0600"
+
+- name: Render private NGC credentials
+  ansible.builtin.template:
+    src: secrets.json.j2
+    dest: "{{ tao_ftms_install_dir }}/secrets.json"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0600"
+
+- name: Validate the upstream Compose bundle
+  ansible.builtin.command: ./tao-ftms config
+  args:
+    chdir: "{{ tao_ftms_install_dir }}"
+  environment:
+    UPSTREAM_REF: "{{ tao_ftms_upstream_ref }}"
+  register: tao_ftms_config_check
+  changed_when: false
+  when: not ansible_check_mode
+
+- name: Validate rendered Docker Compose configuration
+  ansible.builtin.command: docker compose config --quiet
+  args:
+    chdir: "{{ tao_ftms_install_dir }}/.runtime/tao-docker-compose/setup/tao-docker-compose"
+  register: tao_ftms_compose_check
+  changed_when: false
+  when: not ansible_check_mode
+
+- name: Start TAO FTMS only when explicitly enabled
+  ansible.builtin.command: ./tao-ftms up-all
+  args:
+    chdir: "{{ tao_ftms_install_dir }}"
+  environment:
+    UPSTREAM_REF: "{{ tao_ftms_upstream_ref }}"
+  when: tao_ftms_start | bool
+  register: tao_ftms_start_result
+  changed_when: true
+
+- name: Show deployment endpoint
+  ansible.builtin.debug:
+    msg: "TAO FTMS endpoint: http://{{ ansible_host }}:{{ tao_ftms_http_port }}"

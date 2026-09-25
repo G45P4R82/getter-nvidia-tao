@@ -1,0 +1,32 @@
+tao_ftms_repo: https://github.com/G45P4R82/getter-nvidia-tao.git
+tao_ftms_version: main
+tao_ftms_install_dir: /home/getter/tao-ftms
+
+# Keep the FTMS isolated from existing Compose projects.
+tao_ftms_http_port: 8090
+tao_ftms_https_port: 8443
+tao_ftms_seaweedfs_enabled: true
+tao_ftms_seaweedfs_master_port: 19333
+tao_ftms_seaweedfs_volume_port: 18080
+tao_ftms_seaweedfs_filer_port: 18888
+tao_ftms_seaweedfs_s3_port: 18333
+
+# Start conservatively. PTMs can be enabled after the API smoke test.
+tao_ftms_airgapped_mode: false
+tao_ftms_ptm_pull: false
+tao_ftms_num_gpu_per_node: 1
+tao_ftms_deployment_mode: PROD
+tao_ftms_log_level: INFO
+tao_ftms_upstream_ref: main
+
+# The current official bundle uses these images. Pin them after the first
+# compatibility test with the host's RTX 5090.
+tao_ftms_image_tao_api: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-cosmos-rl
+tao_ftms_image_tao_pytorch: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-pyt
+tao_ftms_image_tao_deploy: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-deploy
+tao_ftms_image_tao_ds: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-data-services
+tao_ftms_image_cosmos_rl: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-cosmos-rl
+
+# This remains false during check mode and until the operator explicitly
+# enables the converge step.
+tao_ftms_start: false
