@@ -159,7 +159,19 @@ main() {
       ;;
     up|up-all|down|restart|logs|status|config|cleanup-seaweed|clear-mongo)
       cd "$RUNTIME_DIR/setup/tao-docker-compose"
-      exec ./run.sh "$command" "$@"
+      ./run.sh "$command" "$@"
+      run_status=$?
+      if [[ "$run_status" -eq 0 && ( "$command" == "up" || "$command" == "up-all" ) ]]; then
+        # Compose does not recreate containers when only bind-mounted NGINX
+        # configuration changes. Recreate only TAO API services, never the
+        # other Compose projects on the host.
+        set -a
+        source ./config.env
+        set +a
+        docker compose --profile seaweedfs up -d --force-recreate \
+          nginx tao_api_app tao_api_workflow
+      fi
+      exit "$run_status"
       ;;
     *)
       usage >&2

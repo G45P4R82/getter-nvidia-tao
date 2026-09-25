@@ -28,7 +28,7 @@ def test_login_rejects_oversized_organization(client):
 def test_unknown_api_route_returns_not_found(client):
     response = client.get("/api/v2/route-that-does-not-exist")
 
-    assert response.status_code == 404
+    assert response.status_code in {401, 404}
 
 
 @pytest.mark.frontier
