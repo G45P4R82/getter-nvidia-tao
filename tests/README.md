@@ -45,6 +45,34 @@ The suite never starts training by default. Training integration needs a
 versioned dataset, a test workspace, a GPU budget, and an explicit separate
 test before it should be enabled in CI.
 
+## GitHub Actions
+
+The workflow is `.github/workflows/tao-api-tests.yml`. Because the current TAO
+endpoint is on a private `100.107.81.126` address, the repository needs a
+self-hosted runner with these labels:
+
+```text
+self-hosted, linux, tao-ftms
+```
+
+Configure these repository variables:
+
+```text
+TAO_BASE_URL=http://100.107.81.126:8090
+TAO_ORG=getter
+```
+
+Configure these repository secrets. At least one is required for the
+authenticated job:
+
+```text
+NGC_API_KEY
+TAO_TOKEN
+```
+
+The integration job is manual-only and creates then deletes a temporary
+workspace. It is enabled from **Actions -> TAO API Tests -> Run workflow**.
+
 ## Test Layers
 
 - `test_system.py`: health, OpenAPI, ReDoc, and routing.
