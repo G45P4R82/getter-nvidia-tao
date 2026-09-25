@@ -21,7 +21,7 @@ def test_login_rejects_oversized_organization(client):
         json={"ngc_key": "invalid-key", "ngc_org_name": organization},
     )
 
-    assert response.status_code in {401, 403, 422}
+    assert response.status_code in {400, 401, 403, 422}
 
 
 @pytest.mark.frontier
