@@ -1,0 +1,44 @@
+NVIDIA TAO FTMS API
+===================
+
+Servidor:
+  http://100.107.81.126:8090
+
+Documentacao ReDoc:
+  http://100.107.81.126:8090/api/v2/redoc
+
+Especificacao OpenAPI:
+  http://100.107.81.126:8090/api/v2/openapi.json
+
+Health check:
+  http://100.107.81.126:8090/api/v2/health
+
+Abrir a documentacao pelo terminal:
+
+  curl http://100.107.81.126:8090/api/v2/redoc
+
+Baixar a especificacao OpenAPI:
+
+  curl -o tao-ftms-openapi.json \
+    http://100.107.81.126:8090/api/v2/openapi.json
+
+Visualizar o JSON formatado:
+
+  curl -s http://100.107.81.126:8090/api/v2/openapi.json | jq
+
+Verificar o health check:
+
+  curl -s http://100.107.81.126:8090/api/v2/health
+
+Resultado esperado:
+
+  ["liveness","readiness"]
+
+Observacao:
+  O Swagger UI padrao (/docs) nao esta habilitado pelo FTMS atual.
+  A documentacao disponivel e o ReDoc e o arquivo OpenAPI JSON.
+
+Autenticacao documentada pela API:
+
+  - api-key
+  - bearer-token
