@@ -18,6 +18,7 @@ tao_ftms_num_gpu_per_node: 1
 tao_ftms_deployment_mode: PROD
 tao_ftms_log_level: INFO
 tao_ftms_upstream_ref: main
+tao_ftms_mongodb_image: mongo:7.0
 
 # The current official bundle uses these images. Pin them after the first
 # compatibility test with the host's RTX 5090.

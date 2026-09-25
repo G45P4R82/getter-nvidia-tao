@@ -17,6 +17,7 @@ tao_ftms_num_gpu_per_node: 1
 tao_ftms_deployment_mode: PROD
 tao_ftms_log_level: INFO
 tao_ftms_upstream_ref: main
+tao_ftms_mongodb_image: mongo:7.0
 
 tao_ftms_image_tao_api: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-cosmos-rl
 tao_ftms_image_tao_pytorch: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-pyt

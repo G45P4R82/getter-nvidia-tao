@@ -49,6 +49,23 @@ prepare_runtime() {
   cp "$CONFIG_FILE" "$upstream_dir/config.env"
   cp "$SECRETS_FILE" "$upstream_dir/secrets.json"
   chmod 600 "$upstream_dir/secrets.json"
+
+  # MongoDB latest currently refuses to start on the host's kernel 7.x.
+  # Keep the official Compose bundle intact in Git and pin its local runtime
+  # override to a MongoDB line compatible with this host.
+  python3 - "$upstream_dir/docker-compose.yml" <<'PY'
+from pathlib import Path
+import sys
+
+compose_file = Path(sys.argv[1])
+content = compose_file.read_text()
+content = content.replace(
+    "image: mongo:latest",
+    "image: ${MONGODB_IMAGE:-mongo:7.0}",
+    1,
+)
+compose_file.write_text(content)
+PY
 }
 
 main() {
