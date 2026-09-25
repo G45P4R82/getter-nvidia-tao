@@ -23,28 +23,29 @@
   changed_when: false
   check_mode: false
 
+- name: List running containers for idempotent port validation
+  ansible.builtin.command: docker ps --format '{{ "{{.Names}}" }}'
+  register: tao_ftms_running_containers
+  changed_when: false
+  check_mode: false
+
 - name: Check configured ports without changing services
   ansible.builtin.shell: >-
     ss -ltn |
     awk 'NR > 1 {print $4}' |
-    grep -E '(:{{ item }})$' || true
+    grep -E '(:{{ item.port }})$' || true
   args:
     executable: /bin/bash
-  loop:
-    - "{{ tao_ftms_http_port }}"
-    - "{{ tao_ftms_https_port }}"
-    - "{{ tao_ftms_seaweedfs_master_port }}"
-    - "{{ tao_ftms_seaweedfs_volume_port }}"
-    - "{{ tao_ftms_seaweedfs_filer_port }}"
-    - "{{ tao_ftms_seaweedfs_s3_port }}"
+  loop: "{{ tao_ftms_port_bindings }}"
   register: tao_ftms_port_checks
   changed_when: false
   check_mode: false
 
 - name: Stop if a configured port is already bound
   ansible.builtin.assert:
-    that: item.stdout | length == 0
-    fail_msg: "TAO port {{ item.item }} is already in use. No service was changed."
+    that:
+      - item.stdout | length == 0 or item.item.container in tao_ftms_running_containers.stdout_lines
+    fail_msg: "TAO port {{ item.item.port }} is already in use by an unexpected process. No service was changed."
   loop: "{{ tao_ftms_port_checks.results }}"
 
 - name: Create isolated installation directory

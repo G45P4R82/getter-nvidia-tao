@@ -28,3 +28,17 @@ tao_ftms_image_cosmos_rl: nvcr.io/nvidia/tao/tao-toolkit:6.26.3-cosmos-rl
 tao_ftms_start: false
 tao_ftms_ngc_api_key: ""
 tao_ftms_ptm_api_key: ""
+
+tao_ftms_port_bindings:
+  - port: 8090
+    container: nginx
+  - port: 8443
+    container: nginx
+  - port: 19333
+    container: seaweedfs-master
+  - port: 18080
+    container: seaweedfs-volume
+  - port: 18888
+    container: seaweedfs-filer
+  - port: 18333
+    container: seaweedfs-s3
