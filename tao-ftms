@@ -66,6 +66,81 @@ content = content.replace(
 )
 compose_file.write_text(content)
 PY
+
+  # The upstream auth hook is attached to the auth blueprint only. Use the
+  # bundled NGINX as the perimeter so every API blueprint requires a JWT.
+  python3 - "$upstream_dir/nginx_sites/default.conf" <<'PY'
+from pathlib import Path
+import sys
+
+nginx_file = Path(sys.argv[1])
+content = nginx_file.read_text()
+auth_block = r'''    # Reject encoded and plain traversal attempts before proxying.
+    if ($request_uri ~* "(\\.\\.|%2e%2e|%2f|%5c)") { return 400; }
+
+    # Internal auth subrequest. The application validates the JWT and NGC
+    # session; the client never reaches this location directly.
+    location = /_tao_auth {
+        internal;
+        proxy_pass http://tao_api_app:8000/api/v2/auth;
+        proxy_pass_request_body off;
+        proxy_set_header Content-Length "";
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header X-Original-Url $request_uri;
+        proxy_set_header X-Original-Method $request_method;
+        proxy_set_header Host $host;
+    }
+
+    location = /api/v2/login {
+        proxy_pass http://tao_api_app:8000/api/v2/login;
+        proxy_pass_request_headers on;
+    }
+
+    location = /api/v2/health {
+        proxy_pass http://tao_api_app:8000/api/v2/health;
+        proxy_pass_request_headers on;
+    }
+
+    location = /api/v2/redoc {
+        proxy_pass http://tao_api_app:8000/api/v2/redoc;
+        proxy_pass_request_headers on;
+    }
+
+    location = /api/v2/openapi.json {
+        proxy_pass http://tao_api_app:8000/api/v2/openapi.json;
+        proxy_pass_request_headers on;
+    }
+
+'''
+needle = "    location /api/ {\n"
+if needle not in content:
+    raise SystemExit("TAO NGINX API location was not found")
+content = content.replace(needle, auth_block + "    location /api/ {\n", 1)
+api_start = content.index("    location /api/ {\n")
+api_end = content.index("    }\n", api_start)
+api_block = content[api_start:api_end]
+api_block = api_block.replace(
+    "        proxy_pass_request_headers on;\n",
+    "        auth_request /_tao_auth;\n        proxy_pass_request_headers on;\n",
+    1,
+)
+content = content[:api_start] + api_block + content[api_end:]
+nginx_file.write_text(content)
+PY
+
+  python3 - "$upstream_dir/docker-compose.yml" <<'PY'
+from pathlib import Path
+import sys
+
+compose_file = Path(sys.argv[1])
+content = compose_file.read_text()
+needle = "      USE_ADMIN_KEY: ${USE_ADMIN_KEY:-True}"
+replacement = needle + "\n      INGRESSENABLED: ${INGRESSENABLED:-true}"
+if needle not in content:
+    raise SystemExit("TAO USE_ADMIN_KEY environment entry was not found")
+content = content.replace(needle, replacement)
+compose_file.write_text(content)
+PY
 }
 
 main() {

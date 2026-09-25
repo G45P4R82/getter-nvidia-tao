@@ -14,6 +14,7 @@ tao_ftms_seaweedfs_s3_port: 18333
 # Start conservatively. PTMs can be enabled after the API smoke test.
 tao_ftms_airgapped_mode: false
 tao_ftms_ptm_pull: false
+tao_ftms_ingress_enabled: true
 tao_ftms_num_gpu_per_node: 1
 tao_ftms_deployment_mode: PROD
 tao_ftms_log_level: INFO
