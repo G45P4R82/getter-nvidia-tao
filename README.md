@@ -134,6 +134,103 @@ opencode
 Read-only TAO tools are enabled by default. Workspace mutations require
 `TAO_MCP_ALLOW_MUTATIONS=true` and an explicit confirmation argument.
 
+### MCP Tools
+
+The MCP exposes these read-only tools to OpenCode:
+
+- `tao_health`
+- `tao_api_info`
+- `tao_list_workspaces`
+- `tao_get_workspace`
+- `tao_list_datasets`
+- `tao_list_jobs`
+- `tao_get_job`
+- `tao_get_job_logs`
+- `tao_get_job_schema`
+- `tao_list_base_experiments`
+- `tao_list_gpu_types`
+
+The following tools change TAO state and are disabled by default:
+
+- `tao_create_workspace`
+- `tao_delete_workspace`
+
+Enable mutations only for a controlled session:
+
+```bash
+export TAO_MCP_ALLOW_MUTATIONS=true
+```
+
+Each mutation also requires `confirm="I_CONFIRM"`.
+
+### MCP Authentication
+
+The MCP authenticates against the TAO FTMS API using one of these options:
+
+- `TAO_TOKEN`: an existing TAO JWT.
+- `NGC_KEY` plus `TAO_ORG`: the MCP performs the TAO login and keeps the JWT in memory.
+
+Do not put either credential in `.opencode/opencode.json`, Git, tool arguments,
+or documentation. Export them only in the shell that starts OpenCode, or use a
+local secret manager.
+
+The MCP uses these non-secret defaults from `.opencode/opencode.json`:
+
+```text
+TAO_BASE_URL=http://100.107.81.126:8090
+TAO_ORG=getter
+TAO_MCP_ALLOW_MUTATIONS=false
+```
+
+### OpenCode Setup
+
+The project file `.opencode/opencode.json` registers the MCP through `stdio`:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "tao": {
+      "type": "local",
+      "command": [
+        "mcp/.venv/bin/fastmcp",
+        "run",
+        "mcp/src/tao_mcp/server.py:mcp"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
+
+Install and verify the MCP:
+
+```bash
+make mcp-install
+opencode mcp list
+```
+
+Expected output includes:
+
+```text
+tao connected
+```
+
+After changing `.opencode/opencode.json`, restart OpenCode. The running session
+does not hot-reload MCP configuration.
+
+### MCP Tests
+
+Run the local MCP unit and protocol tests:
+
+```bash
+make mcp-test
+```
+
+The GitHub Actions workflow runs these tests on a public runner. Tests that
+call the private FTMS endpoint run separately on a self-hosted runner with the
+labels `self-hosted`, `linux`, and `tao-ftms`.
+
 ## License
 
 This wrapper is Apache-2.0. NVIDIA TAO images, pretrained models, and their
