@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/tao_ftms_mcp.egg-info/PKG-INFO
+src/tao_ftms_mcp.egg-info/SOURCES.txt
+src/tao_ftms_mcp.egg-info/dependency_links.txt
+src/tao_ftms_mcp.egg-info/requires.txt
+src/tao_ftms_mcp.egg-info/top_level.txt
+src/tao_mcp/__init__.py
+src/tao_mcp/client.py
+src/tao_mcp/server.py
+tests/test_client.py
+tests/test_server.py

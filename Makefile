@@ -1,4 +1,4 @@
-.PHONY: init up up-all down restart logs status config smoke test-safe test-auth test-integration
+.PHONY: init up up-all down restart logs status config smoke test-safe test-auth test-integration mcp-install mcp-test
 
 init:
 	cp config.env.example config.env
@@ -37,3 +37,10 @@ test-auth:
 
 test-integration:
 	pytest --run-auth --run-integration -m integration
+
+mcp-install:
+	python3 -m venv mcp/.venv
+	mcp/.venv/bin/pip install -e 'mcp[test]'
+
+mcp-test:
+	mcp/.venv/bin/pytest -q mcp/tests

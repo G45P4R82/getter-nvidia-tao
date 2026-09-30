@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "tao": {
+      "type": "local",
+      "command": [
+        "mcp/.venv/bin/fastmcp",
+        "run",
+        "mcp/src/tao_mcp/server.py:mcp"
+      ],
+      "environment": {
+        "TAO_BASE_URL": "http://100.107.81.126:8090",
+        "TAO_ORG": "getter",
+        "TAO_MCP_ALLOW_MUTATIONS": "false"
+      },
+      "enabled": true,
+      "timeout": 30000
+    }
+  }
+}

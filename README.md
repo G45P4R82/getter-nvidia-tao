@@ -114,6 +114,26 @@ ansible-playbook --check ansible/playbooks/deploy.yml
 See [`ansible/README.md`](ansible/README.md) for the production sequence. The
 playbook never runs a global Docker shutdown or cleanup command.
 
+## OpenCode MCP
+
+The repository includes a local FastMCP server under `mcp/`. Install it with:
+
+```bash
+make mcp-install
+```
+
+The project configuration at `.opencode/opencode.json` registers the MCP using
+`stdio`. Export `NGC_KEY` before starting OpenCode, then restart OpenCode so it
+loads the project MCP configuration:
+
+```bash
+export NGC_KEY='your-ngc-key'
+opencode
+```
+
+Read-only TAO tools are enabled by default. Workspace mutations require
+`TAO_MCP_ALLOW_MUTATIONS=true` and an explicit confirmation argument.
+
 ## License
 
 This wrapper is Apache-2.0. NVIDIA TAO images, pretrained models, and their
