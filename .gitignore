@@ -11,6 +11,7 @@ saved-docker-images/
 airgapped-models/
 __pycache__/
 *.py[cod]
+*.egg-info/
 mcp/.venv/
 ansible/inventory/production.local.ini
 ansible/inventory/group_vars/vault.yml
