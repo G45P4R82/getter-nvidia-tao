@@ -7,6 +7,7 @@ import os
 import unittest
 
 from fastmcp import Client
+from fastmcp.exceptions import ToolError
 
 from tao_mcp.server import mcp
 
@@ -28,16 +29,16 @@ class RealMCPTests(unittest.IsolatedAsyncioTestCase):
     async def test_health_tool_calls_real_ftms(self):
         async with Client(mcp) as client:
             result = await client.call_tool("tao_health", {})
-        self.assertIn("readiness", result[0].text)
+        self.assertIn("readiness", result.content[0].text)
 
     async def test_mutation_is_disabled_by_default(self):
         os.environ.pop("TAO_MCP_ALLOW_MUTATIONS", None)
         async with Client(mcp) as client:
-            result = await client.call_tool(
-                "tao_create_workspace",
-                {"name": "blocked-unittest", "confirm": "I_CONFIRM"},
-            )
-        self.assertTrue(result.is_error)
+            with self.assertRaises(ToolError):
+                await client.call_tool(
+                    "tao_create_workspace",
+                    {"name": "blocked-unittest", "confirm": "I_CONFIRM"},
+                )
 
 
 if __name__ == "__main__":
