@@ -79,6 +79,14 @@ class RealTaoPipelineTests(unittest.TestCase):
         }
         if parent_job_id:
             payload["parent_job_id"] = parent_job_id
+            if action == "evaluate":
+                payload["eval_dataset_uri"] = os.getenv(
+                    "TAO_EVAL_DATASET_URI", cls.train_dataset_uri
+                )
+            if action == "inference":
+                payload["inference_dataset_uri"] = os.getenv(
+                    "TAO_INFERENCE_DATASET_URI", cls.train_dataset_uri
+                )
         else:
             payload["train_dataset_uris"] = [cls.train_dataset_uri]
             payload["eval_dataset_uri"] = os.getenv("TAO_EVAL_DATASET_URI", cls.train_dataset_uri)
