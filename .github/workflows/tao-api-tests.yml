@@ -51,7 +51,14 @@ jobs:
       - name: Run real MCP tests
         env:
           TAO_RUN_REAL_TESTS: 'true'
-        run: python -m unittest discover -s mcp/tests -v
+        run: python scripts/run_unittest_report.py --start-dir mcp/tests --experiment mcp-ci --report-dir test-reports
+
+      - name: Upload MCP report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mcp-test-report
+          path: test-reports/
 
   safe:
     name: Safe system and boundary tests
@@ -71,7 +78,14 @@ jobs:
       - name: Run real API tests
         env:
           TAO_RUN_REAL_TESTS: 'true'
-        run: python -m unittest discover -s tests -v
+        run: python scripts/run_unittest_report.py --start-dir tests --experiment api-ci --report-dir test-reports
+
+      - name: Upload API report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-test-report
+          path: test-reports/
 
   authenticated:
     name: Authenticated regression tests
@@ -94,7 +108,14 @@ jobs:
       - name: Run authenticated tests
         env:
           TAO_RUN_REAL_TESTS: 'true'
-        run: python -m unittest discover -s tests -v
+        run: python scripts/run_unittest_report.py --start-dir tests --experiment auth-ci --report-dir test-reports
+
+      - name: Upload authenticated report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: authenticated-test-report
+          path: test-reports/
 
   integration:
     name: Opt-in integration lifecycle
@@ -119,7 +140,14 @@ jobs:
         env:
           TAO_RUN_REAL_TESTS: 'true'
           TAO_RUN_MUTATIONS: 'true'
-        run: python -m unittest discover -s tests -v
+        run: python scripts/run_unittest_report.py --start-dir tests --experiment integration-ci --report-dir test-reports
+
+      - name: Upload integration report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-report
+          path: test-reports/
 
   real-pipeline:
     name: Real TAO GPU pipeline
@@ -151,4 +179,11 @@ jobs:
         run: python -m pip install -r tests/requirements.txt
 
       - name: Run real training pipeline
-        run: python -m unittest tests.test_real_pipeline_unittest -v
+        run: python scripts/run_unittest_report.py --start-dir tests --pattern 'test_real_pipeline_unittest.py' --experiment pipeline-ci --report-dir test-reports
+
+      - name: Upload pipeline report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-test-report
+          path: test-reports/

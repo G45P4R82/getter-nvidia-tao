@@ -95,7 +95,9 @@ class RealTaoPipelineTests(unittest.TestCase):
         )
         if response.status_code not in (200, 201):
             raise AssertionError(f"TAO job creation failed: HTTP {response.status_code}")
-        return response.json()["id"]
+        job_id = response.json()["id"]
+        print(f"created_job action={action} id={job_id}")
+        return job_id
 
     @classmethod
     def _wait_for_job(cls, job_id: str) -> dict:
@@ -110,6 +112,7 @@ class RealTaoPipelineTests(unittest.TestCase):
             if response.status_code != 200:
                 raise AssertionError(f"TAO job lookup failed with HTTP {response.status_code}")
             last = response.json()
+            print(f"job_status id={job_id} status={last.get('status')}")
             if last.get("status") in terminal:
                 break
             time.sleep(int(os.getenv("TAO_JOB_POLL_SECONDS", "15")))

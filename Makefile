@@ -39,10 +39,10 @@ test-integration:
 	TAO_RUN_REAL_TESTS=true TAO_RUN_MUTATIONS=true python -m unittest tests.test_api_unittest -v
 
 test-real:
-	TAO_RUN_REAL_TESTS=true python -m unittest discover -s tests -v
+	TAO_RUN_REAL_TESTS=true python scripts/run_unittest_report.py --start-dir tests --experiment "$${TAO_EXPERIMENT_NUMBER:-api-real}"
 
 real-pipeline:
-	TAO_RUN_REAL_PIPELINE=true python -m unittest tests.test_real_pipeline_unittest -v
+	TAO_RUN_REAL_PIPELINE=true python scripts/run_unittest_report.py --start-dir tests --pattern 'test_real_pipeline_unittest.py' --experiment "$${TAO_EXPERIMENT_NUMBER:-pipeline-real}"
 
 mcp-install:
 	python3 -m venv mcp/.venv
@@ -52,4 +52,4 @@ mcp-test:
 	mcp/.venv/bin/python -m unittest discover -s mcp/tests -v
 
 mcp-real:
-	TAO_RUN_REAL_TESTS=true mcp/.venv/bin/python -m unittest discover -s mcp/tests -v
+	TAO_RUN_REAL_TESTS=true mcp/.venv/bin/python scripts/run_unittest_report.py --start-dir mcp/tests --experiment "$${TAO_EXPERIMENT_NUMBER:-mcp-real}"
