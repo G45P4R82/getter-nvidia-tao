@@ -68,6 +68,17 @@ class RealTaoPipelineTests(unittest.TestCase):
     @classmethod
     def _create_job(cls, action: str, specs: dict, parent_job_id: str | None = None):
         network_arch = os.getenv("TAO_REAL_NETWORK", "classification_pyt")
+        specs = json.loads(json.dumps(specs))
+        dataset = specs.setdefault("dataset", {})
+        if action in {"export", "gen_trt_engine", "inference"}:
+            dataset["classes_file"] = os.getenv(
+                "TAO_CLASSES_URI",
+                f"{cls.train_dataset_uri.rstrip('/')}/classes.txt",
+            )
+        if action in {"gen_trt_engine", "inference"}:
+            dataset["batch_size"] = 1
+        if action == "inference" and isinstance(specs.get("inference"), dict):
+            specs["inference"]["batch_size"] = 1
         payload = {
             "kind": "experiment",
             "name": f"unittest-{network_arch}-{action}-{int(time.time())}",
