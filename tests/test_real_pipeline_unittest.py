@@ -37,7 +37,8 @@ class RealTaoPipelineTests(unittest.TestCase):
                     "enable_telemetry": False,
                 },
             )
-            cls.assertEqual(cls, login.status_code, 200)
+            if login.status_code != 200:
+                raise AssertionError(f"TAO login failed with HTTP {login.status_code}")
             cls.token = login.json()["token"]
         if not cls.token:
             raise unittest.SkipTest("set TAO_TOKEN or NGC_KEY")
@@ -92,7 +93,8 @@ class RealTaoPipelineTests(unittest.TestCase):
             headers=cls.headers,
             json=payload,
         )
-        cls.assertIn(cls, response.status_code, (200, 201), response.text[:500])
+        if response.status_code not in (200, 201):
+            raise AssertionError(f"TAO job creation failed: HTTP {response.status_code}")
         return response.json()["id"]
 
     @classmethod
@@ -105,14 +107,16 @@ class RealTaoPipelineTests(unittest.TestCase):
                 f"{cls.prefix}/jobs/{job_id}",
                 headers=cls.headers,
             )
-            cls.assertEqual(cls, response.status_code, 200)
+            if response.status_code != 200:
+                raise AssertionError(f"TAO job lookup failed with HTTP {response.status_code}")
             last = response.json()
             if last.get("status") in terminal:
                 break
             time.sleep(int(os.getenv("TAO_JOB_POLL_SECONDS", "15")))
         else:
             cls.fail(f"TAO job did not finish before timeout: {job_id}")
-        cls.assertNotIn(last.get("status"), {"Error", "Canceled", "Failed"}, last)
+        if last.get("status") in {"Error", "Canceled", "Failed"}:
+            raise AssertionError(f"TAO job failed: {last}")
         return last
 
     def test_real_training_job(self):

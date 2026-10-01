@@ -37,7 +37,8 @@ class RealTaoAPITests(unittest.TestCase):
                     "enable_telemetry": False,
                 },
             )
-            cls.assertEqual(cls, response.status_code, 200)
+            if response.status_code != 200:
+                raise AssertionError(f"TAO login failed with HTTP {response.status_code}")
             cls.token = response.json()["token"]
         if not cls.token:
             raise unittest.SkipTest("set TAO_TOKEN or NGC_KEY")
