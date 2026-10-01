@@ -1,4 +1,4 @@
-.PHONY: init up up-all down restart logs status config smoke test-safe test-auth test-integration mcp-install mcp-test
+.PHONY: init up up-all down restart logs status config smoke test-safe test-auth test-integration test-real real-pipeline mcp-install mcp-test mcp-real
 
 init:
 	cp config.env.example config.env
@@ -30,17 +30,26 @@ smoke:
 	./scripts/smoke-test.sh
 
 test-safe:
-	pytest -m 'not auth and not integration'
+	python -m unittest discover -s tests -p 'test_api_unittest.py' -v
 
 test-auth:
-	pytest --run-auth -m 'auth and not integration'
+	TAO_RUN_REAL_TESTS=true python -m unittest tests.test_api_unittest -v
 
 test-integration:
-	pytest --run-auth --run-integration -m integration
+	TAO_RUN_REAL_TESTS=true TAO_RUN_MUTATIONS=true python -m unittest tests.test_api_unittest -v
+
+test-real:
+	TAO_RUN_REAL_TESTS=true python -m unittest discover -s tests -v
+
+real-pipeline:
+	TAO_RUN_REAL_PIPELINE=true python -m unittest tests.test_real_pipeline_unittest -v
 
 mcp-install:
 	python3 -m venv mcp/.venv
 	mcp/.venv/bin/pip install -e 'mcp[test]'
 
 mcp-test:
-	mcp/.venv/bin/pytest -q mcp/tests
+	mcp/.venv/bin/python -m unittest discover -s mcp/tests -v
+
+mcp-real:
+	TAO_RUN_REAL_TESTS=true mcp/.venv/bin/python -m unittest discover -s mcp/tests -v

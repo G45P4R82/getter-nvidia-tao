@@ -221,14 +221,14 @@ does not hot-reload MCP configuration.
 
 ### MCP Tests
 
-Run the local MCP unit and protocol tests:
+Run the MCP tests using the real FastMCP server and FTMS endpoint:
 
 ```bash
-make mcp-test
+TAO_RUN_REAL_TESTS=true make mcp-real
 ```
 
-The GitHub Actions workflow runs these tests on a public runner. Tests that
-call the private FTMS endpoint run separately on a self-hosted runner with the
+All tests use Python `unittest`; no mocked HTTP transport is used. The GitHub
+Actions workflow runs the real MCP/API tests on a self-hosted runner with the
 labels `self-hosted`, `linux`, and `tao-ftms`.
 
 ## License

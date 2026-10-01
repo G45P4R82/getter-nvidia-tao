@@ -35,5 +35,9 @@ They also require `confirm="I_CONFIRM"` in the tool call.
 ## Tests
 
 ```bash
-make mcp-test
+make mcp-real
 ```
+
+The MCP tests use the real FastMCP server and real FTMS endpoint. Set
+`TAO_RUN_REAL_TESTS=true`, `TAO_BASE_URL`, `TAO_ORG`, and either `NGC_KEY` or
+`TAO_TOKEN`. No mocked HTTP transport is used.
