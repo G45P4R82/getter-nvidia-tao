@@ -83,6 +83,8 @@ class RealTaoPipelineTests(unittest.TestCase):
                 payload["eval_dataset_uri"] = os.getenv(
                     "TAO_EVAL_DATASET_URI", cls.train_dataset_uri
                 )
+            if action == "export":
+                payload["train_dataset_uris"] = [cls.train_dataset_uri]
             if action == "inference":
                 payload["inference_dataset_uri"] = os.getenv(
                     "TAO_INFERENCE_DATASET_URI", cls.train_dataset_uri
