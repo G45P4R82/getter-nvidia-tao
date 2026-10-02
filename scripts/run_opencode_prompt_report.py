@@ -31,9 +31,9 @@ def redact(value: str) -> str:
     return value
 
 
-def event_summary(stdout: str) -> tuple[list[str], list[dict[str, str]]]:
+def event_summary(stdout: str) -> tuple[list[str], list[dict[str, object]]]:
     event_types: list[str] = []
-    tools: list[dict[str, str]] = []
+    tools: list[dict[str, object]] = []
     for line in stdout.splitlines():
         try:
             event = json.loads(line)
@@ -46,11 +46,17 @@ def event_summary(stdout: str) -> tuple[list[str], list[dict[str, str]]]:
             tool = part.get("tool") if isinstance(part, dict) else None
             state = part.get("state", {}) if isinstance(part, dict) else {}
             if isinstance(tool, str):
+                timing = state.get("time", {}) if isinstance(state, dict) else {}
                 tools.append(
                     {
                         "tool": tool,
                         "status": str(state.get("status", "unknown")),
                         "call_id": str(part.get("callID", "")),
+                        "input": state.get("input", {}),
+                        "output": state.get("output"),
+                        "error": state.get("error"),
+                        "started": timing.get("start") if isinstance(timing, dict) else None,
+                        "finished": timing.get("end") if isinstance(timing, dict) else None,
                     }
                 )
     return sorted(set(event_types)), tools
@@ -85,7 +91,7 @@ def main() -> int:
     event_types, tools = event_summary(stdout)
     tool_names = sorted({item["tool"] for item in tools})
     (artifact_dir / "mcp-tool-calls.jsonl").write_text(
-        "\n".join(json.dumps(item, ensure_ascii=True) for item in tools) + "\n",
+        "\n".join(json.dumps(item, ensure_ascii=True, default=str) for item in tools) + "\n",
         encoding="utf-8",
     )
     tool_errors = [item for item in tools if item["status"] == "error"]

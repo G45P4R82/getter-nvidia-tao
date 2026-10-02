@@ -290,5 +290,54 @@ jobs:
           generate_release_notes: false
           body: |
             Real OpenCode -> Azure OpenAI -> TAO MCP -> TAO FTMS experiment.
-            Report and raw OpenCode/MCP events are attached as release assets.
+            The browsable technical report is published at the repository GitHub Pages site.
+            Raw OpenCode/MCP events are attached as release assets.
           files: release-assets/experiment_001-prompt-*.tar.gz
+
+  publish-prompt-pages:
+    name: Publish browsable Experiment 001 report
+    needs: prompt-e2e
+    if: ${{ always() && needs.prompt-e2e.result != 'cancelled' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download prompt report
+        uses: actions/download-artifact@v4
+        with:
+          name: experiment-001-prompt-report
+          path: report-input
+
+      - name: Download previous Pages site
+        uses: actions/download-pages-artifact@v3
+        continue-on-error: true
+        with:
+          path: previous-site
+
+      - name: Build technical report site
+        run: |
+          python3 scripts/build_experiment_site.py \
+            --report-root report-input/test-reports \
+            --output site \
+            --previous-site previous-site \
+            --run-id "${GITHUB_RUN_ID}" \
+            --release-tag "experiment-001-prompt-${GITHUB_RUN_NUMBER}"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy Pages
+        uses: actions/deploy-pages@v4
+
+      - name: Report Pages URL
+        run: |
+          echo "Technical report site: https://g45p4r82.github.io/getter-nvidia-tao/reports/experiment-001-prompt-${GITHUB_RUN_ID}/" >> "$GITHUB_STEP_SUMMARY"
