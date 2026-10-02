@@ -71,7 +71,12 @@ def main() -> None:
         counts[name] = counts.get(name, 0) + 1
     chart(raw / "mcp-tools.svg", "Chamadas MCP por ferramenta", [(k, float(v)) for k, v in counts.items()], "#7b61ff")
     failed = [job for job in jobs if str(job.get("status", "")) in {"Error", "Failed", "Failure", "Canceled", "Cancelled"}]
-    status = "FAILED" if failed else ("PASSED" if jobs else "INCOMPLETE")
+    actions = {str(job.get("action", "")) for job in jobs}
+    required_actions = {"train", "evaluate", "export", "gen_trt_engine", "inference"}
+    unfinished = [job for job in jobs if str(job.get("status", "")) not in {"Done", "Completed"}]
+    status = "FAILED" if failed else (
+        "INCOMPLETE" if not jobs or unfinished or not required_actions.issubset(actions) else "PASSED"
+    )
     table = "\n".join(
         f"| `{job.get('action', 'unknown')}` | `{job.get('id')}` | **{job.get('status', 'unknown')}** | {fmt_seconds(duration_seconds(job))} | {job.get('network_arch', 'Não disponível')} |"
         for job in jobs

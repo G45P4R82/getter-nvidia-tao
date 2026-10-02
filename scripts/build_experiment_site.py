@@ -70,7 +70,7 @@ def job_rows(tools: list[dict]) -> list[dict]:
             job_id = item.get("id")
             if not isinstance(job_id, str) or len(job_id) < 8:
                 continue
-            if not any(key in item for key in ("status", "action", "job_details", "network_arch")):
+            if not any(key in item for key in ("action", "job_details", "network_arch")):
                 continue
             row = jobs.setdefault(job_id, {"id": job_id})
             row.update({key: value for key, value in item.items() if key not in {"id"} or key not in row})
@@ -119,7 +119,12 @@ def page(report_root: Path, output: Path, run_id: str, release_tag: str) -> None
     jobs = job_rows(tools)
     report_text = report.read_text(encoding="utf-8") if report else "Relatório não encontrado."
     failed_jobs = [job for job in jobs if str(job.get("status", "")) in TERMINAL_FAILURES]
-    pipeline_status = "FAILED" if failed_jobs else ("PASSED" if jobs else "INCOMPLETE")
+    actions = {str(job.get("action", "")) for job in jobs}
+    required_actions = {"train", "evaluate", "export", "gen_trt_engine", "inference"}
+    unfinished = [job for job in jobs if str(job.get("status", "")) not in {"Done", "Completed"}]
+    pipeline_status = "FAILED" if failed_jobs else (
+        "INCOMPLETE" if not jobs or unfinished or not required_actions.issubset(actions) else "PASSED"
+    )
     run_slug = f"experiment-001-prompt-{run_id}"
     target = output / "reports" / run_slug
     target.mkdir(parents=True, exist_ok=True)
