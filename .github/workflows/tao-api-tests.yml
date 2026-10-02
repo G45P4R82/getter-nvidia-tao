@@ -297,7 +297,7 @@ jobs:
   publish-prompt-wiki:
     name: Publish Experiment 001 report to Wiki
     needs: prompt-e2e
-    if: ${{ always() && github.event_name == 'workflow_dispatch' && inputs.run_prompt == true && needs.prompt-e2e.result != 'cancelled' }}
+    if: ${{ needs.prompt-e2e.result == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

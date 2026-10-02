@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from scripts.build_experiment_site import duration_seconds, job_rows, page
+from scripts.run_opencode_prompt_report import pipeline_is_final
 
 
 class ExperimentSiteTests(unittest.TestCase):
@@ -41,6 +42,15 @@ class ExperimentSiteTests(unittest.TestCase):
             "last_modified": "2026-10-02T03:02:30+00:00",
         }
         self.assertEqual(duration_seconds(job), 150.0)
+
+    def test_pipeline_is_not_final_while_training_is_started(self):
+        tools = [{"output": '{"id":"12345678","action":"train","status":"Started"}'}]
+        self.assertFalse(pipeline_is_final(tools))
+
+    def test_pipeline_is_final_after_all_actions_complete(self):
+        actions = ["train", "evaluate", "export", "gen_trt_engine", "inference"]
+        tools = [{"output": {"id": str(index) + "1234567", "action": action, "status": "Done"}} for index, action in enumerate(actions)]
+        self.assertTrue(pipeline_is_final(tools))
 
     def test_page_is_generated_without_inventing_missing_metrics(self):
         with tempfile.TemporaryDirectory() as temp:
