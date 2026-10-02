@@ -19,6 +19,7 @@ services:
       - "github.com:4.228.31.150"
       - "broker.actions.githubusercontent.com:20.85.130.105"
       - "pipelinesghubeus8.actions.githubusercontent.com:20.102.39.220"
+      - "tokenghub.actions.githubusercontent.com:20.85.108.33"
     dns:
       - 1.1.1.1
       - 8.8.8.8
