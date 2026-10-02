@@ -10,17 +10,15 @@ from pathlib import Path
 
 def main() -> None:
     output = Path(os.environ["OPENCODE_CONFIG_OUTPUT"])
+    provider_options = {"baseURL": os.environ["OPENAI_BASE_URL"]}
+    if os.getenv("OPENAI_AUTH_MODE", "api_key") != "azure_ad":
+        provider_options["headers"] = {"api-key": os.environ["OPENAI_API_KEY"]}
     config = {
         "$schema": "https://opencode.ai/config.json",
-        "model": f"openai/{os.getenv('OPENAI_MODEL', 'gpt-5.6-luna')}",
+        "model": f"openai/{os.getenv('OPENAI_MODEL', 'gpt-4.1')}",
         "provider": {
             "openai": {
-                "options": {
-                    "baseURL": os.environ["OPENAI_BASE_URL"],
-                    "headers": {
-                        "api-key": os.environ["OPENAI_API_KEY"],
-                    },
-                }
+                "options": provider_options
             }
         },
         "mcp": {
