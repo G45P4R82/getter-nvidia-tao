@@ -1,0 +1,21 @@
+services:
+  github-runner:
+    build:
+      context: .
+      args:
+        RUNNER_VERSION: ${RUNNER_VERSION:-2.337.0}
+    container_name: github-runner-tao
+    restart: unless-stopped
+    init: true
+    environment:
+      REPO_URL: ${REPO_URL}
+      RUNNER_TOKEN: ${RUNNER_TOKEN}
+      RUNNER_NAME: ${RUNNER_NAME:-tao-ftms-docker}
+      RUNNER_LABELS: ${RUNNER_LABELS:-tao-ftms}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - runner_work:/runner/_work
+
+volumes:
+  runner_work:

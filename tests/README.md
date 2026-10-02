@@ -75,8 +75,9 @@ TensorRT. They do not use mocked HTTP responses.
 ## GitHub Actions
 
 The workflow is `.github/workflows/tao-api-tests.yml`. Because the current TAO
-endpoint is on a private `100.107.81.126` address, the repository needs a
-self-hosted runner with these labels:
+endpoint is private and the workflow uses a self-hosted runner, it is triggered
+by pushes to `main` and manual dispatch only. It does not execute untrusted Pull
+Request code on the training machine. The runner needs these labels:
 
 ```text
 self-hosted, linux, tao-ftms
