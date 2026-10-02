@@ -88,7 +88,12 @@ def main() -> int:
         "\n".join(json.dumps(item, ensure_ascii=True) for item in tools) + "\n",
         encoding="utf-8",
     )
-    status = "PASSED" if process.returncode == 0 else "FAILED"
+    tool_errors = [item for item in tools if item["status"] == "error"]
+    if tool_errors:
+        process_returncode = 1
+    else:
+        process_returncode = process.returncode
+    status = "PASSED" if process_returncode == 0 else "FAILED"
     report = [
         f"# Experiment {cli.experiment} - OpenCode Prompt",
         "",
@@ -99,6 +104,7 @@ def main() -> int:
         f"- Model: `openai/{cli.model}`",
         f"- TAO URL: `{os.getenv('TAO_BASE_URL', 'not set')}`",
         f"- OpenCode exit code: `{process.returncode}`",
+        f"- MCP tool errors: `{len(tool_errors)}`",
         "",
         "## Prompt",
         "",
@@ -127,7 +133,7 @@ def main() -> int:
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text("\n".join(report) + "\n", encoding="utf-8")
     print(f"report={report_path}")
-    return process.returncode
+    return process_returncode
 
 
 if __name__ == "__main__":

@@ -201,6 +201,7 @@ jobs:
       OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-4.1' }}
       OPENAI_AUTH_MODE: api_key
+      OPENCODE_DISABLE_PROJECT_CONFIG: '1'
       NGC_KEY: ${{ secrets.NGC_API_KEY }}
       TAO_TOKEN: ${{ secrets.TAO_TOKEN }}
       TAO_BASE_URL: ${{ vars.TAO_BASE_URL || 'http://host.docker.internal:8090' }}
