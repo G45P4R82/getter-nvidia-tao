@@ -144,6 +144,8 @@ class RealTaoPipelineTests(unittest.TestCase):
         return last
 
     def test_real_training_job(self):
+        if os.getenv("TAO_RUN_REAL_DEPLOY", "false").lower() == "true":
+            self.skipTest("training is covered by the full deploy pipeline")
         train_job = self._create_job("train", self._spec("TAO_TRAIN_SPECS_JSON"))
         result = self._wait_for_job(train_job)
         self.assertIn(result.get("status"), {"Done", "Completed"})

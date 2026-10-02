@@ -20,13 +20,18 @@ on:
         required: false
         default: false
         type: boolean
+      run_full_api:
+        description: Run the complete direct TAO API validation job
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
 
 concurrency:
   group: tao-api-tests-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   TAO_BASE_URL: ${{ vars.TAO_BASE_URL || 'http://100.107.81.126:8090' }}
@@ -190,6 +195,66 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pipeline-test-report
+          path: test-reports/
+
+  full-api-validation:
+    name: Complete TAO API validation
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_full_api == true }}
+    runs-on: [self-hosted, linux, tao-ftms]
+    env:
+      NGC_KEY: ${{ secrets.NGC_API_KEY }}
+      TAO_TOKEN: ${{ secrets.TAO_TOKEN }}
+      TAO_RUN_REAL_TESTS: 'true'
+      TAO_RUN_MUTATIONS: 'true'
+      TAO_RUN_REAL_PIPELINE: 'true'
+      TAO_RUN_REAL_DEPLOY: 'true'
+      TAO_TEST_WORKSPACE_ID: ${{ vars.TAO_TEST_WORKSPACE_ID }}
+      TAO_TRAIN_DATASET_URI: ${{ vars.TAO_TRAIN_DATASET_URI }}
+      TAO_EVAL_DATASET_URI: ${{ vars.TAO_EVAL_DATASET_URI }}
+      TAO_INFERENCE_DATASET_URI: ${{ vars.TAO_INFERENCE_DATASET_URI }}
+      TAO_TRAIN_SPECS_JSON: ${{ secrets.TAO_TRAIN_SPECS_JSON }}
+      TAO_EVAL_SPECS_JSON: ${{ secrets.TAO_EVAL_SPECS_JSON }}
+      TAO_EXPORT_SPECS_JSON: ${{ secrets.TAO_EXPORT_SPECS_JSON }}
+      TAO_TRT_SPECS_JSON: ${{ secrets.TAO_TRT_SPECS_JSON }}
+      TAO_INFERENCE_SPECS_JSON: ${{ secrets.TAO_INFERENCE_SPECS_JSON }}
+      TAO_REAL_NETWORK: ${{ vars.TAO_REAL_NETWORK || 'classification_pyt' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install test dependencies
+        run: python -m pip install -r tests/requirements.txt
+
+      - name: Run complete direct API validation
+        shell: bash
+        run: |
+          set +e
+          python scripts/run_unittest_report.py \
+            --start-dir tests \
+            --pattern 'test_api_unittest.py' \
+            --experiment full-api-contract \
+            --report-dir test-reports
+          api_status=$?
+          python scripts/run_unittest_report.py \
+            --start-dir tests \
+            --pattern 'test_real_pipeline_unittest.py' \
+            --experiment full-api-tao-pipeline \
+            --report-dir test-reports
+          pipeline_status=$?
+          if [ "$api_status" -ne 0 ] || [ "$pipeline_status" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Upload complete API validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-api-validation-report
           path: test-reports/
 
   prompt-e2e:
