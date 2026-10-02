@@ -17,6 +17,9 @@ def main() -> None:
             "openai": {
                 "options": {
                     "baseURL": os.environ["OPENAI_BASE_URL"],
+                    "headers": {
+                        "api-key": os.environ["OPENAI_API_KEY"],
+                    },
                 }
             }
         },
