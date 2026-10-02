@@ -31,9 +31,9 @@ def redact(value: str) -> str:
     return value
 
 
-def event_summary(stdout: str) -> tuple[list[str], list[str]]:
+def event_summary(stdout: str) -> tuple[list[str], list[dict[str, str]]]:
     event_types: list[str] = []
-    tools: list[str] = []
+    tools: list[dict[str, str]] = []
     for line in stdout.splitlines():
         try:
             event = json.loads(line)
@@ -42,11 +42,18 @@ def event_summary(stdout: str) -> tuple[list[str], list[str]]:
         if isinstance(event, dict):
             if event.get("type"):
                 event_types.append(str(event["type"]))
-            for key in ("tool", "tool_name", "name"):
-                value = event.get(key)
-                if isinstance(value, str) and ("tao" in value.lower() or "mcp" in value.lower()):
-                    tools.append(value)
-    return sorted(set(event_types)), sorted(set(tools))
+            part = event.get("part", {})
+            tool = part.get("tool") if isinstance(part, dict) else None
+            state = part.get("state", {}) if isinstance(part, dict) else {}
+            if isinstance(tool, str):
+                tools.append(
+                    {
+                        "tool": tool,
+                        "status": str(state.get("status", "unknown")),
+                        "call_id": str(part.get("callID", "")),
+                    }
+                )
+    return sorted(set(event_types)), tools
 
 
 def main() -> int:
@@ -76,6 +83,11 @@ def main() -> int:
     (artifact_dir / "opencode-events.jsonl").write_text(stdout, encoding="utf-8")
     (artifact_dir / "opencode.stderr.log").write_text(stderr, encoding="utf-8")
     event_types, tools = event_summary(stdout)
+    tool_names = sorted({item["tool"] for item in tools})
+    (artifact_dir / "mcp-tool-calls.jsonl").write_text(
+        "\n".join(json.dumps(item, ensure_ascii=True) for item in tools) + "\n",
+        encoding="utf-8",
+    )
     status = "PASSED" if process.returncode == 0 else "FAILED"
     report = [
         f"# Experiment {cli.experiment} - OpenCode Prompt",
@@ -97,7 +109,9 @@ def main() -> int:
         "## MCP Observation",
         "",
         f"- Event types: `{', '.join(event_types) or 'none detected'}`",
-        f"- TAO/MCP tools detected: `{', '.join(tools) or 'none detected'}`",
+        f"- MCP tool calls: `{len(tools)}`",
+        f"- TAO/MCP tools detected: `{', '.join(tool_names) or 'none detected'}`",
+        f"- Tool call manifest: `{artifact_dir / 'mcp-tool-calls.jsonl'}`",
         f"- Raw events: `{artifact_dir / 'opencode-events.jsonl'}`",
         "",
         "## Artifacts",

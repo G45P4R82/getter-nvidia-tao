@@ -20,7 +20,10 @@ Execute o fluxo completo:
 13. Compare os resultados.
 14. Gere um relatorio completo da rodada.
 
+Esta execucao CI ja foi aprovada para usar uma GPU e executar todas as
+mutacoes do experimento. Use confirm="I_CONFIRM" nas tools mutaveis depois
+de validar o contexto. Nao pare para pedir uma confirmacao interativa.
+
 Use somente as tools MCP do TAO. Nao execute comandos Docker diretamente.
 Nao revele nenhuma credencial. Nao inicie outro job se o primeiro ainda
-estiver em execucao. Antes de uma mutacao, informe o job, a GPU e o custo
-estimado e peca confirmacao explicita.
+estiver em execucao. Informe no relatorio o job, a GPU e o custo estimado.

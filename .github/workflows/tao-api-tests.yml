@@ -256,7 +256,7 @@ jobs:
 
       - name: Package prompt report
         if: always()
-        run: tar -czf "experiment_001-prompt-${GITHUB_RUN_ID}.tar.gz" -C test-reports experiment_001-prompt-e2e
+        run: tar -czf "experiment_001-prompt-${GITHUB_RUN_ID}.tar.gz" -C test-reports experiment_001-prompt-e2e experiment_001-prompt-e2e-opencode.md
 
       - name: Upload prompt report
         if: always()
