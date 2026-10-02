@@ -15,6 +15,11 @@ on:
         required: false
         default: false
         type: boolean
+      run_prompt:
+        description: Run Experiment 001 through OpenCode, Azure OpenAI and TAO MCP
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: read
@@ -186,3 +191,101 @@ jobs:
         with:
           name: pipeline-test-report
           path: test-reports/
+
+  prompt-e2e:
+    name: Experiment 001 OpenCode prompt E2E
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_prompt == true }}
+    runs-on: [self-hosted, linux, tao-ftms]
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
+      OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5.6-luna' }}
+      NGC_KEY: ${{ secrets.NGC_API_KEY }}
+      TAO_TOKEN: ${{ secrets.TAO_TOKEN }}
+      TAO_BASE_URL: ${{ vars.TAO_BASE_URL || 'http://host.docker.internal:8090' }}
+      TAO_ORG: ${{ vars.TAO_ORG || 'getter' }}
+      TAO_TEST_WORKSPACE_ID: ${{ vars.TAO_TEST_WORKSPACE_ID }}
+      TAO_TRAIN_DATASET_URI: ${{ vars.TAO_TRAIN_DATASET_URI }}
+      TAO_EVAL_DATASET_URI: ${{ vars.TAO_EVAL_DATASET_URI }}
+      TAO_INFERENCE_DATASET_URI: ${{ vars.TAO_INFERENCE_DATASET_URI }}
+      TAO_BASE_EXPERIMENT_IDS: ${{ vars.TAO_BASE_EXPERIMENT_IDS }}
+      TAO_REAL_NETWORK: ${{ vars.TAO_REAL_NETWORK || 'classification_pyt' }}
+      TAO_MCP_ALLOW_MUTATIONS: 'true'
+      TAO_RUN_REAL_TESTS: 'true'
+      TAO_RUN_REAL_PIPELINE: 'true'
+      TAO_RUN_REAL_DEPLOY: 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install MCP environment
+        run: |
+          python -m venv mcp/.venv
+          mcp/.venv/bin/pip install -e 'mcp[test]'
+
+      - name: Install OpenCode
+        run: |
+          curl -fsSL https://opencode.ai/install | bash -s -- --no-modify-path
+          echo "$HOME/.opencode/bin" >> "$GITHUB_PATH"
+          opencode --version
+
+      - name: Create CI OpenCode config
+        env:
+          OPENCODE_CONFIG_OUTPUT: ${{ runner.temp }}/opencode-ci.json
+        run: |
+          python scripts/create_opencode_ci_config.py
+          echo "OPENCODE_CONFIG=${{ runner.temp }}/opencode-ci.json" >> "$GITHUB_ENV"
+
+      - name: Verify OpenCode MCP connection
+        run: opencode mcp list
+
+      - name: Run Experiment 001 prompt
+        run: |
+          python scripts/run_opencode_prompt_report.py \
+            --prompt-file tests/prompts/experiment_001_full_pipeline.txt \
+            --experiment 001-prompt-e2e \
+            --report-dir test-reports \
+            --artifact-dir test-reports/experiment_001-prompt-e2e
+
+      - name: Package prompt report
+        if: always()
+        run: tar -czf "experiment_001-prompt-${GITHUB_RUN_ID}.tar.gz" -C test-reports experiment_001-prompt-e2e
+
+      - name: Upload prompt report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiment-001-prompt-report
+          path: |
+            test-reports/
+            experiment_001-prompt-*.tar.gz
+
+  publish-prompt-release:
+    name: Publish Experiment 001 Release
+    needs: prompt-e2e
+    if: ${{ needs.prompt-e2e.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download prompt report
+        uses: actions/download-artifact@v4
+        with:
+          name: experiment-001-prompt-report
+          path: release-assets
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: experiment-001-prompt-${{ github.run_number }}
+          name: Experiment 001 Prompt ${{ github.run_number }}
+          generate_release_notes: false
+          body: |
+            Real OpenCode -> Azure OpenAI -> TAO MCP -> TAO FTMS experiment.
+            Report and raw OpenCode/MCP events are attached as release assets.
+          files: release-assets/experiment_001-prompt-*.tar.gz

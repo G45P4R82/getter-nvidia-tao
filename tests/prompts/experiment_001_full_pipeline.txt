@@ -1,0 +1,26 @@
+Execute o experimento 001 usando o MCP do TAO.
+
+Use o modelo classification_pyt e o dataset real de teste configurado para
+esta rodada. Use uma GPU e uma epoca.
+
+Execute o fluxo completo:
+
+1. Verifique a saude do TAO.
+2. Consulte os schemas disponiveis.
+3. Consulte o contexto de teste configurado com workspace, dataset e modelo base.
+4. Valide o workspace e o dataset de teste.
+5. Consulte o modelo base compativel.
+6. Submeta o treinamento real usando tao_submit_job.
+7. Acompanhe o job ate terminar usando tao_get_job e tao_get_job_logs.
+8. Colete logs, metricas e artefatos.
+9. Execute avaliacao usando tao_submit_job.
+10. Exporte o checkpoint para ONNX.
+11. Gere o engine TensorRT.
+12. Execute inferencia TensorRT.
+13. Compare os resultados.
+14. Gere um relatorio completo da rodada.
+
+Use somente as tools MCP do TAO. Nao execute comandos Docker diretamente.
+Nao revele nenhuma credencial. Nao inicie outro job se o primeiro ainda
+estiver em execucao. Antes de uma mutacao, informe o job, a GPU e o custo
+estimado e peca confirmacao explicita.

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
 from typing import Any
 
 from fastmcp import FastMCP
@@ -99,6 +100,25 @@ def tao_list_gpu_types() -> str:
     return _result(client.gpu_types())
 
 
+@mcp.tool
+def tao_get_test_context() -> str:
+    """Return the explicitly configured non-secret fixture for real tests."""
+    return _result(
+        {
+            "workspace_id": os.getenv("TAO_TEST_WORKSPACE_ID", ""),
+            "train_dataset_uri": os.getenv("TAO_TRAIN_DATASET_URI", ""),
+            "eval_dataset_uri": os.getenv("TAO_EVAL_DATASET_URI", ""),
+            "inference_dataset_uri": os.getenv("TAO_INFERENCE_DATASET_URI", ""),
+            "base_experiment_ids": [
+                value
+                for value in os.getenv("TAO_BASE_EXPERIMENT_IDS", "").split(",")
+                if value
+            ],
+            "network_arch": os.getenv("TAO_REAL_NETWORK", "classification_pyt"),
+        }
+    )
+
+
 def _require_mutations() -> None:
     if os.getenv("TAO_MCP_ALLOW_MUTATIONS", "false").lower() != "true":
         raise PermissionError("Mutations are disabled. Set TAO_MCP_ALLOW_MUTATIONS=true explicitly.")
@@ -122,6 +142,56 @@ def tao_delete_workspace(workspace_id: str, confirm: str = "") -> str:
     if confirm != "I_CONFIRM":
         raise PermissionError("Pass confirm='I_CONFIRM' to delete a workspace")
     return _result(client.delete_workspace(_validate_id(workspace_id, "workspace_id")))
+
+
+@mcp.tool
+def tao_submit_job(
+    network_arch: str,
+    action: str,
+    workspace_id: str,
+    specs: dict[str, Any],
+    confirm: str = "",
+    name: str = "",
+    parent_job_id: str = "",
+    train_dataset_uris: list[str] | None = None,
+    eval_dataset_uri: str = "",
+    inference_dataset_uri: str = "",
+    base_experiment_ids: list[str] | None = None,
+) -> str:
+    """Submit a real TAO job after explicit confirmation and validation."""
+    _require_mutations()
+    if confirm != "I_CONFIRM":
+        raise PermissionError("Pass confirm='I_CONFIRM' to submit a TAO job")
+    allowed_actions = {"train", "evaluate", "export", "gen_trt_engine", "inference"}
+    if action not in allowed_actions:
+        raise ValueError(f"action must be one of: {', '.join(sorted(allowed_actions))}")
+    _validate_id(workspace_id, "workspace_id")
+    if parent_job_id:
+        _validate_id(parent_job_id, "parent_job_id")
+    job_name = name or f"mcp-{network_arch}-{action}-{int(time.time())}"
+    return _result(
+        client.create_job(
+            name=job_name,
+            network_arch=network_arch,
+            action=action,
+            workspace_id=workspace_id,
+            specs=specs,
+            parent_job_id=parent_job_id or None,
+            train_dataset_uris=train_dataset_uris,
+            eval_dataset_uri=eval_dataset_uri or None,
+            inference_dataset_uri=inference_dataset_uri or None,
+            base_experiment_ids=base_experiment_ids,
+        )
+    )
+
+
+@mcp.tool
+def tao_cancel_job(job_id: str, confirm: str = "") -> str:
+    """Cancel a running TAO job after explicit confirmation."""
+    _require_mutations()
+    if confirm != "I_CONFIRM":
+        raise PermissionError("Pass confirm='I_CONFIRM' to cancel a TAO job")
+    return _result(client.cancel_job(_validate_id(job_id, "job_id")))
 
 
 if __name__ == "__main__":

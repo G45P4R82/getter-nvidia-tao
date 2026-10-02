@@ -141,6 +141,44 @@ class TaoClient:
     def gpu_types(self) -> Any:
         return self.request("GET", f"/api/v2/orgs/{self.org}/jobs:gpu_types")
 
+    def create_job(
+        self,
+        *,
+        name: str,
+        network_arch: str,
+        action: str,
+        workspace_id: str,
+        specs: dict[str, Any],
+        parent_job_id: str | None = None,
+        train_dataset_uris: list[str] | None = None,
+        eval_dataset_uri: str | None = None,
+        inference_dataset_uri: str | None = None,
+        base_experiment_ids: list[str] | None = None,
+    ) -> Any:
+        payload: dict[str, Any] = {
+            "kind": "experiment",
+            "name": name,
+            "network_arch": network_arch,
+            "encryption_key": os.getenv("TAO_ENCRYPTION_KEY", "tlt_encode"),
+            "workspace": workspace_id,
+            "action": action,
+            "specs": specs,
+        }
+        if parent_job_id:
+            payload["parent_job_id"] = parent_job_id
+        if train_dataset_uris:
+            payload["train_dataset_uris"] = train_dataset_uris
+        if eval_dataset_uri:
+            payload["eval_dataset_uri"] = eval_dataset_uri
+        if inference_dataset_uri:
+            payload["inference_dataset_uri"] = inference_dataset_uri
+        if base_experiment_ids:
+            payload["base_experiment_ids"] = base_experiment_ids
+        return self.request("POST", f"/api/v2/orgs/{self.org}/jobs", json_body=payload)
+
+    def cancel_job(self, job_id: str) -> Any:
+        return self.request("POST", f"/api/v2/orgs/{self.org}/jobs/{job_id}:cancel")
+
     def create_workspace(self, name: str) -> Any:
         return self.request(
             "POST",

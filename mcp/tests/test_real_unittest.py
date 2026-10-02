@@ -25,6 +25,7 @@ class RealMCPTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("tao_health", names)
         self.assertIn("tao_list_jobs", names)
         self.assertIn("tao_create_workspace", names)
+        self.assertIn("tao_submit_job", names)
 
     async def test_health_tool_calls_real_ftms(self):
         async with Client(mcp) as client:
