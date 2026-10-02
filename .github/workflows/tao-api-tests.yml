@@ -313,10 +313,21 @@ jobs:
           path: report-input
 
       - name: Download previous Pages site
-        uses: actions/download-pages-artifact@v3
-        continue-on-error: true
-        with:
-          path: previous-site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          previous_run=$(gh run list \
+            --repo "$GITHUB_REPOSITORY" \
+            --workflow tao-api-tests.yml \
+            --branch main \
+            --json databaseId,conclusion \
+            --jq 'map(select(.conclusion == "success")) | .[0].databaseId // empty')
+          if [ -n "$previous_run" ]; then
+            gh run download "$previous_run" \
+              --repo "$GITHUB_REPOSITORY" \
+              --name pages-site \
+              --dir previous-site || true
+          fi
 
       - name: Build technical report site
         run: |
@@ -334,6 +345,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
+
+      - name: Archive Pages site for the next run
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-site
+          path: site
+          retention-days: 90
 
       - name: Deploy Pages
         uses: actions/deploy-pages@v4
