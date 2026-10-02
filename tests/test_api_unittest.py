@@ -134,6 +134,13 @@ class RealTaoAPITests(unittest.TestCase):
                     f"{self.prefix}/workspaces/{created_id}",
                     headers=self.auth,
                 )
+                if deleted.status_code == 400:
+                    deleted = self.client.request(
+                        "DELETE",
+                        f"{self.prefix}/workspaces",
+                        headers=self.auth,
+                        json={"workspace_ids": [created_id]},
+                    )
                 self.assertIn(deleted.status_code, (200, 204))
 
 

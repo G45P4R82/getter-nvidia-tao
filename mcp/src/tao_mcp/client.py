@@ -205,4 +205,13 @@ class TaoClient:
         )
 
     def delete_workspace(self, workspace_id: str) -> Any:
-        return self.request("DELETE", f"/api/v2/orgs/{self.org}/workspaces/{workspace_id}")
+        try:
+            return self.request("DELETE", f"/api/v2/orgs/{self.org}/workspaces/{workspace_id}")
+        except TaoAPIError as error:
+            if error.status_code != 400:
+                raise
+            return self.request(
+                "DELETE",
+                f"/api/v2/orgs/{self.org}/workspaces",
+                json_body={"workspace_ids": [workspace_id]},
+            )
