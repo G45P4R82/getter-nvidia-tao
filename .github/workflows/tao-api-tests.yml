@@ -212,11 +212,6 @@ jobs:
       TAO_TRAIN_DATASET_URI: ${{ vars.TAO_TRAIN_DATASET_URI }}
       TAO_EVAL_DATASET_URI: ${{ vars.TAO_EVAL_DATASET_URI }}
       TAO_INFERENCE_DATASET_URI: ${{ vars.TAO_INFERENCE_DATASET_URI }}
-      TAO_TRAIN_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/train.json
-      TAO_EVAL_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/evaluate.json
-      TAO_EXPORT_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/export.json
-      TAO_TRT_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/gen_trt_engine.json
-      TAO_INFERENCE_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/inference.json
       TAO_REAL_NETWORK: ${{ vars.TAO_REAL_NETWORK || 'classification_pyt' }}
     steps:
       - name: Checkout
@@ -233,6 +228,13 @@ jobs:
       - name: Generate real specs from TAO API schemas
         run: |
           python scripts/generate_tao_specs.py --output "$RUNNER_TEMP/tao-specs"
+          {
+            echo "TAO_TRAIN_SPECS_JSON_FILE=$RUNNER_TEMP/tao-specs/train.json"
+            echo "TAO_EVAL_SPECS_JSON_FILE=$RUNNER_TEMP/tao-specs/evaluate.json"
+            echo "TAO_EXPORT_SPECS_JSON_FILE=$RUNNER_TEMP/tao-specs/export.json"
+            echo "TAO_TRT_SPECS_JSON_FILE=$RUNNER_TEMP/tao-specs/gen_trt_engine.json"
+            echo "TAO_INFERENCE_SPECS_JSON_FILE=$RUNNER_TEMP/tao-specs/inference.json"
+          } >> "$GITHUB_ENV"
 
       - name: Run complete direct API validation
         shell: bash
