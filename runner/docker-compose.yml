@@ -14,6 +14,10 @@ services:
       RUNNER_LABELS: ${RUNNER_LABELS:-tao-ftms}
     extra_hosts:
       - "host.docker.internal:host-gateway"
+      # Temporary fallback while the host DNS servers are unreachable.
+      - "api.github.com:4.228.31.149"
+      - "github.com:4.228.31.150"
+      - "broker.actions.githubusercontent.com:20.85.130.105"
     dns:
       - 1.1.1.1
       - 8.8.8.8
