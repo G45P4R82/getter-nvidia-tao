@@ -31,6 +31,25 @@ def main() -> None:
                 ],
                 "enabled": True,
                 "timeout": 30000,
+                "environment": {
+                    "TAO_BASE_URL": os.environ.get("TAO_BASE_URL", ""),
+                    "TAO_ORG": os.environ.get("TAO_ORG", "getter"),
+                    "TAO_MCP_ALLOW_MUTATIONS": os.environ.get(
+                        "TAO_MCP_ALLOW_MUTATIONS", "false"
+                    ),
+                    "TAO_TEST_WORKSPACE_ID": os.environ.get("TAO_TEST_WORKSPACE_ID", ""),
+                    "TAO_TRAIN_DATASET_URI": os.environ.get("TAO_TRAIN_DATASET_URI", ""),
+                    "TAO_EVAL_DATASET_URI": os.environ.get("TAO_EVAL_DATASET_URI", ""),
+                    "TAO_INFERENCE_DATASET_URI": os.environ.get(
+                        "TAO_INFERENCE_DATASET_URI", ""
+                    ),
+                    "TAO_BASE_EXPERIMENT_IDS": os.environ.get(
+                        "TAO_BASE_EXPERIMENT_IDS", ""
+                    ),
+                    "TAO_REAL_NETWORK": os.environ.get(
+                        "TAO_REAL_NETWORK", "classification_pyt"
+                    ),
+                },
             }
         },
     }
