@@ -197,12 +197,10 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_prompt == true }}
     runs-on: [self-hosted, linux, tao-ftms]
     env:
-      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
       OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-4.1' }}
-      OPENAI_AUTH_MODE: azure_ad
+      OPENAI_AUTH_MODE: api_key
       NGC_KEY: ${{ secrets.NGC_API_KEY }}
       TAO_TOKEN: ${{ secrets.TAO_TOKEN }}
       TAO_BASE_URL: ${{ vars.TAO_BASE_URL || 'http://host.docker.internal:8090' }}
@@ -230,15 +228,6 @@ jobs:
         run: |
           python -m venv mcp/.venv
           mcp/.venv/bin/pip install -e 'mcp[test]'
-
-      - name: Install Azure identity dependency
-        run: python -m pip install azure-identity
-
-      - name: Acquire Azure AI bearer token
-        run: |
-          TOKEN=$(python scripts/get_azure_token.py)
-          echo "::add-mask::$TOKEN"
-          echo "OPENAI_API_KEY=$TOKEN" >> "$GITHUB_ENV"
 
       - name: Install OpenCode
         run: |
