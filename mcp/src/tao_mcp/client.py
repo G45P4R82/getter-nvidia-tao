@@ -97,7 +97,11 @@ class TaoClient:
             raise TaoAPIError(response.status_code, _safe_message(response))
         if not response.content:
             return None
-        return response.json()
+        try:
+            return response.json()
+        except ValueError:
+            # The logs endpoint may return plain text or an empty-looking stream.
+            return response.text
 
     def health(self) -> Any:
         return self.request("GET", "/api/v2/health", authenticated=False)

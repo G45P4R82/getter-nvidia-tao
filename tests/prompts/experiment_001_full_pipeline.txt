@@ -14,9 +14,9 @@ Execute o fluxo completo:
 7. Acompanhe o job ate terminar usando tao_get_job e tao_get_job_logs.
 8. Colete logs, metricas e artefatos.
 9. Execute avaliacao usando tao_submit_job.
-10. Exporte o checkpoint para ONNX.
+10. Exporte o checkpoint para ONNX usando a action `export`.
 11. Gere o engine TensorRT.
-12. Execute inferencia TensorRT.
+12. Execute inferencia TensorRT usando a action `inference`.
 13. Compare os resultados.
 14. Gere um relatorio completo da rodada.
 
