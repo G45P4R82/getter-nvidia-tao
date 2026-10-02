@@ -14,5 +14,8 @@ services:
       RUNNER_LABELS: ${RUNNER_LABELS:-tao-ftms}
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
     volumes:
       - ./work:/runner/_work
