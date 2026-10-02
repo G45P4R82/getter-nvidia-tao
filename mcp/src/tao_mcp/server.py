@@ -74,7 +74,12 @@ def tao_get_job_logs(job_id: str, max_chars: int = 12000) -> str:
     """Get bounded logs for a TAO job without flooding the model context."""
     if not 1 <= max_chars <= 50000:
         raise ValueError("max_chars must be between 1 and 50000")
-    value = client.job_logs(_validate_id(job_id, "job_id"))
+    try:
+        value = client.job_logs(_validate_id(job_id, "job_id"))
+    except TaoAPIError as error:
+        if error.status_code == 400 and "not available" in str(error).lower():
+            return _result({"available": False, "message": "Logs are not available yet; poll tao_get_job."})
+        raise
     text = value if isinstance(value, str) else _result(value)
     return text[-max_chars:]
 
