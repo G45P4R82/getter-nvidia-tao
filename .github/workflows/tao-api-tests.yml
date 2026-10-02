@@ -212,11 +212,11 @@ jobs:
       TAO_TRAIN_DATASET_URI: ${{ vars.TAO_TRAIN_DATASET_URI }}
       TAO_EVAL_DATASET_URI: ${{ vars.TAO_EVAL_DATASET_URI }}
       TAO_INFERENCE_DATASET_URI: ${{ vars.TAO_INFERENCE_DATASET_URI }}
-      TAO_TRAIN_SPECS_JSON: ${{ secrets.TAO_TRAIN_SPECS_JSON }}
-      TAO_EVAL_SPECS_JSON: ${{ secrets.TAO_EVAL_SPECS_JSON }}
-      TAO_EXPORT_SPECS_JSON: ${{ secrets.TAO_EXPORT_SPECS_JSON }}
-      TAO_TRT_SPECS_JSON: ${{ secrets.TAO_TRT_SPECS_JSON }}
-      TAO_INFERENCE_SPECS_JSON: ${{ secrets.TAO_INFERENCE_SPECS_JSON }}
+      TAO_TRAIN_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/train.json
+      TAO_EVAL_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/evaluate.json
+      TAO_EXPORT_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/export.json
+      TAO_TRT_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/gen_trt_engine.json
+      TAO_INFERENCE_SPECS_JSON_FILE: ${{ runner.temp }}/tao-specs/inference.json
       TAO_REAL_NETWORK: ${{ vars.TAO_REAL_NETWORK || 'classification_pyt' }}
     steps:
       - name: Checkout
@@ -230,23 +230,9 @@ jobs:
       - name: Install test dependencies
         run: python -m pip install -r tests/requirements.txt
 
-      - name: Validate full pipeline configuration
+      - name: Generate real specs from TAO API schemas
         run: |
-          missing=()
-          for variable in \
-            TAO_TRAIN_SPECS_JSON \
-            TAO_EVAL_SPECS_JSON \
-            TAO_EXPORT_SPECS_JSON \
-            TAO_TRT_SPECS_JSON \
-            TAO_INFERENCE_SPECS_JSON; do
-            if [ -z "${!variable}" ]; then
-              missing+=("$variable")
-            fi
-          done
-          if [ "${#missing[@]}" -gt 0 ]; then
-            echo "Missing required GitHub Secrets for the real TAO pipeline: ${missing[*]}"
-            exit 2
-          fi
+          python scripts/generate_tao_specs.py --output "$RUNNER_TEMP/tao-specs"
 
       - name: Run complete direct API validation
         shell: bash
