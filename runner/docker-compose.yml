@@ -15,7 +15,4 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - runner_work:/runner/_work
-
-volumes:
-  runner_work:
+      - ./work:/runner/_work

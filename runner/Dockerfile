@@ -8,6 +8,7 @@ RUN apt-get update \
        ca-certificates curl git jq python3 python3-pip python3-venv sudo \
        libicu74 libssl3 libkrb5-3 zlib1g liblttng-ust1t64 \
     && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/bin/python3 /usr/local/bin/python \
     && useradd --create-home --shell /bin/bash runner
 
 WORKDIR /runner

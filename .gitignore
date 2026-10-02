@@ -13,5 +13,6 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 mcp/.venv/
+runner/work/
 ansible/inventory/production.local.ini
 ansible/inventory/group_vars/vault.yml
