@@ -1,33 +1,41 @@
 # Experiment direct-tao-pipeline
 
 - Status: **FAILED**
-- Started/report time (UTC): `2026-10-02T16:58:52.665607+00:00`
+- Started/report time (UTC): `2026-10-03T01:16:17.219297+00:00`
 - Host: `getter-System-Product-Name`
 - Python: `3.14.4`
 - Test scope: `tests` / `test_real_pipeline_unittest.py`
 - TAO URL: `http://127.0.0.1:8090`
-- Tests executed: `0`
+- Tests executed: `2`
 - Failures: `0`
 - Errors: `1`
-- Skipped: `0`
+- Skipped: `1`
 
 ## Result
 
 ```text
-setUpClass (test_real_pipeline_unittest.RealTaoPipelineTests) ... ERROR
+test_real_evaluate_export_tensorrt_inference (test_real_pipeline_unittest.RealTaoPipelineTests.test_real_evaluate_export_tensorrt_inference) ... ERROR
+test_real_training_job (test_real_pipeline_unittest.RealTaoPipelineTests.test_real_training_job) ... skipped 'training is covered by the full deploy pipeline'
 
 ======================================================================
-ERROR: setUpClass (test_real_pipeline_unittest.RealTaoPipelineTests)
+ERROR: test_real_evaluate_export_tensorrt_inference (test_real_pipeline_unittest.RealTaoPipelineTests.test_real_evaluate_export_tensorrt_inference)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/home/getter/tao-direct-api-2026-10-02/tests/test_real_pipeline_unittest.py", line 41, in setUpClass
-    raise AssertionError(f"TAO login failed with HTTP {login.status_code}")
-AssertionError: TAO login failed with HTTP 401
+  File "/home/getter/tao-direct-api-2026-10-02/tests/test_real_pipeline_unittest.py", line 159, in test_real_evaluate_export_tensorrt_inference
+    self._wait_for_job(train_job)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/home/getter/tao-direct-api-2026-10-02/tests/test_real_pipeline_unittest.py", line 141, in _wait_for_job
+    cls.fail(f"TAO job did not finish before timeout: {job_id}")
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/unittest/case.py", line 750, in fail
+    raise self.failureException(msg)
+          ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'failureException'
 
 ----------------------------------------------------------------------
-Ran 0 tests in 16.033s
+Ran 2 tests in 3605.269s
 
-FAILED (errors=1)
+FAILED (errors=1, skipped=1)
 ```
 
 ## Interpretation
