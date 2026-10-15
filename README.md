@@ -1,5 +1,8 @@
 # NVIDIA TAO FTMS Docker Compose
 
+Arquitetura do sistema: [`docs/architecture.md`](docs/architecture.md), com
+diagramas C4 de contexto, containers, componentes e deploy.
+
 Deployment wrapper for the official NVIDIA TAO Finetuning Microservice (FTMS)
 using Docker Compose.
 
