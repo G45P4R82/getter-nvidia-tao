@@ -1,0 +1,23 @@
+{
+  "experiment": "006-training-real",
+  "checks": {
+    "login_health_context": true,
+    "historical_model_catalogued": true,
+    "base_experiment_found": true,
+    "historical_context_documented": true,
+    "corrected_context_documented": true,
+    "historical_failure_reproduced": true,
+    "corrected_training_passed": true
+  },
+  "generated_at": "2026-10-19T20:33:03.380266+00:00",
+  "evidence_files": [
+    "catalog-compatibility.json",
+    "corrected-payload.json",
+    "corrected-result.json",
+    "corrected-status.json",
+    "final-checklist.json",
+    "historical-payload.json",
+    "historical-result.json",
+    "historical-status.json"
+  ]
+}
