@@ -1,0 +1,84 @@
+{
+  "id": "45ae9fc6-775c-475a-93c9-2563ecb72e55",
+  "created_on": "2026-10-19T20:09:45.494000+00:00",
+  "last_modified": "2026-10-19T20:11:08.205000+00:00",
+  "name": "experiment-005-historical-1792440522",
+  "shared": false,
+  "description": "",
+  "version": "1.0.0",
+  "logo": "https://www.nvidia.com",
+  "ngc_path": "",
+  "workspace": "98c4bec1-88df-423e-8a15-af78881e9742",
+  "additional_id_info": null,
+  "checkpoint_choose_method": "best_model",
+  "checkpoint_epoch_number": {},
+  "encryption_key": "unittest-only",
+  "network_arch": "classification_pyt",
+  "base_experiment_ids": [
+    "469f42fe-37dc-55ff-b89b-5096477f9a87"
+  ],
+  "dataset_type": "image_classification",
+  "dataset_formats": [
+    "classification_pyt"
+  ],
+  "accepted_dataset_intents": [
+    "training",
+    "evaluation",
+    "testing"
+  ],
+  "eval_dataset": null,
+  "inference_dataset": null,
+  "calibration_dataset": null,
+  "train_datasets": [],
+  "train_dataset_uris": [
+    "seaweedfs://tao-storage/data/tao-test-classification-v1"
+  ],
+  "eval_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "inference_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "calibration_dataset_uri": null,
+  "dataset_format": null,
+  "read_only": false,
+  "public": false,
+  "actions": [
+    "train",
+    "distill",
+    "quantize",
+    "evaluate",
+    "export",
+    "gen_trt_engine",
+    "inference"
+  ],
+  "status": "Error",
+  "automl_settings": {},
+  "metric": "kpi",
+  "model_params": {},
+  "experiment_actions": [],
+  "tensorboard_enabled": false,
+  "tags": [],
+  "authorized_party_nca_id": "",
+  "parent_id": null,
+  "action": "train",
+  "job_details": {
+    "45ae9fc6-775c-475a-93c9-2563ecb72e55": {
+      "graphical": [],
+      "categorical": [],
+      "kpi": [],
+      "epoch": null,
+      "max_epoch": 1,
+      "time_per_epoch": null,
+      "time_per_iter": null,
+      "cur_iter": null,
+      "eta": null,
+      "detailed_status": {
+        "date": "10/19/2026",
+        "time": "20:10:30",
+        "message": "train action failed for classification_pyt",
+        "status": "FAILURE"
+      },
+      "key_metric": 0.0
+    }
+  },
+  "backend_details": null,
+  "experiment_id": "45ae9fc6-775c-475a-93c9-2563ecb72e55",
+  "kind": "experiment"
+}

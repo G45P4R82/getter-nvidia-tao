@@ -1,0 +1,25 @@
+{
+  "executed": true,
+  "job_id": "45ae9fc6-775c-475a-93c9-2563ecb72e55",
+  "status": "Error",
+  "job_details": {
+    "45ae9fc6-775c-475a-93c9-2563ecb72e55": {
+      "graphical": [],
+      "categorical": [],
+      "kpi": [],
+      "epoch": null,
+      "max_epoch": 1,
+      "time_per_epoch": null,
+      "time_per_iter": null,
+      "cur_iter": null,
+      "eta": null,
+      "detailed_status": {
+        "date": "10/19/2026",
+        "time": "20:10:30",
+        "message": "train action failed for classification_pyt",
+        "status": "FAILURE"
+      },
+      "key_metric": 0.0
+    }
+  }
+}

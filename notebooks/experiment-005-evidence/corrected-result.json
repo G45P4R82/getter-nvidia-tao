@@ -1,0 +1,44 @@
+{
+  "executed": true,
+  "job_id": "e9d00ced-0ef4-42df-8c0c-32de3f94798f",
+  "status": "Done",
+  "job_details": {
+    "e9d00ced-0ef4-42df-8c0c-32de3f94798f": {
+      "graphical": [],
+      "categorical": [],
+      "kpi": [
+        {
+          "metric": "val_loss",
+          "values": {
+            "0": 0.5858913064002991
+          }
+        },
+        {
+          "metric": "val_acc_1",
+          "values": {
+            "0": 0.875
+          }
+        },
+        {
+          "metric": "train_loss",
+          "values": {
+            "0": 0.7383504509925842
+          }
+        }
+      ],
+      "epoch": 0,
+      "max_epoch": 1,
+      "time_per_epoch": "0:00:01.088459",
+      "time_per_iter": null,
+      "cur_iter": null,
+      "eta": "0:00:00",
+      "detailed_status": {
+        "date": "10/19/2026",
+        "time": "20:12:8",
+        "message": "train action completed successfully for classification_pyt",
+        "status": "SUCCESS"
+      },
+      "key_metric": 0.0
+    }
+  }
+}

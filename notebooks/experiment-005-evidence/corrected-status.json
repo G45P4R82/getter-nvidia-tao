@@ -1,0 +1,109 @@
+{
+  "id": "e9d00ced-0ef4-42df-8c0c-32de3f94798f",
+  "created_on": "2026-10-19T20:11:17.576000+00:00",
+  "last_modified": "2026-10-19T20:13:08.339000+00:00",
+  "name": "experiment-005-corrected-1792440614",
+  "shared": false,
+  "description": "",
+  "version": "1.0.0",
+  "logo": "https://www.nvidia.com",
+  "ngc_path": "",
+  "workspace": "98c4bec1-88df-423e-8a15-af78881e9742",
+  "additional_id_info": null,
+  "checkpoint_choose_method": "best_model",
+  "checkpoint_epoch_number": {
+    "best_model_e9d00ced-0ef4-42df-8c0c-32de3f94798f": 0,
+    "latest_model_e9d00ced-0ef4-42df-8c0c-32de3f94798f": 0
+  },
+  "encryption_key": "unittest-only",
+  "network_arch": "classification_pyt",
+  "base_experiment_ids": [
+    "469f42fe-37dc-55ff-b89b-5096477f9a87"
+  ],
+  "dataset_type": "image_classification",
+  "dataset_formats": [
+    "classification_pyt"
+  ],
+  "accepted_dataset_intents": [
+    "training",
+    "evaluation",
+    "testing"
+  ],
+  "eval_dataset": null,
+  "inference_dataset": null,
+  "calibration_dataset": null,
+  "train_datasets": [],
+  "train_dataset_uris": [
+    "seaweedfs://tao-storage/data/tao-test-classification-v1"
+  ],
+  "eval_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "inference_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "calibration_dataset_uri": null,
+  "dataset_format": null,
+  "read_only": false,
+  "public": false,
+  "actions": [
+    "train",
+    "distill",
+    "quantize",
+    "evaluate",
+    "export",
+    "gen_trt_engine",
+    "inference"
+  ],
+  "status": "Done",
+  "automl_settings": {},
+  "metric": "kpi",
+  "model_params": {},
+  "experiment_actions": [],
+  "tensorboard_enabled": false,
+  "tags": [],
+  "authorized_party_nca_id": "",
+  "parent_id": null,
+  "action": "train",
+  "job_details": {
+    "e9d00ced-0ef4-42df-8c0c-32de3f94798f": {
+      "graphical": [],
+      "categorical": [],
+      "kpi": [
+        {
+          "metric": "val_loss",
+          "values": {
+            "0": 0.5858913064002991
+          }
+        },
+        {
+          "metric": "val_acc_1",
+          "values": {
+            "0": 0.875
+          }
+        },
+        {
+          "metric": "train_loss",
+          "values": {
+            "0": 0.7383504509925842
+          }
+        }
+      ],
+      "epoch": 0,
+      "max_epoch": 1,
+      "time_per_epoch": "0:00:01.088459",
+      "time_per_iter": null,
+      "cur_iter": null,
+      "eta": "0:00:00",
+      "detailed_status": {
+        "date": "10/19/2026",
+        "time": "20:12:8",
+        "message": "train action completed successfully for classification_pyt",
+        "status": "SUCCESS"
+      },
+      "key_metric": 0.0
+    }
+  },
+  "backend_details": null,
+  "experiment_id": "e9d00ced-0ef4-42df-8c0c-32de3f94798f",
+  "epoch_numbers": [
+    0
+  ],
+  "kind": "experiment"
+}
