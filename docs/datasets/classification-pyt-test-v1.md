@@ -62,6 +62,20 @@ de download, e nao inferida apenas pelo registro do dataset.
 
 ## Onde Consultar
 
+### Referencias externas
+
+Estas paginas explicam o formato e o fluxo oficial usados pelo dataset:
+
+- [TAO Image Classification PyTorch](https://docs.nvidia.com/tao/tao-toolkit/latest/text/cv_finetuning/pytorch/image_classification_pyt.html)
+- [Formato de dados Image Classification PyTorch](https://docs.nvidia.com/tao/tao-toolkit/latest/text/data_annotation_format.html#image-classification-format-pytorch)
+- [TAO Deploy para Classification PyT](https://docs.nvidia.com/tao/tao-toolkit/latest/text/tao_deploy/classification_pyt.html)
+- [Documentacao geral do TAO Toolkit](https://docs.nvidia.com/tao/tao-toolkit/latest/)
+
+Nao existe uma pagina publica especifica para este dataset sintetico: ele e uma
+fixture privada do ambiente FTMS. Os links externos acima documentam o formato
+`classification_pyt`, a estrutura esperada e as etapas oficiais de treino,
+exportacao e deploy.
+
 ### API TAO
 
 Metadados de todos os datasets:
