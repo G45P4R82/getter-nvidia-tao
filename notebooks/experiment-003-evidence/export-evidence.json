@@ -1,0 +1,37 @@
+{
+  "action": "export",
+  "job_id": "0339296f-f5f0-4618-a61b-f136eb09a5fa",
+  "status": "Done",
+  "created_on": "2026-10-19T19:25:18.578000+00:00",
+  "last_modified": "2026-10-19T19:26:41.753000+00:00",
+  "parent_id": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+  "dataset_uris": {
+    "train": null,
+    "eval": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+    "inference": null
+  },
+  "job_details": {
+    "graphical": [],
+    "categorical": [],
+    "kpi": [],
+    "epoch": null,
+    "max_epoch": 1,
+    "time_per_epoch": null,
+    "time_per_iter": null,
+    "cur_iter": null,
+    "eta": null,
+    "detailed_status": {
+      "date": "10/19/2026",
+      "time": "19:25:56",
+      "message": "export action completed successfully for classification_pyt",
+      "status": "SUCCESS"
+    },
+    "key_metric": 0.0
+  },
+  "artifacts": [
+    "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/export/experiment.yaml",
+    "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/export/status.json",
+    "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/microservices_log.txt",
+    "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/model.onnx"
+  ]
+}

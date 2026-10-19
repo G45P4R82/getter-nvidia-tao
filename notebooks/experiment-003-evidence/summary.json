@@ -1,0 +1,135 @@
+{
+  "experiment": "003",
+  "status": "PASSED",
+  "jobs": {
+    "train": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+    "evaluate": "fe1af6bc-6d28-4da2-809b-9337ef3b6603",
+    "export": "0339296f-f5f0-4618-a61b-f136eb09a5fa",
+    "gen_trt_engine": "a24e9173-5d63-45e8-8a85-0639b47a7648",
+    "inference": "b6ef559a-38a5-4d6f-a293-cd64c88b3c82"
+  },
+  "artifacts_and_metrics": {
+    "train": {
+      "job_id": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+      "kpi": [
+        {
+          "metric": "val_loss",
+          "values": {
+            "0": 2.090709686279297,
+            "1": 1.6890172958374023,
+            "2": 1.3091542720794678,
+            "3": 1.0176483392715454,
+            "4": 0.8069472908973694,
+            "5": 0.6671432256698608,
+            "6": 0.578280508518219,
+            "7": 0.5187190771102905,
+            "8": 0.4794667065143585,
+            "9": 0.4794667065143585
+          }
+        },
+        {
+          "metric": "val_acc_1",
+          "values": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0,
+            "8": 1.0,
+            "9": 1.0
+          }
+        },
+        {
+          "metric": "train_loss",
+          "values": {
+            "0": 2.7502124309539795,
+            "1": 2.2535881996154785,
+            "2": 1.8727021217346191,
+            "3": 1.4630461931228638,
+            "4": 1.1364675760269165,
+            "5": 1.015878677368164,
+            "6": 0.8752769231796265,
+            "7": 0.8202236294746399,
+            "8": 0.7425450086593628,
+            "9": 0.605469822883606
+          }
+        }
+      ],
+      "artifact_listing": [
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/microservices_log.txt",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth",
+        "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json"
+      ],
+      "api_download_endpoint": "http://100.107.81.126:8090/api/v2/orgs/getter/jobs/c45a3fe8-858d-4e18-a7b5-385cc474aa90:download"
+    },
+    "evaluate": {
+      "job_id": "fe1af6bc-6d28-4da2-809b-9337ef3b6603",
+      "kpi": [
+        {
+          "metric": "val_acc_1",
+          "values": {
+            "0": 1.0
+          }
+        }
+      ],
+      "artifact_listing": [
+        "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/experiment.yaml",
+        "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/lightning_logs/version_0/events.out.tfevents.1792437863.b0ca2c4d77f0.286.0",
+        "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/lightning_logs/version_0/hparams.yaml",
+        "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/result.csv",
+        "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/status.json",
+        "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/microservices_log.txt"
+      ],
+      "api_download_endpoint": "http://100.107.81.126:8090/api/v2/orgs/getter/jobs/fe1af6bc-6d28-4da2-809b-9337ef3b6603:download"
+    },
+    "export": {
+      "job_id": "0339296f-f5f0-4618-a61b-f136eb09a5fa",
+      "kpi": [],
+      "artifact_listing": [
+        "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/export/experiment.yaml",
+        "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/export/status.json",
+        "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/microservices_log.txt",
+        "results/0339296f-f5f0-4618-a61b-f136eb09a5fa/model.onnx"
+      ],
+      "api_download_endpoint": "http://100.107.81.126:8090/api/v2/orgs/getter/jobs/0339296f-f5f0-4618-a61b-f136eb09a5fa:download"
+    },
+    "gen_trt_engine": {
+      "job_id": "a24e9173-5d63-45e8-8a85-0639b47a7648",
+      "kpi": [],
+      "artifact_listing": [
+        "results/a24e9173-5d63-45e8-8a85-0639b47a7648/gen_trt_engine/experiment.yaml",
+        "results/a24e9173-5d63-45e8-8a85-0639b47a7648/gen_trt_engine/status.json",
+        "results/a24e9173-5d63-45e8-8a85-0639b47a7648/microservices_log.txt",
+        "results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine"
+      ],
+      "api_download_endpoint": "http://100.107.81.126:8090/api/v2/orgs/getter/jobs/a24e9173-5d63-45e8-8a85-0639b47a7648:download"
+    },
+    "inference": {
+      "job_id": "b6ef559a-38a5-4d6f-a293-cd64c88b3c82",
+      "kpi": [],
+      "artifact_listing": [
+        "results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz",
+        "results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/microservices_log.txt",
+        "results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json"
+      ],
+      "api_download_endpoint": "http://100.107.81.126:8090/api/v2/orgs/getter/jobs/b6ef559a-38a5-4d6f-a293-cd64c88b3c82:download"
+    }
+  },
+  "finished_at": "2026-10-19T19:29:14.113440+00:00"
+}

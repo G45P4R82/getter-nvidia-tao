@@ -1,0 +1,37 @@
+{
+  "action": "gen_trt_engine",
+  "job_id": "a24e9173-5d63-45e8-8a85-0639b47a7648",
+  "status": "Done",
+  "created_on": "2026-10-19T19:26:54.574000+00:00",
+  "last_modified": "2026-10-19T19:28:41.660000+00:00",
+  "parent_id": "0339296f-f5f0-4618-a61b-f136eb09a5fa",
+  "dataset_uris": {
+    "train": null,
+    "eval": null,
+    "inference": null
+  },
+  "job_details": {
+    "graphical": [],
+    "categorical": [],
+    "kpi": [],
+    "epoch": null,
+    "max_epoch": 1,
+    "time_per_epoch": null,
+    "time_per_iter": null,
+    "cur_iter": null,
+    "eta": null,
+    "detailed_status": {
+      "date": "10/19/2026",
+      "time": "19:28:2",
+      "message": "gen_trt_engine action completed successfully for classification_pyt",
+      "status": "SUCCESS"
+    },
+    "key_metric": 0.0
+  },
+  "artifacts": [
+    "results/a24e9173-5d63-45e8-8a85-0639b47a7648/gen_trt_engine/experiment.yaml",
+    "results/a24e9173-5d63-45e8-8a85-0639b47a7648/gen_trt_engine/status.json",
+    "results/a24e9173-5d63-45e8-8a85-0639b47a7648/microservices_log.txt",
+    "results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine"
+  ]
+}

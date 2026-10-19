@@ -1,8 +1,8 @@
 {
-  "id": "e9d00ced-0ef4-42df-8c0c-32de3f94798f",
-  "created_on": "2026-10-19T20:11:17.576000+00:00",
-  "last_modified": "2026-10-19T20:13:08.339000+00:00",
-  "name": "experiment-005-corrected-1792440614",
+  "id": "87f257a2-598a-40af-84be-df63b79fffd0",
+  "created_on": "2026-10-19T20:15:43.044000+00:00",
+  "last_modified": "2026-10-19T20:17:09.067000+00:00",
+  "name": "experiment-005-corrected-1792440879",
   "shared": false,
   "description": "",
   "version": "1.0.0",
@@ -12,8 +12,8 @@
   "additional_id_info": null,
   "checkpoint_choose_method": "best_model",
   "checkpoint_epoch_number": {
-    "best_model_e9d00ced-0ef4-42df-8c0c-32de3f94798f": 0,
-    "latest_model_e9d00ced-0ef4-42df-8c0c-32de3f94798f": 0
+    "best_model_87f257a2-598a-40af-84be-df63b79fffd0": 0,
+    "latest_model_87f257a2-598a-40af-84be-df63b79fffd0": 0
   },
   "encryption_key": "unittest-only",
   "network_arch": "classification_pyt",
@@ -62,7 +62,7 @@
   "parent_id": null,
   "action": "train",
   "job_details": {
-    "e9d00ced-0ef4-42df-8c0c-32de3f94798f": {
+    "87f257a2-598a-40af-84be-df63b79fffd0": {
       "graphical": [],
       "categorical": [],
       "kpi": [
@@ -87,13 +87,13 @@
       ],
       "epoch": 0,
       "max_epoch": 1,
-      "time_per_epoch": "0:00:01.088459",
+      "time_per_epoch": "0:00:00.906410",
       "time_per_iter": null,
       "cur_iter": null,
       "eta": "0:00:00",
       "detailed_status": {
         "date": "10/19/2026",
-        "time": "20:12:8",
+        "time": "20:16:37",
         "message": "train action completed successfully for classification_pyt",
         "status": "SUCCESS"
       },
@@ -101,7 +101,7 @@
     }
   },
   "backend_details": null,
-  "experiment_id": "e9d00ced-0ef4-42df-8c0c-32de3f94798f",
+  "experiment_id": "87f257a2-598a-40af-84be-df63b79fffd0",
   "epoch_numbers": [
     0
   ],

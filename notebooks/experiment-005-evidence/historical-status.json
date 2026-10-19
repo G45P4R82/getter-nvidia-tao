@@ -1,8 +1,8 @@
 {
-  "id": "45ae9fc6-775c-475a-93c9-2563ecb72e55",
-  "created_on": "2026-10-19T20:09:45.494000+00:00",
-  "last_modified": "2026-10-19T20:11:08.205000+00:00",
-  "name": "experiment-005-historical-1792440522",
+  "id": "cf5d1935-5b43-4256-a382-fe3931773914",
+  "created_on": "2026-10-19T20:14:10.987000+00:00",
+  "last_modified": "2026-10-19T20:15:39.178000+00:00",
+  "name": "experiment-005-historical-1792440788",
   "shared": false,
   "description": "",
   "version": "1.0.0",
@@ -59,7 +59,7 @@
   "parent_id": null,
   "action": "train",
   "job_details": {
-    "45ae9fc6-775c-475a-93c9-2563ecb72e55": {
+    "cf5d1935-5b43-4256-a382-fe3931773914": {
       "graphical": [],
       "categorical": [],
       "kpi": [],
@@ -71,7 +71,7 @@
       "eta": null,
       "detailed_status": {
         "date": "10/19/2026",
-        "time": "20:10:30",
+        "time": "20:15:1",
         "message": "train action failed for classification_pyt",
         "status": "FAILURE"
       },
@@ -79,6 +79,6 @@
     }
   },
   "backend_details": null,
-  "experiment_id": "45ae9fc6-775c-475a-93c9-2563ecb72e55",
+  "experiment_id": "cf5d1935-5b43-4256-a382-fe3931773914",
   "kind": "experiment"
 }

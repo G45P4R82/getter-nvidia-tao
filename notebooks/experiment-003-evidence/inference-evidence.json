@@ -1,0 +1,36 @@
+{
+  "action": "inference",
+  "job_id": "b6ef559a-38a5-4d6f-a293-cd64c88b3c82",
+  "status": "Done",
+  "created_on": "2026-10-19T19:28:50.921000+00:00",
+  "last_modified": "2026-10-19T19:30:11.678000+00:00",
+  "parent_id": "a24e9173-5d63-45e8-8a85-0639b47a7648",
+  "dataset_uris": {
+    "train": null,
+    "eval": null,
+    "inference": "seaweedfs://tao-storage/data/tao-test-classification-v1"
+  },
+  "job_details": {
+    "graphical": [],
+    "categorical": [],
+    "kpi": [],
+    "epoch": null,
+    "max_epoch": 1,
+    "time_per_epoch": null,
+    "time_per_iter": null,
+    "cur_iter": null,
+    "eta": null,
+    "detailed_status": {
+      "date": "10/19/2026",
+      "time": "19:29:16",
+      "message": "inference action completed successfully for classification_pyt",
+      "status": "SUCCESS"
+    },
+    "key_metric": 0.0
+  },
+  "artifacts": [
+    "results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz",
+    "results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/microservices_log.txt",
+    "results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json"
+  ]
+}

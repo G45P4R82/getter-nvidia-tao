@@ -1,0 +1,58 @@
+{
+  "workspace": {
+    "id": "98c4bec1-88df-423e-8a15-af78881e9742",
+    "user_id": "8270f072-19c3-574a-a7f2-c999d40039da",
+    "created_on": "2026-10-01T18:13:25.328000+00:00",
+    "last_modified": "2026-10-01T18:13:25.328000+00:00",
+    "name": "real-unittest-classification",
+    "shared": false,
+    "version": "1.0.0",
+    "cloud_type": "seaweedfs"
+  },
+  "dataset_matches": [
+    {
+      "id": "7b242a10-b98c-45ff-ba3e-74b5e3e16c54",
+      "created_on": "2026-10-01T18:14:51.435000+00:00",
+      "last_modified": "2026-10-01T18:14:51.435000+00:00",
+      "name": "real-unittest-classification-v2",
+      "shared": false,
+      "description": "Synthetic real TAO unittest dataset",
+      "version": "1.0.0",
+      "logo": "https://www.nvidia.com",
+      "type": "image_classification",
+      "format": "classification_pyt",
+      "workspace": "98c4bec1-88df-423e-8a15-af78881e9742",
+      "url": null,
+      "cloud_file_path": "data/tao-test-classification-v1",
+      "actions": [],
+      "client_url": null,
+      "status": "pull_complete",
+      "use_for": [
+        "training",
+        "evaluation",
+        "testing"
+      ],
+      "base_experiment_ids": [],
+      "authorized_party_nca_id": ""
+    }
+  ],
+  "expected_root": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "schema_properties": [
+    "model_name",
+    "encryption_key",
+    "results_dir",
+    "wandb",
+    "model",
+    "dataset",
+    "train",
+    "distill",
+    "quantize",
+    "automl_disabled_parameters"
+  ],
+  "base_experiment_found": true,
+  "expected_layout": [
+    "images_train/",
+    "images_val/ or images_test/",
+    "classes.txt"
+  ]
+}

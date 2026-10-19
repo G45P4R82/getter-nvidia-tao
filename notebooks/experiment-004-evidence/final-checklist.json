@@ -1,0 +1,53 @@
+{
+  "experiment": "004-training-real",
+  "job_id": "fb3606d6-93bc-4cbc-a060-db01dc537f24",
+  "status": "PASSED",
+  "checks": {
+    "login_and_health": true,
+    "workspace_validated": true,
+    "dataset_registered": true,
+    "schema_validated": true,
+    "base_experiment_validated": true,
+    "one_gpu_configured": true,
+    "one_epoch_configured": true,
+    "dataset_root_configured": true,
+    "job_terminal_success": true,
+    "tao_success_message": true,
+    "metrics_returned": true,
+    "images_train_observed_in_logs": true,
+    "classes_file_observed_in_logs": true
+  },
+  "layout_tokens": {
+    "images_train": true,
+    "images_test": true,
+    "classes.txt": true
+  },
+  "metrics": [
+    {
+      "metric": "val_loss",
+      "values": {
+        "0": 0.5858913064002991
+      }
+    },
+    {
+      "metric": "val_acc_1",
+      "values": {
+        "0": 0.875
+      }
+    },
+    {
+      "metric": "train_loss",
+      "values": {
+        "0": 0.7383504509925842
+      }
+    }
+  ],
+  "evidence_files": [
+    "dataset-preflight.json",
+    "job-id.txt",
+    "summary.json",
+    "train-logs.txt",
+    "train-payload.json",
+    "train-status.json"
+  ]
+}

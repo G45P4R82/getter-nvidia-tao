@@ -1,0 +1,152 @@
+
+=======================
+=== TAO Toolkit Deploy ===
+=======================
+
+NVIDIA Release 6.26.3-Deploy (build 207438968)
+TAO Toolkit Version 6.26.3
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the TAO Toolkit End User License Agreement.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/tao-toolkit-software-license-agreement
+
+2026-10-19 19:29:02,322 - nvidia_tao_core.microservices.utils.job_utils.workflow - INFO - Logging configured at level: INFO
+2026-10-19 19:29:02,339 - nvidia_tao_core.microservices.app - INFO - Logging configured at level: INFO
+2026-10-19 19:29:02,340 - nvidia_tao_core.microservices.app - INFO - Register all versioned API blueprints
+2026-10-19 19:29:02,340 - nvidia_tao_core.microservices.api_versions - INFO - Setting up API versioning...
+2026-10-19 19:29:02,340 - nvidia_tao_core.microservices.api_versions - INFO - Registered API version v1 with 8 blueprints
+2026-10-19 19:29:02,340 - nvidia_tao_core.microservices.api_versions - INFO - Successfully set up v1 API blueprints
+2026-10-19 19:29:02,340 - nvidia_tao_core.microservices.api_versions - INFO - Registered API version v2 with 8 blueprints
+2026-10-19 19:29:02,340 - nvidia_tao_core.microservices.api_versions - INFO - Registering blueprints for API v1
+2026-10-19 19:29:02,359 - nvidia_tao_core.microservices.api_versions - INFO - Registering blueprints for API v2
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.api_versions - INFO - API versioning setup complete. Available versions: ['v1', 'v2']
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.app - INFO - Initialize all versioned OpenAPI Specs
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.api_versions - INFO - Initialize APISpec versions
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.api_versions - INFO - Initialize versioned OpenAPI specs
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.api_versions - INFO - Versioned OpenAPI specs complete.
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.app - INFO - Register schemas with versioned OpenAPI specs
+2026-10-19 19:29:02,407 - nvidia_tao_core.microservices.api_versions - INFO - Setting up schemas in APISpec...
+/usr/local/lib/python3.12/dist-packages/apispec_oneofschema/plugin.py:16: UserWarning: Multiple schemas resolved to the name slurm. The name has been modified. Either manually add each of the schemas with a different name or provide a custom schema_name_resolver.
+  unique_component_name = common.get_unique_schema_name(
+/usr/local/lib/python3.12/dist-packages/apispec_oneofschema/plugin.py:16: UserWarning: Multiple schemas resolved to the name lepton. The name has been modified. Either manually add each of the schemas with a different name or provide a custom schema_name_resolver.
+  unique_component_name = common.get_unique_schema_name(
+/usr/local/lib/python3.12/dist-packages/apispec/ext/marshmallow/__init__.py:184: UserWarning: <class 'nvidia_tao_core.microservices.blueprints.v2.schemas.HuggingFaceCloudPull'> has already been added to the spec. Adding it twice may cause references to not resolve properly.
+  self.warn_if_schema_already_in_spec(schema_key)
+2026-10-19 19:29:02,434 - nvidia_tao_core.microservices.api_versions - INFO - Schemas in APISpec complete.
+2026-10-19 19:29:02,434 - nvidia_tao_core.microservices.app - INFO - Register routes with versioned OpenAPI specs
+2026-10-19 19:29:02,434 - nvidia_tao_core.microservices.api_versions - INFO - Setting up routes in APISpec...
+2026-10-19 19:29:02,434 - nvidia_tao_core.microservices.api_versions - INFO - Register routes with versioned OpenAPI specs
+2026-10-19 19:29:02,615 - nvidia_tao_core.microservices.api_versions - INFO - Routes in APISpec complete.
+2026-10-19 19:29:02,615 - nvidia_tao_core.microservices.app - INFO - TAO Core Flask application created and configured successfully
+ * Serving Flask app 'nvidia_tao_core.microservices.app'
+ * Debug mode: off
+2026-10-19 19:29:02,616 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://172.22.0.10:8000
+2026-10-19 19:29:02,616 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-10-19 19:29:11,072 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:29:11] "GET /api/v1/health/liveness HTTP/1.1" 200 -
+2026-10-19 19:29:11,084 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:29:11] "POST /api/v1/internal/container_job HTTP/1.1" 200 -
+2026-10-19 19:29:11,109 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+/usr/local/lib/python3.12/dist-packages/fsspec/registry.py:301: UserWarning: Your installed version of s3fs is very old and known to cause
+severe performance issues, see also https://github.com/dask/dask/issues/10276
+
+To fix, you should specify a lower version bound on s3fs, or
+update the current installation.
+
+  warnings.warn(s3_msg)
+2026-10-19 19:29:11,143 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Local master task (SLURM_LOCALID=0, NODE_RANK=0) - performing downloads
+2026-10-19 19:29:11,143 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Analyzing spec for download requirements...
+2026-10-19 19:29:11,143 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,184 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+
+2026-10-19 19:29:11,220 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,236 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:29:11] "GET /api/v1/internal/container_job:status?results_dir=seaweedfs://tao-storage/results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82 HTTP/1.1" 200 -
+2026-10-19 19:29:11,257 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,299 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Found 4 files to download before job launch:
+2026-10-19 19:29:11,299 - nvidia_tao_core.microservices.handlers.container_handler - INFO -   - Main spec files: 4
+2026-10-19 19:29:11,299 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Downloading files from normal spec (preserve_source_path_params=set())
+2026-10-19 19:29:11,299 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Calculating total download size...
+2026-10-19 19:29:11,299 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,331 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,366 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,502 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,533 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Calculated total download size: 216.6 MB
+2026-10-19 19:29:11,533 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,569 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting download: data/tao-test-classification-v1/images_test.tar.gz -> /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//data/tao-test-classification-v1/images_test.tar.gz (0.0 MB)
+2026-10-19 19:29:11,579 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Downloaded data/tao-test-classification-v1/images_test.tar.gz to /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//data/tao-test-classification-v1/images_test.tar.gz
+2026-10-19 19:29:11,580 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Untarring data started
+2026-10-19 19:29:11,581 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Untarring data complete
+2026-10-19 19:29:11,581 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Removing data tar file
+2026-10-19 19:29:11,581 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Deleted data tar file
+2026-10-19 19:29:11,581 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: data/tao-test-classification-v1/images_test.tar.gz
+2026-10-19 19:29:11,581 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,621 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting download: data/tao-test-classification-v1/classes.txt -> /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//data/tao-test-classification-v1/classes.txt (0.0 MB)
+2026-10-19 19:29:11,632 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Downloaded data/tao-test-classification-v1/classes.txt to /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//data/tao-test-classification-v1/classes.txt
+2026-10-19 19:29:11,632 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: data/tao-test-classification-v1/classes.txt
+2026-10-19 19:29:11,633 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,671 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting download: results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine -> /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine (108.3 MB)
+2026-10-19 19:29:11,825 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Downloaded results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine to /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine
+2026-10-19 19:29:11,825 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine
+2026-10-19 19:29:11,826 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:29:11,866 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - File /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82//results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine already exists, skipping download
+2026-10-19 19:29:11,866 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: results/a24e9173-5d63-45e8-8a85-0639b47a7648/model.engine
+2026-10-19 19:29:11,866 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Download completed: 2 files, 108.3 MB in 0:00:00
+2026-10-19 19:29:11,871 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:11", "status": "RUNNING", "verbosity": "INFO", "message": "Download completed: 2 files, 108.3 MB in 0:00:00"}'} sent successfully
+2026-10-19 19:29:11,871 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Main spec file downloads completed
+2026-10-19 19:29:11,873 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Captured snapshot of 18 items in directory: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82
+2026-10-19 19:29:11,874 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Using upload strategy for classification_pyt inference: tarball_after_completion
+
+2026-10-19 19:29:13,128 [TAO Toolkit] [INFO] nvidia_tao_core.microservices.utils.job_utils.workflow 61: Logging configured at level: INFOsys:1: UserWarning: 
+'spec.yaml' is validated against ConfigStore schema with the same name.
+This behavior is deprecated in Hydra 1.1 and will be removed in Hydra 1.2.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/automatic_schema_matching for migration instructions.
+/usr/local/lib/python3.12/dist-packages/nvidia_tao_deploy/cv/common/hydra/hydra_runner.py:99: UserWarning: 
+'spec.yaml' is validated against ConfigStore schema with the same name.
+This behavior is deprecated in Hydra 1.1 and will be removed in Hydra 1.2.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/automatic_schema_matching for migration instructions.
+  _run_hydra(
+/usr/local/lib/python3.12/dist-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+Trt_inference results will be saved at: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference
+Starting classification_pyt trt_inference.
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:13", "status": "STARTED", "verbosity": "INFO", "message": "Starting classification_pyt trt_inference."}'} sent successfully
+
+
+Producing predictions:   0%|          | 0/8 [00:00<?, ?it/s]
+Producing predictions:  38%|███▊      | 3/8 [00:00<00:00, 29.02it/s]
+Producing predictions: 100%|██████████| 8/8 [00:00<00:00, 43.81it/s]Finished inference.
+Trt_inference finished successfully.
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:13", "status": "RUNNING", "verbosity": "INFO", "message": "Trt_inference finished successfully."}'} sent successfully
+Job artifacts in results dir are being uploaded to the cloud
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:13", "status": "RUNNING", "verbosity": "INFO", "message": "Job artifacts in results dir are being uploaded to the cloud"}'} sent successfully
+2026-10-19 19:29:13,873 - nvidia_tao_deploy.cv.common.entrypoint.entrypoint_hydra - WARNING - Telemetry data couldn't be sent, but the command ran successfully.
+2026-10-19 19:29:13,873 - nvidia_tao_deploy.cv.common.entrypoint.entrypoint_hydra - WARNING - 'str' object has no attribute 'decode'
+[38;20m2026-10-19 19:29:15,874 - [TAO Toolkit] - INFO - Log file already exists at /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json (logging.py:224)[0m
+2026-10-19 19:29:15,874 - TAO Toolkit - INFO - Log file already exists at /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json
+2026-10-19 19:29:15,874 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Job completed, creating and uploading tarball
+2026-10-19 19:29:15,874 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Creating tarball excluding 18 pre-existing items: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz from source: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82
+2026-10-19 19:29:15,878 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Tarball created successfully: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz (5 files added, 11 files excluded)
+2026-10-19 19:29:16,095 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading tarball to cloud: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz
+2026-10-19 19:29:16,096 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz -> /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz (0.0 MB)
+2026-10-19 19:29:16,107 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Total Upload Progress: 1/1 files (100.0%), 0.0 MB/0.0 MB (0.3%), Remaining: 0 files, 0.0 MB, ETA: calculating...
+2026-10-19 19:29:16,111 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:16", "status": "RUNNING", "verbosity": "INFO", "message": "Total Upload Progress: 1/1 files (100.0%), 0.0 MB/0.0 MB (0.3%), Remaining: 0 files, 0.0 MB, ETA: calculating..."}'} sent successfully
+2026-10-19 19:29:16,111 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Upload completed: 1 files, 0.0 MB in 0:00:00
+2026-10-19 19:29:16,116 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:16", "status": "RUNNING", "verbosity": "INFO", "message": "Upload completed: 1 files, 0.0 MB in 0:00:00"}'} sent successfully
+2026-10-19 19:29:16,116 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz to /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz
+2026-10-19 19:29:16,116 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Tarball uploaded successfully: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz
+2026-10-19 19:29:16,116 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Local tarball removed: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/inference_results.tar.gz
+[38;20m2026-10-19 19:29:16,116 - [TAO Toolkit] - INFO - inference action completed successfully for classification_pyt (logging.py:191)[0m
+2026-10-19 19:29:16,116 - TAO Toolkit - INFO - inference action completed successfully for classification_pyt
+2026-10-19 19:29:16,123 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:29:16", "status": "SUCCESS", "verbosity": "INFO", "message": "inference action completed successfully for classification_pyt"}'} sent successfully
+2026-10-19 19:29:16,123 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json -> /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json (0.0 MB)
+2026-10-19 19:29:16,129 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Upload completed: 1 files, 0.0 MB in 0:00:00
+2026-10-19 19:29:16,129 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json to /results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82/trt_inference/status.json
+2026-10-19 19:29:16,130 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Found active CUDA context. Cleaning up...
+2026-10-19 19:29:16,130 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Active CUDA context cleaned up!
+
+2026-10-19 19:29:41,655 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:29:41] "GET /api/v1/internal/container_job:status?results_dir=seaweedfs://tao-storage/results/b6ef559a-38a5-4d6f-a293-cd64c88b3c82 HTTP/1.1" 200 -
+

@@ -1,0 +1,97 @@
+{
+  "action": "train",
+  "job_id": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+  "status": "Done",
+  "created_on": "2026-10-19T19:21:46.251000+00:00",
+  "last_modified": "2026-10-19T19:23:41.961000+00:00",
+  "parent_id": null,
+  "dataset_uris": {
+    "train": [
+      "seaweedfs://tao-storage/data/tao-test-classification-v1"
+    ],
+    "eval": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+    "inference": "seaweedfs://tao-storage/data/tao-test-classification-v1"
+  },
+  "job_details": {
+    "graphical": [],
+    "categorical": [],
+    "kpi": [
+      {
+        "metric": "val_loss",
+        "values": {
+          "0": 2.090709686279297,
+          "1": 1.6890172958374023,
+          "2": 1.3091542720794678,
+          "3": 1.0176483392715454,
+          "4": 0.8069472908973694,
+          "5": 0.6671432256698608,
+          "6": 0.578280508518219,
+          "7": 0.5187190771102905,
+          "8": 0.4794667065143585,
+          "9": 0.4794667065143585
+        }
+      },
+      {
+        "metric": "val_acc_1",
+        "values": {
+          "0": 1.0,
+          "1": 1.0,
+          "2": 1.0,
+          "3": 1.0,
+          "4": 1.0,
+          "5": 1.0,
+          "6": 1.0,
+          "7": 1.0,
+          "8": 1.0,
+          "9": 1.0
+        }
+      },
+      {
+        "metric": "train_loss",
+        "values": {
+          "0": 2.7502124309539795,
+          "1": 2.2535881996154785,
+          "2": 1.8727021217346191,
+          "3": 1.4630461931228638,
+          "4": 1.1364675760269165,
+          "5": 1.015878677368164,
+          "6": 0.8752769231796265,
+          "7": 0.8202236294746399,
+          "8": 0.7425450086593628,
+          "9": 0.605469822883606
+        }
+      }
+    ],
+    "epoch": 9,
+    "max_epoch": 9,
+    "time_per_epoch": "0:00:00.428316",
+    "time_per_iter": null,
+    "cur_iter": null,
+    "eta": "0:00:00",
+    "detailed_status": {
+      "date": "10/19/2026",
+      "time": "19:23:6",
+      "message": "train action completed successfully for classification_pyt",
+      "status": "SUCCESS"
+    },
+    "key_metric": 0.0
+  },
+  "artifacts": [
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/microservices_log.txt",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth",
+    "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json"
+  ]
+}

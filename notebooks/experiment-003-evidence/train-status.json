@@ -1,0 +1,145 @@
+{
+  "id": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+  "created_on": "2026-10-19T19:21:46.251000+00:00",
+  "last_modified": "2026-10-19T19:23:41.961000+00:00",
+  "name": "curl-experiment-003-train-1792437643",
+  "shared": false,
+  "description": "",
+  "version": "1.0.0",
+  "logo": "https://www.nvidia.com",
+  "ngc_path": "",
+  "workspace": "98c4bec1-88df-423e-8a15-af78881e9742",
+  "additional_id_info": null,
+  "checkpoint_choose_method": "best_model",
+  "checkpoint_epoch_number": {
+    "best_model_c45a3fe8-858d-4e18-a7b5-385cc474aa90": 9,
+    "latest_model_c45a3fe8-858d-4e18-a7b5-385cc474aa90": 9
+  },
+  "encryption_key": "unittest-only",
+  "network_arch": "classification_pyt",
+  "base_experiment_ids": [
+    "469f42fe-37dc-55ff-b89b-5096477f9a87"
+  ],
+  "dataset_type": "image_classification",
+  "dataset_formats": [
+    "classification_pyt"
+  ],
+  "accepted_dataset_intents": [
+    "training",
+    "evaluation",
+    "testing"
+  ],
+  "eval_dataset": null,
+  "inference_dataset": null,
+  "calibration_dataset": null,
+  "train_datasets": [],
+  "train_dataset_uris": [
+    "seaweedfs://tao-storage/data/tao-test-classification-v1"
+  ],
+  "eval_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "inference_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+  "calibration_dataset_uri": null,
+  "dataset_format": null,
+  "read_only": false,
+  "public": false,
+  "actions": [
+    "train",
+    "distill",
+    "quantize",
+    "evaluate",
+    "export",
+    "gen_trt_engine",
+    "inference"
+  ],
+  "status": "Done",
+  "automl_settings": {},
+  "metric": "kpi",
+  "model_params": {},
+  "experiment_actions": [],
+  "tensorboard_enabled": false,
+  "tags": [],
+  "authorized_party_nca_id": "",
+  "parent_id": null,
+  "action": "train",
+  "job_details": {
+    "c45a3fe8-858d-4e18-a7b5-385cc474aa90": {
+      "graphical": [],
+      "categorical": [],
+      "kpi": [
+        {
+          "metric": "val_loss",
+          "values": {
+            "0": 2.090709686279297,
+            "1": 1.6890172958374023,
+            "2": 1.3091542720794678,
+            "3": 1.0176483392715454,
+            "4": 0.8069472908973694,
+            "5": 0.6671432256698608,
+            "6": 0.578280508518219,
+            "7": 0.5187190771102905,
+            "8": 0.4794667065143585,
+            "9": 0.4794667065143585
+          }
+        },
+        {
+          "metric": "val_acc_1",
+          "values": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0,
+            "7": 1.0,
+            "8": 1.0,
+            "9": 1.0
+          }
+        },
+        {
+          "metric": "train_loss",
+          "values": {
+            "0": 2.7502124309539795,
+            "1": 2.2535881996154785,
+            "2": 1.8727021217346191,
+            "3": 1.4630461931228638,
+            "4": 1.1364675760269165,
+            "5": 1.015878677368164,
+            "6": 0.8752769231796265,
+            "7": 0.8202236294746399,
+            "8": 0.7425450086593628,
+            "9": 0.605469822883606
+          }
+        }
+      ],
+      "epoch": 9,
+      "max_epoch": 9,
+      "time_per_epoch": "0:00:00.428316",
+      "time_per_iter": null,
+      "cur_iter": null,
+      "eta": "0:00:00",
+      "detailed_status": {
+        "date": "10/19/2026",
+        "time": "19:23:6",
+        "message": "train action completed successfully for classification_pyt",
+        "status": "SUCCESS"
+      },
+      "key_metric": 0.0
+    }
+  },
+  "backend_details": null,
+  "experiment_id": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+  "epoch_numbers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "kind": "experiment"
+}

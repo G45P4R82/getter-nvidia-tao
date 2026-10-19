@@ -1,0 +1,46 @@
+{
+  "action": "evaluate",
+  "job_id": "fe1af6bc-6d28-4da2-809b-9337ef3b6603",
+  "status": "Done",
+  "created_on": "2026-10-19T19:23:52.654000+00:00",
+  "last_modified": "2026-10-19T19:25:11.650000+00:00",
+  "parent_id": "c45a3fe8-858d-4e18-a7b5-385cc474aa90",
+  "dataset_uris": {
+    "train": null,
+    "eval": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+    "inference": null
+  },
+  "job_details": {
+    "graphical": [],
+    "categorical": [],
+    "kpi": [
+      {
+        "metric": "val_acc_1",
+        "values": {
+          "0": 1.0
+        }
+      }
+    ],
+    "epoch": null,
+    "max_epoch": 1,
+    "time_per_epoch": null,
+    "time_per_iter": null,
+    "cur_iter": null,
+    "eta": null,
+    "detailed_status": {
+      "date": "10/19/2026",
+      "time": "19:24:27",
+      "message": "evaluate action completed successfully for classification_pyt",
+      "status": "SUCCESS"
+    },
+    "key_metric": 0.0
+  },
+  "artifacts": [
+    "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/experiment.yaml",
+    "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/lightning_logs/version_0/events.out.tfevents.1792437863.b0ca2c4d77f0.286.0",
+    "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/lightning_logs/version_0/hparams.yaml",
+    "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/result.csv",
+    "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/status.json",
+    "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/microservices_log.txt"
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/microservices_log.txt",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth",
+  "results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json"
+]

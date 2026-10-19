@@ -1,9 +1,9 @@
 {
   "executed": true,
-  "job_id": "45ae9fc6-775c-475a-93c9-2563ecb72e55",
+  "job_id": "cf5d1935-5b43-4256-a382-fe3931773914",
   "status": "Error",
   "job_details": {
-    "45ae9fc6-775c-475a-93c9-2563ecb72e55": {
+    "cf5d1935-5b43-4256-a382-fe3931773914": {
       "graphical": [],
       "categorical": [],
       "kpi": [],
@@ -15,7 +15,7 @@
       "eta": null,
       "detailed_status": {
         "date": "10/19/2026",
-        "time": "20:10:30",
+        "time": "20:15:1",
         "message": "train action failed for classification_pyt",
         "status": "FAILURE"
       },

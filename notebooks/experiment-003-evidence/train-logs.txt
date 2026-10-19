@@ -1,0 +1,1199 @@
+
+===========================
+=== TAO Toolkit PyTorch ===
+===========================
+
+NVIDIA Release 6.26.3-PyTorch (build 210907837)
+TAO Toolkit Version 6.26.3
+
+Various files include modifications (c) NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
+
+This container image and its contents are governed by the TAO Toolkit End User License Agreement.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/tao-toolkit-software-license-agreement
+
+2026-10-19 19:22:02,557 - nvidia_tao_core.microservices.utils.job_utils.workflow - INFO - Logging configured at level: INFO
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.app - INFO - Logging configured at level: INFO
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.app - INFO - Register all versioned API blueprints
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.api_versions - INFO - Setting up API versioning...
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.api_versions - INFO - Registered API version v1 with 8 blueprints
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.api_versions - INFO - Successfully set up v1 API blueprints
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.api_versions - INFO - Registered API version v2 with 8 blueprints
+2026-10-19 19:22:02,586 - nvidia_tao_core.microservices.api_versions - INFO - Registering blueprints for API v1
+2026-10-19 19:22:02,606 - nvidia_tao_core.microservices.api_versions - INFO - Registering blueprints for API v2
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.api_versions - INFO - API versioning setup complete. Available versions: ['v1', 'v2']
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.app - INFO - Initialize all versioned OpenAPI Specs
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.api_versions - INFO - Initialize APISpec versions
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.api_versions - INFO - Initialize versioned OpenAPI specs
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.api_versions - INFO - Versioned OpenAPI specs complete.
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.app - INFO - Register schemas with versioned OpenAPI specs
+2026-10-19 19:22:02,617 - nvidia_tao_core.microservices.api_versions - INFO - Setting up schemas in APISpec...
+/usr/local/lib/python3.12/dist-packages/apispec_oneofschema/plugin.py:16: UserWarning: Multiple schemas resolved to the name slurm. The name has been modified. Either manually add each of the schemas with a different name or provide a custom schema_name_resolver.
+  unique_component_name = common.get_unique_schema_name(
+/usr/local/lib/python3.12/dist-packages/apispec_oneofschema/plugin.py:16: UserWarning: Multiple schemas resolved to the name lepton. The name has been modified. Either manually add each of the schemas with a different name or provide a custom schema_name_resolver.
+  unique_component_name = common.get_unique_schema_name(
+/usr/local/lib/python3.12/dist-packages/apispec/ext/marshmallow/__init__.py:184: UserWarning: <class 'nvidia_tao_core.microservices.blueprints.v2.schemas.HuggingFaceCloudPull'> has already been added to the spec. Adding it twice may cause references to not resolve properly.
+  self.warn_if_schema_already_in_spec(schema_key)
+2026-10-19 19:22:02,645 - nvidia_tao_core.microservices.api_versions - INFO - Schemas in APISpec complete.
+2026-10-19 19:22:02,645 - nvidia_tao_core.microservices.app - INFO - Register routes with versioned OpenAPI specs
+2026-10-19 19:22:02,645 - nvidia_tao_core.microservices.api_versions - INFO - Setting up routes in APISpec...
+2026-10-19 19:22:02,645 - nvidia_tao_core.microservices.api_versions - INFO - Register routes with versioned OpenAPI specs
+2026-10-19 19:22:02,833 - nvidia_tao_core.microservices.api_versions - INFO - Routes in APISpec complete.
+2026-10-19 19:22:02,833 - nvidia_tao_core.microservices.app - INFO - TAO Core Flask application created and configured successfully
+ * Serving Flask app 'nvidia_tao_core.microservices.app'
+ * Debug mode: off
+2026-10-19 19:22:02,834 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://172.22.0.10:8000
+2026-10-19 19:22:02,834 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2026-10-19 19:22:10,235 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:22:10] "GET /api/v1/health/liveness HTTP/1.1" 200 -
+2026-10-19 19:22:10,247 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:22:10] "POST /api/v1/internal/container_job HTTP/1.1" 200 -
+2026-10-19 19:22:10,346 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+/usr/local/lib/python3.12/dist-packages/fsspec/registry.py:298: UserWarning: Your installed version of s3fs is very old and known to cause
+severe performance issues, see also https://github.com/dask/dask/issues/10276
+
+To fix, you should specify a lower version bound on s3fs, or
+update the current installation.
+
+  warnings.warn(s3_msg)
+2026-10-19 19:22:10,388 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Local master task (SLURM_LOCALID=0, NODE_RANK=0) - performing downloads
+2026-10-19 19:22:10,388 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Analyzing spec for download requirements...
+2026-10-19 19:22:10,388 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - WARNING - Could not list files in cloud path ngc://nvidia/tao/pretrained_fan_classification_imagenet:fan_hybrid_small: 'ngc'
+2026-10-19 19:22:10,388 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:10,422 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+
+2026-10-19 19:22:10,514 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:10,551 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Found 4 files to download before job launch:
+2026-10-19 19:22:10,551 - nvidia_tao_core.microservices.handlers.container_handler - INFO -   - Main spec files: 4
+2026-10-19 19:22:10,551 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Downloading files from normal spec (preserve_source_path_params=set())
+2026-10-19 19:22:10,551 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Calculating total download size...
+2026-10-19 19:22:10,561 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:22:10] "GET /api/v1/internal/container_job:status?results_dir=seaweedfs://tao-storage/results/c45a3fe8-858d-4e18-a7b5-385cc474aa90 HTTP/1.1" 200 -
+2026-10-19 19:22:11,749 - nvidia_tao_core.microservices.utils.ngc_utils - ERROR - Can't configure the passed NGC KEY for Org nvidia, team tao
+2026-10-19 19:22:11,750 - nvidia_tao_core.microservices.utils.ngc_utils - ERROR - Error: Provided organization: 'nvidia', doesn't match organization for which API Key has permissions:'1057364407774188'
+2026-10-19 19:22:11,750 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:11,782 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:11,818 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:11,850 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Calculated total download size: 0.0 MB
+2026-10-19 19:22:12,583 - nvidia_tao_core.microservices.utils.ngc_utils - ERROR - Can't configure the passed NGC KEY for Org nvidia, team tao
+2026-10-19 19:22:12,583 - nvidia_tao_core.microservices.utils.ngc_utils - ERROR - Error: Provided organization: 'nvidia', doesn't match organization for which API Key has permissions:'1057364407774188'
+2026-10-19 19:22:12,583 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Starting NGC model download: nvidia/tao/pretrained_fan_classification_imagenet:fan_hybrid_small (0.0 MB)
+2026-10-19 19:22:13,321 - nvidia_tao_core.microservices.utils.ngc_utils - INFO - Can't validate the passed NGC KEY for Org nvidia, team tao, continuing without configuring credentials
+2026-10-19 19:22:18,593 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Current file download: NGC: pretrained_fan_classification_imagenet (nvidia/tao); Current file download Progress: 32.3 MB; Total Download Progress: 1/4 files (25.0%), 32.3 MB/0.0 MB (3234.5%), Remaining: 3 files, 0.0 MB, ETA: 0:00:00
+2026-10-19 19:22:18,604 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:18", "status": "RUNNING", "verbosity": "INFO", "message": "Current file download: NGC: pretrained_fan_classification_imagenet (nvidia/tao); Current file download Progress: 32.3 MB; Total Download Progress: 1/4 files (25.0%), 32.3 MB/0.0 MB (3234.5%), Remaining: 3 files, 0.0 MB, ETA: 0:00:00"}'} sent successfully
+2026-10-19 19:22:19,216 - nvidia_tao_core.microservices.utils.ngc_utils - INFO - Saving base_experiment file to /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model
+2026-10-19 19:22:19,604 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - NGC model download completed: nvidia/tao/pretrained_fan_classification_imagenet:fan_hybrid_small
+2026-10-19 19:22:19,608 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Found valid PTM at /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth
+2026-10-19 19:22:19,609 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:19,647 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting download: data/tao-test-classification-v1/images_train.tar.gz -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_train.tar.gz (0.0 MB)
+2026-10-19 19:22:19,661 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Downloaded data/tao-test-classification-v1/images_train.tar.gz to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_train.tar.gz
+2026-10-19 19:22:19,661 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Untarring data started
+2026-10-19 19:22:19,662 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Untarring data complete
+2026-10-19 19:22:19,662 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Removing data tar file
+2026-10-19 19:22:19,662 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Deleted data tar file
+2026-10-19 19:22:19,662 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: data/tao-test-classification-v1/images_train.tar.gz
+2026-10-19 19:22:19,662 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:19,694 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting download: data/tao-test-classification-v1/images_val.tar.gz -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_val.tar.gz (0.0 MB)
+2026-10-19 19:22:19,703 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Downloaded data/tao-test-classification-v1/images_val.tar.gz to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_val.tar.gz
+2026-10-19 19:22:19,703 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Untarring data started
+2026-10-19 19:22:19,704 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Untarring data complete
+2026-10-19 19:22:19,704 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Removing data tar file
+2026-10-19 19:22:19,704 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Deleted data tar file
+2026-10-19 19:22:19,704 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: data/tao-test-classification-v1/images_val.tar.gz
+2026-10-19 19:22:19,704 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Cleared all fsspec caches
+2026-10-19 19:22:19,742 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting download: data/tao-test-classification-v1/classes.txt -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/classes.txt (0.0 MB)
+2026-10-19 19:22:19,751 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Downloaded data/tao-test-classification-v1/classes.txt to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/classes.txt
+2026-10-19 19:22:19,751 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Downloaded: data/tao-test-classification-v1/classes.txt
+2026-10-19 19:22:19,751 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Download completed: 4 files, 99.9 MB in 0:00:07
+2026-10-19 19:22:19,756 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:19", "status": "RUNNING", "verbosity": "INFO", "message": "Download completed: 4 files, 99.9 MB in 0:00:07"}'} sent successfully
+2026-10-19 19:22:19,756 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Main spec file downloads completed
+2026-10-19 19:22:19,759 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Captured snapshot of 34 items in directory: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90
+2026-10-19 19:22:19,759 - nvidia_tao_core.microservices.handlers.container_handler - INFO - Using upload strategy for classification_pyt train: continuous
+
+2026-10-19 19:22:22,775 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - monitor_and_upload :: Entering
+2026-10-19 19:22:22,775 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Backend=local-docker: Server-side log streaming enabled. Log files will not be uploaded from container.
+2026-10-19 19:22:22,775 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Skipping container-side log upload for backend=local-docker. Server-side log streaming is enabled.
+/usr/local/lib/python3.12/dist-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/usr/local/lib/python3.12/dist-packages/modelopt/torch/__init__.py:36: UserWarning: transformers version 4.57.6 is incompatible with nvidia-modelopt and may cause issues. Please install recommended version with `pip install nvidia-modelopt[hf]` if working with HF models.
+  _warnings.warn(
+{
+    "download_end": "2026-10-19 19:22:19",
+    "download_start": "2026-10-19 19:22:16",
+    "download_time": "2s",
+    "files_downloaded": 1,
+    "local_path": "/ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small",
+    "size_downloaded": "99.88 MB",
+    "status": "COMPLETED"
+}
+2026-10-19 19:22:28,780 - nvidia_tao_core.microservices.utils.job_utils.workflow - INFO - Logging configured at level: INFO
+/usr/local/lib/python3.12/dist-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+sys:1: UserWarning: 
+'spec.yaml' is validated against ConfigStore schema with the same name.
+This behavior is deprecated in Hydra 1.1 and will be removed in Hydra 1.2.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/automatic_schema_matching for migration instructions.
+/usr/local/lib/python3.12/dist-packages/nvidia_tao_pytorch/core/hydra/hydra_runner.py:110: UserWarning: 
+'spec.yaml' is validated against ConfigStore schema with the same name.
+This behavior is deprecated in Hydra 1.1 and will be removed in Hydra 1.2.
+See https://hydra.cc/docs/1.2/upgrades/1.0_to_1.1/automatic_schema_matching for migration instructions.
+  _run_hydra(
+/usr/local/lib/python3.12/dist-packages/hydra/_internal/hydra.py:119: UserWarning: Future Hydra versions will no longer change working directory at job runtime by default.
+See https://hydra.cc/docs/1.2/upgrades/1.1_to_1.2/changes_to_job_working_dir/ for more information.
+  ret = run_job(
+Train results will be saved at: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:30", "status": "STARTED", "verbosity": "INFO", "message": "Starting Classification train."}'} sent successfully
+
+[38;20m2026-10-19 19:22:30,083 - [TAO Toolkit] - INFO - Experiment configuration:model_name: ''
+encryption_key: '***'
+results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+wandb:
+  enable: true
+  project: TAO Toolkit
+  entity: ''
+  group: ''
+  tags:
+  - tao-toolkit
+  reinit: false
+  sync_tensorboard: false
+  save_code: false
+  name: TAO Toolkit Training
+  run_id: ''
+model:
+  backbone:
+    type: fan_small_12_p4_hybrid
+    pretrained_backbone_path: /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth
+    freeze_backbone: false
+    freeze_norm: false
+  head:
+    type: TAOLinearClsHead
+    binary: false
+    in_channels: 448
+    custom_args: null
+    loss:
+      type: CrossEntropyLoss
+      label_smooth_val: 0.0
+    topk:
+    - 1
+dataset:
+  root_dir: ''
+  dataset: CLDataset
+  num_classes: 20
+  img_size: 224
+  batch_size: 8
+  workers: 1
+  shuffle: true
+  augmentation:
+    random_flip:
+      vflip_probability: 0.5
+      hflip_probability: 0.5
+      enable: true
+    random_rotate:
+      rotate_probability: 0.5
+      angle_list:
+      - 90.0
+      - 180.0
+      - 270.0
+      enable: true
+    random_color:
+      brightness: 0.3
+      contrast: 0.3
+      saturation: 0.3
+      hue: 0.0
+      enable: true
+      color_probability: 0.5
+    random_erase:
+      enable: true
+      erase_probability: 0.2
+    random_aug:
+      enable: true
+    with_scale_random_crop:
+      scale_range:
+      - 1.0
+      - 1.2
+      enable: true
+    with_random_blur: true
+    with_random_crop: true
+    mean:
+    - 0.485
+    - 0.456
+    - 0.406
+    std:
+    - 0.229
+    - 0.224
+    - 0.225
+    mixup_cutmix: false
+    mixup_alpha: 0.4
+  train_dataset:
+    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_train
+  train_nolabel:
+    folder_path: ''
+  val_dataset:
+    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_val
+  test_dataset:
+    images_dir: ''
+  quant_calibration_dataset:
+    images_dir: ''
+  classes_file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/classes.txt
+train:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  seed: 1234
+  cudnn:
+    benchmark: false
+    deterministic: true
+  num_epochs: 10
+  checkpoint_interval: 1
+  checkpoint_interval_unit: epoch
+  validation_interval: 1
+  resume_training_checkpoint_path: ''
+  results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+  optim:
+    monitor_name: val_loss
+    optim: adamw
+    lr: 6.0e-05
+    policy: linear
+    policy_params:
+      step_size: 30
+      gamma: 0.1
+      milestones:
+      - 10
+      - 20
+    momentum: 0.9
+    weight_decay: 0.01
+    betas:
+    - 0.9
+    - 0.999
+
+skip_names: []    warmup_epochs: 0
+  pretrained_model_path: null
+  tensorboard:
+    enabled: false
+    infrequent_logging_frequency: 2
+  enable_ema: false
+  ema_decay: 0.998
+  clip_grad_norm: 2.0
+  precision: fp32
+evaluate:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  checkpoint: ???
+  trt_engine: null
+  results_dir: null
+  batch_size: -1
+  vis_after_n_batches: 16
+  is_quantized: false
+inference:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  checkpoint: ???
+  trt_engine: null
+  results_dir: null
+  batch_size: -1
+  vis_after_n_batches: 16
+  is_quantized: false
+export:
+  results_dir: null
+  gpu_id: 0
+  checkpoint: ???
+  onnx_file: ???
+  on_cpu: false
+  input_channel: 3
+  input_width: 960
+  input_height: 544
+  opset_version: 17
+  batch_size: -1
+  verbose: false
+  format: onnx
+  serialize_nvdsinfer: false
+  is_quantized: false
+gen_trt_engine:
+  results_dir: null
+  gpu_id: 0
+  onnx_file: ???
+  trt_engine: ???
+  timing_cache: null
+  batch_size: -1
+  verbose: false
+  tensorrt:
+    workspace_size: 1024
+    min_batch_size: 1
+    opt_batch_size: 1
+    max_batch_size: 1
+
+layers_precision: []    data_type: FP32
+    calibration:
+      cal_image_dir: ???
+      cal_cache_file: ???
+      cal_batch_size: 1
+      cal_batches: 1
+distill:
+  teacher:
+    backbone:
+      type: fan_small_12_p4_hybrid
+      pretrained_backbone_path: ''
+      freeze_backbone: false
+      freeze_norm: false
+    head:
+      type: TAOLinearClsHead
+      binary: false
+      in_channels: 448
+      custom_args: null
+      loss:
+        type: CrossEntropyLoss
+        label_smooth_val: 0.0
+      topk:
+      - 1
+  pretrained_teacher_model_path: ???
+
+bindings: []  loss_type: KL
+  loss_lambda: 0.5
+  mode: auto
+  use_mlp: true
+  mlp_hidden_size: 1024
+  mlp_num_inner: 0
+  results_dir: ''
+quantize:
+  backend: torchao
+  mode: weight_only_ptq
+  algorithm: minmax
+
+layers: []
+skip_names: []  model_path: ''
+  results_dir: ''
+  backend_kwargs: {}
+  device: cuda
+ (tlt_logging.py:201)[0m
+
+[38;20m2026-10-19 19:22:30,083 - [TAO Toolkit] - INFO - Experiment configuration:model_name: ''
+encryption_key: '***'
+results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+wandb:
+  enable: true
+  project: TAO Toolkit
+  entity: ''
+  group: ''
+  tags:
+  - tao-toolkit
+  reinit: false
+  sync_tensorboard: false
+  save_code: false
+  name: TAO Toolkit Training
+  run_id: ''
+model:
+  backbone:
+    type: fan_small_12_p4_hybrid
+    pretrained_backbone_path: /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth
+    freeze_backbone: false
+    freeze_norm: false
+  head:
+    type: TAOLinearClsHead
+    binary: false
+    in_channels: 448
+    custom_args: null
+    loss:
+      type: CrossEntropyLoss
+      label_smooth_val: 0.0
+    topk:
+    - 1
+dataset:
+  root_dir: ''
+  dataset: CLDataset
+  num_classes: 20
+  img_size: 224
+  batch_size: 8
+  workers: 1
+  shuffle: true
+  augmentation:
+    random_flip:
+      vflip_probability: 0.5
+      hflip_probability: 0.5
+      enable: true
+    random_rotate:
+      rotate_probability: 0.5
+      angle_list:
+      - 90.0
+      - 180.0
+      - 270.0
+      enable: true
+    random_color:
+      brightness: 0.3
+      contrast: 0.3
+      saturation: 0.3
+      hue: 0.0
+      enable: true
+      color_probability: 0.5
+    random_erase:
+      enable: true
+      erase_probability: 0.2
+    random_aug:
+      enable: true
+    with_scale_random_crop:
+      scale_range:
+      - 1.0
+      - 1.2
+      enable: true
+    with_random_blur: true
+    with_random_crop: true
+    mean:
+    - 0.485
+    - 0.456
+    - 0.406
+    std:
+    - 0.229
+    - 0.224
+    - 0.225
+    mixup_cutmix: false
+    mixup_alpha: 0.4
+  train_dataset:
+    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_train
+  train_nolabel:
+    folder_path: ''
+  val_dataset:
+    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_val
+  test_dataset:
+    images_dir: ''
+  quant_calibration_dataset:
+    images_dir: ''
+  classes_file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/classes.txt
+train:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  seed: 1234
+  cudnn:
+    benchmark: false
+    deterministic: true
+  num_epochs: 10
+  checkpoint_interval: 1
+  checkpoint_interval_unit: epoch
+  validation_interval: 1
+  resume_training_checkpoint_path: ''
+  results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+  optim:
+    monitor_name: val_loss
+    optim: adamw
+    lr: 6.0e-05
+    policy: linear
+    policy_params:
+      step_size: 30
+      gamma: 0.1
+      milestones:
+      - 10
+      - 20
+    momentum: 0.9
+    weight_decay: 0.01
+    betas:
+    - 0.9
+    - 0.999
+
+skip_names: []    warmup_epochs: 0
+  pretrained_model_path: null
+  tensorboard:
+    enabled: false
+    infrequent_logging_frequency: 2
+  enable_ema: false
+  ema_decay: 0.998
+  clip_grad_norm: 2.0
+  precision: fp32
+evaluate:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  checkpoint: ???
+  trt_engine: null
+  results_dir: null
+  batch_size: -1
+  vis_after_n_batches: 16
+  is_quantized: false
+inference:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  checkpoint: ???
+  trt_engine: null
+  results_dir: null
+  batch_size: -1
+  vis_after_n_batches: 16
+  is_quantized: false
+export:
+  results_dir: null
+  gpu_id: 0
+  checkpoint: ???
+  onnx_file: ???
+  on_cpu: false
+  input_channel: 3
+  input_width: 960
+  input_height: 544
+  opset_version: 17
+  batch_size: -1
+  verbose: false
+  format: onnx
+  serialize_nvdsinfer: false
+  is_quantized: false
+gen_trt_engine:
+  results_dir: null
+  gpu_id: 0
+  onnx_file: ???
+  trt_engine: ???
+  timing_cache: null
+  batch_size: -1
+  verbose: false
+  tensorrt:
+    workspace_size: 1024
+    min_batch_size: 1
+    opt_batch_size: 1
+    max_batch_size: 1
+
+layers_precision: []    data_type: FP32
+    calibration:
+      cal_image_dir: ???
+      cal_cache_file: ???
+      cal_batch_size: 1
+      cal_batches: 1
+distill:
+  teacher:
+    backbone:
+      type: fan_small_12_p4_hybrid
+      pretrained_backbone_path: ''
+      freeze_backbone: false
+      freeze_norm: false
+    head:
+      type: TAOLinearClsHead
+      binary: false
+      in_channels: 448
+      custom_args: null
+      loss:
+        type: CrossEntropyLoss
+        label_smooth_val: 0.0
+      topk:
+      - 1
+  pretrained_teacher_model_path: ???
+
+bindings: []  loss_type: KL
+  loss_lambda: 0.5
+  mode: auto
+  use_mlp: true
+  mlp_hidden_size: 1024
+  mlp_num_inner: 0
+  results_dir: ''
+quantize:
+  backend: torchao
+  mode: weight_only_ptq
+  algorithm: minmax
+
+layers: []
+skip_names: []  model_path: ''
+  results_dir: ''
+  backend_kwargs: {}
+  device: cuda
+ (tlt_logging.py:201)[0m
+
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:30", "status": "RUNNING", "verbosity": "INFO", "message": "Experiment configuration:\\nmodel_name: \'\'\\nencryption_key: \'***\'\\nresults_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train\\nwandb:\\n  enable: true\\n  project: TAO Toolkit\\n  entity: \'\'\\n  group: \'\'\\n  tags:\\n  - tao-toolkit\\n  reinit: false\\n  sync_tensorboard: false\\n  save_code: false\\n  name: TAO Toolkit Training\\n  run_id: \'\'\\nmodel:\\n  backbone:\\n    type: fan_small_12_p4_hybrid\\n    pretrained_backbone_path: /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth\\n    freeze_backbone: false\\n    freeze_norm: false\\n  head:\\n    type: TAOLinearClsHead\\n    binary: false\\n    in_channels: 448\\n    custom_args: null\\n    loss:\\n      type: CrossEntropyLoss\\n      label_smooth_val: 0.0\\n    topk:\\n    - 1\\ndataset:\\n  root_dir: \'\'\\n  dataset: CLDataset\\n  num_classes: 20\\n  img_size: 224\\n  batch_size: 8\\n  workers: 1\\n  shuffle: true\\n  augmentation:\\n    random_flip:\\n      vflip_probability: 0.5\\n      hflip_probability: 0.5\\n      enable: true\\n    random_rotate:\\n      rotate_probability: 0.5\\n      angle_list:\\n      - 90.0\\n      - 180.0\\n      - 270.0\\n      enable: true\\n    random_color:\\n      brightness: 0.3\\n      contrast: 0.3\\n      saturation: 0.3\\n      hue: 0.0\\n      enable: true\\n      color_probability: 0.5\\n    random_erase:\\n      enable: true\\n      erase_probability: 0.2\\n    random_aug:\\n      enable: true\\n    with_scale_random_crop:\\n      scale_range:\\n      - 1.0\\n      - 1.2\\n      enable: true\\n    with_random_blur: true\\n    with_random_crop: true\\n    mean:\\n    - 0.485\\n    - 0.456\\n    - 0.406\\n    std:\\n    - 0.229\\n    - 0.224\\n    - 0.225\\n    mixup_cutmix: false\\n    mixup_alpha: 0.4\\n  train_dataset:\\n    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_train\\n  train_nolabel:\\n    folder_path: \'\'\\n  val_dataset:\\n    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_val\\n  test_dataset:\\n    images_dir: \'\'\\n  quant_calibration_dataset:\\n    images_dir: \'\'\\n  classes_file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/classes.txt\\ntrain:\\n  num_gpus: 1\\n  gpu_ids:\\n  - 0\\n  num_nodes: 1\\n  seed: 1234\\n  cudnn:\\n    benchmark: false\\n    deterministic: true\\n  num_epochs: 10\\n  checkpoint_interval: 1\\n  checkpoint_interval_unit: epoch\\n  validation_interval: 1\\n  resume_training_checkpoint_path: \'\'\\n  results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train\\n  optim:\\n    monitor_name: val_loss\\n    optim: adamw\\n    lr: 6.0e-05\\n    policy: linear\\n    policy_params:\\n      step_size: 30\\n      gamma: 0.1\\n      milestones:\\n      - 10\\n      - 20\\n    momentum: 0.9\\n    weight_decay: 0.01\\n    betas:\\n    - 0.9\\n    - 0.999\\n    skip_names: []\\n    warmup_epochs: 0\\n  pretrained_model_path: null\\n  tensorboard:\\n    enabled: false\\n    infrequent_logging_frequency: 2\\n  enable_ema: false\\n  ema_decay: 0.998\\n  clip_grad_norm: 2.0\\n  precision: fp32\\nevaluate:\\n  num_gpus: 1\\n  gpu_ids:\\n  - 0\\n  num_nodes: 1\\n  checkpoint: ???\\n  trt_engine: null\\n  results_dir: null\\n  batch_size: -1\\n  vis_after_n_batches: 16\\n  is_quantized: false\\ninference:\\n  num_gpus: 1\\n  gpu_ids:\\n  - 0\\n  num_nodes: 1\\n  checkpoint: ???\\n  trt_engine: null\\n  results_dir: null\\n  batch_size: -1\\n  vis_after_n_batches: 16\\n  is_quantized: false\\nexport:\\n  results_dir: null\\n  gpu_id: 0\\n  checkpoint: ???\\n  onnx_file: ???\\n  on_cpu: false\\n  input_channel: 3\\n  input_width: 960\\n  input_height: 544\\n  opset_version: 17\\n  batch_size: -1\\n  verbose: false\\n  format: onnx\\n  serialize_nvdsinfer: false\\n  is_quantized: false\\ngen_trt_engine:\\n  results_dir: null\\n  gpu_id: 0\\n  onnx_file: ???\\n  trt_engine: ???\\n  timing_cache: null\\n  batch_size: -1\\n  verbose: false\\n  tensorrt:\\n    workspace_size: 1024\\n    min_batch_size: 1\\n    opt_batch_size: 1\\n    max_batch_size: 1\\n    layers_precision: []\\n    data_type: FP32\\n    calibration:\\n      cal_image_dir: ???\\n      cal_cache_file: ???\\n      cal_batch_size: 1\\n      cal_batches: 1\\ndistill:\\n  teacher:\\n    backbone:\\n      type: fan_small_12_p4_hybrid\\n      pretrained_backbone_path: \'\'\\n      freeze_backbone: false\\n      freeze_norm: false\\n    head:\\n      type: TAOLinearClsHead\\n      binary: false\\n      in_channels: 448\\n      custom_args: null\\n      loss:\\n        type: CrossEntropyLoss\\n        label_smooth_val: 0.0\\n      topk:\\n      - 1\\n  pretrained_teacher_model_path: ???\\n  bindings: []\\n  loss_type: KL\\n  loss_lambda: 0.5\\n  mode: auto\\n  use_mlp: true\\n  mlp_hidden_size: 1024\\n  mlp_num_inner: 0\\n  results_dir: \'\'\\nquantize:\\n  backend: torchao\\n  mode: weight_only_ptq\\n  algorithm: minmax\\n  layers: []\\n  skip_names: []\\n  model_path: \'\'\\n  results_dir: \'\'\\n  backend_kwargs: {}\\n  device: cuda\\n"}'} sent successfullyExperiment configuration:
+model_name: ''
+encryption_key: '***'
+results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+wandb:
+  enable: true
+  project: TAO Toolkit
+  entity: ''
+  group: ''
+  tags:
+  - tao-toolkit
+  reinit: false
+  sync_tensorboard: false
+  save_code: false
+  name: TAO Toolkit Training
+  run_id: ''
+model:
+  backbone:
+    type: fan_small_12_p4_hybrid
+    pretrained_backbone_path: /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth
+    freeze_backbone: false
+    freeze_norm: false
+  head:
+    type: TAOLinearClsHead
+    binary: false
+    in_channels: 448
+    custom_args: null
+    loss:
+      type: CrossEntropyLoss
+      label_smooth_val: 0.0
+    topk:
+    - 1
+dataset:
+  root_dir: ''
+  dataset: CLDataset
+  num_classes: 20
+  img_size: 224
+  batch_size: 8
+  workers: 1
+  shuffle: true
+  augmentation:
+    random_flip:
+      vflip_probability: 0.5
+      hflip_probability: 0.5
+      enable: true
+    random_rotate:
+      rotate_probability: 0.5
+      angle_list:
+      - 90.0
+      - 180.0
+      - 270.0
+      enable: true
+    random_color:
+      brightness: 0.3
+      contrast: 0.3
+      saturation: 0.3
+      hue: 0.0
+      enable: true
+      color_probability: 0.5
+    random_erase:
+      enable: true
+      erase_probability: 0.2
+    random_aug:
+      enable: true
+    with_scale_random_crop:
+      scale_range:
+      - 1.0
+      - 1.2
+      enable: true
+    with_random_blur: true
+    with_random_crop: true
+    mean:
+    - 0.485
+    - 0.456
+    - 0.406
+    std:
+    - 0.229
+    - 0.224
+    - 0.225
+    mixup_cutmix: false
+    mixup_alpha: 0.4
+  train_dataset:
+    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_train
+  train_nolabel:
+    folder_path: ''
+  val_dataset:
+    images_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/images_val
+  test_dataset:
+    images_dir: ''
+  quant_calibration_dataset:
+    images_dir: ''
+  classes_file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90//data/tao-test-classification-v1/classes.txt
+train:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  seed: 1234
+  cudnn:
+    benchmark: false
+    deterministic: true
+  num_epochs: 10
+  checkpoint_interval: 1
+  checkpoint_interval_unit: epoch
+  validation_interval: 1
+  resume_training_checkpoint_path: ''
+  results_dir: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train
+  optim:
+    monitor_name: val_loss
+    optim: adamw
+    lr: 6.0e-05
+    policy: linear
+    policy_params:
+      step_size: 30
+      gamma: 0.1
+      milestones:
+      - 10
+      - 20
+    momentum: 0.9
+    weight_decay: 0.01
+    betas:
+    - 0.9
+    - 0.999
+
+skip_names: []    warmup_epochs: 0
+  pretrained_model_path: null
+  tensorboard:
+    enabled: false
+    infrequent_logging_frequency: 2
+  enable_ema: false
+  ema_decay: 0.998
+  clip_grad_norm: 2.0
+  precision: fp32
+evaluate:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  checkpoint: ???
+  trt_engine: null
+  results_dir: null
+  batch_size: -1
+  vis_after_n_batches: 16
+  is_quantized: false
+inference:
+  num_gpus: 1
+  gpu_ids:
+  - 0
+  num_nodes: 1
+  checkpoint: ???
+  trt_engine: null
+  results_dir: null
+  batch_size: -1
+  vis_after_n_batches: 16
+  is_quantized: false
+export:
+  results_dir: null
+  gpu_id: 0
+  checkpoint: ???
+  onnx_file: ???
+  on_cpu: false
+  input_channel: 3
+  input_width: 960
+  input_height: 544
+  opset_version: 17
+  batch_size: -1
+  verbose: false
+  format: onnx
+  serialize_nvdsinfer: false
+  is_quantized: false
+gen_trt_engine:
+  results_dir: null
+  gpu_id: 0
+  onnx_file: ???
+  trt_engine: ???
+  timing_cache: null
+  batch_size: -1
+  verbose: false
+  tensorrt:
+    workspace_size: 1024
+    min_batch_size: 1
+    opt_batch_size: 1
+    max_batch_size: 1
+
+layers_precision: []    data_type: FP32
+    calibration:
+      cal_image_dir: ???
+      cal_cache_file: ???
+      cal_batch_size: 1
+      cal_batches: 1
+distill:
+  teacher:
+    backbone:
+      type: fan_small_12_p4_hybrid
+      pretrained_backbone_path: ''
+      freeze_backbone: false
+      freeze_norm: false
+    head:
+      type: TAOLinearClsHead
+      binary: false
+      in_channels: 448
+      custom_args: null
+      loss:
+        type: CrossEntropyLoss
+        label_smooth_val: 0.0
+      topk:
+      - 1
+  pretrained_teacher_model_path: ???
+
+bindings: []  loss_type: KL
+  loss_lambda: 0.5
+  mode: auto
+  use_mlp: true
+  mlp_hidden_size: 1024
+  mlp_num_inner: 0
+  results_dir: ''
+quantize:
+  backend: torchao
+  mode: weight_only_ptq
+  algorithm: minmax
+
+layers: []
+skip_names: []  model_path: ''
+  results_dir: ''
+  backend_kwargs: {}
+  device: cuda
+
+Seed set to 1234
+
+[38;20m2026-10-19 19:22:30,419 - [TAO Toolkit] - INFO - Loading pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth (classifier.py:65)[0m
+[38;20m2026-10-19 19:22:30,419 - [TAO Toolkit] - INFO - Loading pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth (classifier.py:65)[0mStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:30", "status": "RUNNING", "verbosity": "INFO", "message": "Loading pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth"}'} sent successfully
+Loading pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth
+
+[38;20m2026-10-19 19:22:30,472 - [TAO Toolkit] - INFO - Loaded pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth (classifier.py:75)[0m
+[38;20m2026-10-19 19:22:30,472 - [TAO Toolkit] - INFO - Loaded pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth (classifier.py:75)[0mStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:30", "status": "RUNNING", "verbosity": "INFO", "message": "Loaded pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth"}'} sent successfully
+Loaded pretrained weights from /ptm/nvidia/tao/pretrained_fan_classification_imagenet/fan_hybrid_small/model/pretrained_fan_classification_imagenet_vfan_hybrid_small/fan_hybrid_small.pth
+
+[38;20m2026-10-19 19:22:30,483 - [TAO Toolkit] - INFO - _IncompatibleKeys(missing_keys=['head.weight', 'head.bias'], unexpected_keys=['head.fc.weight', 'head.fc.bias']) (classifier.py:76)[0m
+[38;20m2026-10-19 19:22:30,483 - [TAO Toolkit] - INFO - _IncompatibleKeys(missing_keys=['head.weight', 'head.bias'], unexpected_keys=['head.fc.weight', 'head.fc.bias']) (classifier.py:76)[0m
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:30", "status": "RUNNING", "verbosity": "INFO", "message": "_IncompatibleKeys(missing_keys=[\'head.weight\', \'head.bias\'], unexpected_keys=[\'head.fc.weight\', \'head.fc.bias\'])"}'} sent successfully
+_IncompatibleKeys(missing_keys=['head.weight', 'head.bias'], unexpected_keys=['head.fc.weight', 'head.fc.bias'])GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+/usr/local/lib/python3.12/dist-packages/torch/__init__.py:1539: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /opt/pytorch/pytorch/aten/src/ATen/Context.cpp:80.)
+  return _C._get_float32_matmul_precision()
+/usr/local/lib/python3.12/dist-packages/pytorch_lightning/callbacks/model_checkpoint.py:654: Checkpoint directory /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train exists and is not empty.
+
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+  | Name      | Type             | Params | Mode 
+-------------------------------------------------------
+0 | train_acc | MetricCollection | 0      | train
+1 | valid_acc | MetricCollection | 0      | train
+2 | model     | FAN              | 25.7 M | train
+3 | criterion | Cross_Entropy    | 0      | train
+-------------------------------------------------------
+25.7 M    Trainable params
+0         Non-trainable params
+25.7 M    Total params
+102.963   Total estimated model params size (MB)
+376       Modules in train mode
+0         Modules in eval mode
+
+
+
+Sanity Checking: |          | 0/? [00:00<?, ?it/s]/usr/local/lib/python3.12/dist-packages/pytorch_lightning/trainer/connectors/data_connector.py:425: The 'val_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=31` in the `DataLoader` to improve performance.
+
+Sanity Checking:   0%|          | 0/1 [00:00<?, ?it/s]
+Sanity Checking DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s]
+Sanity Checking DataLoader 0: 100%|██████████| 1/1 [00:00<00:00,  1.66it/s]                                                                           /usr/local/lib/python3.12/dist-packages/pytorch_lightning/trainer/connectors/data_connector.py:425: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=31` in the `DataLoader` to improve performance.
+
+/usr/local/lib/python3.12/dist-packages/pytorch_lightning/loops/fit_loop.py:310: The number of training batches (2) is smaller than the logging interval Trainer(log_every_n_steps=50). Set a lower value for log_every_n_steps if you want to see logs for the training epoch.
+
+
+Training: |          | 0/? [00:00<?, ?it/s]Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:31", "status": "STARTED", "verbosity": "INFO", "message": "Starting Training Loop."}'} sent successfully
+
+Training:   0%|          | 0/2 [00:00<?, ?it/s]
+Epoch 0:   0%|          | 0/2 [00:00<?, ?it/s]
+Epoch 0:  50%|█████     | 1/2 [00:00<00:00,  1.90it/s]
+Epoch 0:  50%|█████     | 1/2 [00:00<00:00,  1.90it/s, v_num=1, train_loss_step=2.810, lr=6e-5]
+Epoch 0: 100%|██████████| 2/2 [00:00<00:00,  3.58it/s, v_num=1, train_loss_step=2.810, lr=6e-5]
+Epoch 0: 100%|██████████| 2/2 [00:00<00:00,  3.54it/s, v_num=1, train_loss_step=2.690, lr=6e-5]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 76.98it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:32", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 2.503445863723755, "val_acc_1": 0.625}}'} sent successfully
+
+                                                                      [A
+
+Epoch 0: 100%|██████████| 2/2 [00:00<00:00,  2.43it/s, v_num=1, train_loss_step=2.690, lr=6e-5, val_loss=2.500, val_acc_1=0.625]
+Epoch 0: 100%|██████████| 2/2 [00:00<00:00,  2.43it/s, v_num=1, train_loss_step=2.690, lr=6e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]Status update with data {'experiment_number': '0', 'status': '{"epoch": 0, "step": 2, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.824544", "time_per_step": "0:00:00.264034", "eta": "0:00:07.420900", "date": "10/19/2026", "time": "19:22:32", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 2.503445863723755, "val_acc_1": 0.625}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:32", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 2.7502124309539795}}'} sent successfully
+
+
+Epoch 0:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=2.690, lr=6e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]
+Epoch 1:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=2.690, lr=6e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]
+Epoch 1:  50%|█████     | 1/2 [00:00<00:00,  8.60it/s, v_num=1, train_loss_step=2.690, lr=6e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]
+Epoch 1:  50%|█████     | 1/2 [00:00<00:00,  8.22it/s, v_num=1, train_loss_step=2.290, lr=5.45e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]
+Epoch 1: 100%|██████████| 2/2 [00:00<00:00, 13.17it/s, v_num=1, train_loss_step=2.290, lr=5.45e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]
+Epoch 1: 100%|██████████| 2/2 [00:00<00:00, 12.58it/s, v_num=1, train_loss_step=2.210, lr=5.45e-5, val_loss=2.500, val_acc_1=0.625, train_loss_epoch=2.750]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 75.19it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:33", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 2.090709686279297, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 1: 100%|██████████| 2/2 [00:00<00:00,  4.69it/s, v_num=1, train_loss_step=2.210, lr=5.45e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.750]
+Epoch 1: 100%|██████████| 2/2 [00:00<00:00,  4.68it/s, v_num=1, train_loss_step=2.210, lr=5.45e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]Status update with data {'experiment_number': '0', 'status': '{"epoch": 1, "step": 4, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.427417", "time_per_step": "0:00:00.152855", "eta": "0:00:03.419338", "date": "10/19/2026", "time": "19:22:33", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 2.090709686279297, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:33", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 2.2535881996154785}}'} sent successfully
+
+
+Epoch 1:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=2.210, lr=5.45e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]
+Epoch 2:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=2.210, lr=5.45e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]
+Epoch 2:  50%|█████     | 1/2 [00:00<00:00,  7.69it/s, v_num=1, train_loss_step=2.210, lr=5.45e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]
+Epoch 2:  50%|█████     | 1/2 [00:00<00:00,  7.39it/s, v_num=1, train_loss_step=1.910, lr=4.91e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]
+Epoch 2: 100%|██████████| 2/2 [00:00<00:00, 11.69it/s, v_num=1, train_loss_step=1.910, lr=4.91e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]
+Epoch 2: 100%|██████████| 2/2 [00:00<00:00, 11.42it/s, v_num=1, train_loss_step=1.840, lr=4.91e-5, val_loss=2.090, val_acc_1=1.000, train_loss_epoch=2.250]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 72.69it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:34", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 1.6890172958374023, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 2: 100%|██████████| 2/2 [00:00<00:00,  4.54it/s, v_num=1, train_loss_step=1.840, lr=4.91e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=2.250]
+Epoch 2: 100%|██████████| 2/2 [00:00<00:00,  4.53it/s, v_num=1, train_loss_step=1.840, lr=4.91e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]Status update with data {'experiment_number': '0', 'status': '{"epoch": 2, "step": 6, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.441038", "time_per_step": "0:00:00.117241", "eta": "0:00:03.087267", "date": "10/19/2026", "time": "19:22:34", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 1.6890172958374023, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:34", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 1.8727021217346191}}'} sent successfully
+
+
+Epoch 2:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.840, lr=4.91e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]
+Epoch 3:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.840, lr=4.91e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]
+Epoch 3:  50%|█████     | 1/2 [00:00<00:00,  9.18it/s, v_num=1, train_loss_step=1.840, lr=4.91e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]
+Epoch 3:  50%|█████     | 1/2 [00:00<00:00,  8.73it/s, v_num=1, train_loss_step=1.370, lr=4.36e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]
+Epoch 3: 100%|██████████| 2/2 [00:00<00:00, 13.84it/s, v_num=1, train_loss_step=1.370, lr=4.36e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]
+Epoch 3: 100%|██████████| 2/2 [00:00<00:00, 13.20it/s, v_num=1, train_loss_step=1.550, lr=4.36e-5, val_loss=1.690, val_acc_1=1.000, train_loss_epoch=1.870]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 74.28it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:35", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 1.3091542720794678, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 3: 100%|██████████| 2/2 [00:00<00:00,  4.80it/s, v_num=1, train_loss_step=1.550, lr=4.36e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.870]
+Epoch 3: 100%|██████████| 2/2 [00:00<00:00,  4.79it/s, v_num=1, train_loss_step=1.550, lr=4.36e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]Status update with data {'experiment_number': '0', 'status': '{"epoch": 3, "step": 8, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.417507", "time_per_step": "0:00:00.098402", "eta": "0:00:02.505044", "date": "10/19/2026", "time": "19:22:35", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 1.3091542720794678, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:35", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 1.4630461931228638}}'} sent successfully
+
+
+Epoch 3:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.550, lr=4.36e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]
+Epoch 4:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.550, lr=4.36e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]
+Epoch 4:  50%|█████     | 1/2 [00:00<00:00,  8.56it/s, v_num=1, train_loss_step=1.550, lr=4.36e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]
+Epoch 4:  50%|█████     | 1/2 [00:00<00:00,  8.17it/s, v_num=1, train_loss_step=1.130, lr=3.82e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]
+Epoch 4: 100%|██████████| 2/2 [00:00<00:00, 13.00it/s, v_num=1, train_loss_step=1.130, lr=3.82e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]
+Epoch 4: 100%|██████████| 2/2 [00:00<00:00, 12.44it/s, v_num=1, train_loss_step=1.140, lr=3.82e-5, val_loss=1.310, val_acc_1=1.000, train_loss_epoch=1.460]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 67.49it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:35", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 1.0176483392715454, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 4: 100%|██████████| 2/2 [00:00<00:00,  4.60it/s, v_num=1, train_loss_step=1.140, lr=3.82e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.460]
+Epoch 4: 100%|██████████| 2/2 [00:00<00:00,  4.59it/s, v_num=1, train_loss_step=1.140, lr=3.82e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]Status update with data {'experiment_number': '0', 'status': '{"epoch": 4, "step": 10, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.435906", "time_per_step": "0:00:00.087221", "eta": "0:00:02.179528", "date": "10/19/2026", "time": "19:22:36", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 1.0176483392715454, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:36", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 1.1364675760269165}}'} sent successfully
+
+
+Epoch 4:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.140, lr=3.82e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]
+Epoch 5:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.140, lr=3.82e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]
+Epoch 5:  50%|█████     | 1/2 [00:00<00:00,  8.81it/s, v_num=1, train_loss_step=1.140, lr=3.82e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]
+Epoch 5:  50%|█████     | 1/2 [00:00<00:00,  8.41it/s, v_num=1, train_loss_step=0.955, lr=3.27e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]
+Epoch 5: 100%|██████████| 2/2 [00:00<00:00, 13.43it/s, v_num=1, train_loss_step=0.955, lr=3.27e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]
+Epoch 5: 100%|██████████| 2/2 [00:00<00:00, 12.81it/s, v_num=1, train_loss_step=1.080, lr=3.27e-5, val_loss=1.020, val_acc_1=1.000, train_loss_epoch=1.140]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 74.88it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:36", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 0.8069472908973694, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 5: 100%|██████████| 2/2 [00:00<00:00,  4.80it/s, v_num=1, train_loss_step=1.080, lr=3.27e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.140]
+Epoch 5: 100%|██████████| 2/2 [00:00<00:00,  4.79it/s, v_num=1, train_loss_step=1.080, lr=3.27e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]Status update with data {'experiment_number': '0', 'status': '{"epoch": 5, "step": 12, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.417786", "time_per_step": "0:00:00.079632", "eta": "0:00:01.671144", "date": "10/19/2026", "time": "19:22:36", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 0.8069472908973694, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:36", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 1.015878677368164}}'} sent successfully
+
+
+Epoch 5:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.080, lr=3.27e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]
+Epoch 6:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=1.080, lr=3.27e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]
+Epoch 6:  50%|█████     | 1/2 [00:00<00:00,  8.40it/s, v_num=1, train_loss_step=1.080, lr=3.27e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]
+Epoch 6:  50%|█████     | 1/2 [00:00<00:00,  8.02it/s, v_num=1, train_loss_step=0.863, lr=2.73e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]
+Epoch 6: 100%|██████████| 2/2 [00:00<00:00, 12.82it/s, v_num=1, train_loss_step=0.863, lr=2.73e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]
+Epoch 6: 100%|██████████| 2/2 [00:00<00:00, 12.29it/s, v_num=1, train_loss_step=0.887, lr=2.73e-5, val_loss=0.807, val_acc_1=1.000, train_loss_epoch=1.020]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 73.47it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:37", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 0.6671432256698608, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 6: 100%|██████████| 2/2 [00:00<00:00,  4.64it/s, v_num=1, train_loss_step=0.887, lr=2.73e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=1.020]
+Epoch 6: 100%|██████████| 2/2 [00:00<00:00,  4.63it/s, v_num=1, train_loss_step=0.887, lr=2.73e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]Status update with data {'experiment_number': '0', 'status': '{"epoch": 6, "step": 14, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.432124", "time_per_step": "0:00:00.074321", "eta": "0:00:01.296372", "date": "10/19/2026", "time": "19:22:37", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 0.6671432256698608, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:37", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 0.8752769231796265}}'} sent successfully
+
+
+Epoch 6:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=0.887, lr=2.73e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]
+Epoch 7:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=0.887, lr=2.73e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]
+Epoch 7:  50%|█████     | 1/2 [00:00<00:00,  8.90it/s, v_num=1, train_loss_step=0.887, lr=2.73e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]
+Epoch 7:  50%|█████     | 1/2 [00:00<00:00,  8.48it/s, v_num=1, train_loss_step=0.751, lr=2.18e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]
+Epoch 7: 100%|██████████| 2/2 [00:00<00:00, 13.37it/s, v_num=1, train_loss_step=0.751, lr=2.18e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]
+Epoch 7: 100%|██████████| 2/2 [00:00<00:00, 12.78it/s, v_num=1, train_loss_step=0.889, lr=2.18e-5, val_loss=0.667, val_acc_1=1.000, train_loss_epoch=0.875]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 74.81it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:38", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 0.578280508518219, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 7: 100%|██████████| 2/2 [00:00<00:00,  4.79it/s, v_num=1, train_loss_step=0.889, lr=2.18e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.875]
+Epoch 7: 100%|██████████| 2/2 [00:00<00:00,  4.78it/s, v_num=1, train_loss_step=0.889, lr=2.18e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]Status update with data {'experiment_number': '0', 'status': '{"epoch": 7, "step": 16, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.418183", "time_per_step": "0:00:00.070366", "eta": "0:00:00.836365", "date": "10/19/2026", "time": "19:22:38", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 0.578280508518219, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:38", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 0.8202236294746399}}'} sent successfully
+
+
+Epoch 7:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=0.889, lr=2.18e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]
+Epoch 8:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=0.889, lr=2.18e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]
+Epoch 8:  50%|█████     | 1/2 [00:00<00:00,  8.16it/s, v_num=1, train_loss_step=0.889, lr=2.18e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]
+Epoch 8:  50%|█████     | 1/2 [00:00<00:00,  7.80it/s, v_num=1, train_loss_step=0.674, lr=1.64e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]
+Epoch 8: 100%|██████████| 2/2 [00:00<00:00, 12.63it/s, v_num=1, train_loss_step=0.674, lr=1.64e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]
+Epoch 8: 100%|██████████| 2/2 [00:00<00:00, 12.10it/s, v_num=1, train_loss_step=0.811, lr=1.64e-5, val_loss=0.578, val_acc_1=1.000, train_loss_epoch=0.820]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 74.16it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:39", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 0.5187190771102905, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 8: 100%|██████████| 2/2 [00:00<00:00,  4.62it/s, v_num=1, train_loss_step=0.811, lr=1.64e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.820]
+Epoch 8: 100%|██████████| 2/2 [00:00<00:00,  4.61it/s, v_num=1, train_loss_step=0.811, lr=1.64e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]Status update with data {'experiment_number': '0', 'status': '{"epoch": 8, "step": 18, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.433626", "time_per_step": "0:00:00.067195", "eta": "0:00:00.433626", "date": "10/19/2026", "time": "19:22:39", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 0.5187190771102905, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:39", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 0.7425450086593628}}'} sent successfully
+
+
+Epoch 8:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=0.811, lr=1.64e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]
+Epoch 9:   0%|          | 0/2 [00:00<?, ?it/s, v_num=1, train_loss_step=0.811, lr=1.64e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]
+Epoch 9:  50%|█████     | 1/2 [00:00<00:00,  8.39it/s, v_num=1, train_loss_step=0.811, lr=1.64e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]
+Epoch 9:  50%|█████     | 1/2 [00:00<00:00,  8.02it/s, v_num=1, train_loss_step=0.550, lr=1.09e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]
+Epoch 9: 100%|██████████| 2/2 [00:00<00:00, 12.95it/s, v_num=1, train_loss_step=0.550, lr=1.09e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]
+Epoch 9: 100%|██████████| 2/2 [00:00<00:00, 12.38it/s, v_num=1, train_loss_step=0.661, lr=1.09e-5, val_loss=0.519, val_acc_1=1.000, train_loss_epoch=0.743]
+
+Validation: |          | 0/? [00:00<?, ?it/s][A
+
+Validation:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0:   0%|          | 0/1 [00:00<?, ?it/s][A
+
+Validation DataLoader 0: 100%|██████████| 1/1 [00:00<00:00, 74.28it/s][AStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:39", "status": "RUNNING", "verbosity": "INFO", "message": "Eval metrics generated.", "kpi": {"val_loss": 0.4794667065143585, "val_acc_1": 1.0}}'} sent successfully
+
+                                                                      [A
+
+Epoch 9: 100%|██████████| 2/2 [00:00<00:00,  4.68it/s, v_num=1, train_loss_step=0.661, lr=1.09e-5, val_loss=0.479, val_acc_1=1.000, train_loss_epoch=0.743]
+Epoch 9: 100%|██████████| 2/2 [00:00<00:00,  4.67it/s, v_num=1, train_loss_step=0.661, lr=1.09e-5, val_loss=0.479, val_acc_1=1.000, train_loss_epoch=0.605]Status update with data {'experiment_number': '0', 'status': '{"epoch": 9, "step": 20, "max_epoch": 9, "max_step": 20, "time_per_epoch": "0:00:00.428316", "time_per_step": "0:00:00.064666", "eta": "0:00:00", "date": "10/19/2026", "time": "19:22:40", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop in progress", "kpi": {"val_loss": 0.4794667065143585, "val_acc_1": 1.0}}'} sent successfullyStatus update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:40", "status": "RUNNING", "verbosity": "INFO", "message": "Train metrics generated.", "kpi": {"train_loss": 0.605469822883606}}'} sent successfully
+`Trainer.fit` stopped: `max_epochs=10` reached.
+
+
+Epoch 9: 100%|██████████| 2/2 [00:00<00:00,  2.56it/s, v_num=1, train_loss_step=0.661, lr=1.09e-5, val_loss=0.479, val_acc_1=1.000, train_loss_epoch=0.605]Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:40", "status": "RUNNING", "verbosity": "INFO", "message": "Training loop complete.", "kpi": {"train_loss": 0.605469822883606}}'} sent successfully
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:40", "status": "RUNNING", "verbosity": "INFO", "message": "Train finished successfully.", "kpi": {"train_loss": 0.605469822883606}}'} sent successfully
+Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:40", "status": "RUNNING", "verbosity": "INFO", "message": "Job artifacts in results dir are being uploaded to the cloud", "kpi": {"train_loss": 0.605469822883606}}'} sent successfully
+2026-10-19 19:22:40,782 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:22:40] "GET /api/v1/internal/container_job:status?results_dir=seaweedfs://tao-storage/results/c45a3fe8-858d-4e18-a7b5-385cc474aa90 HTTP/1.1" 200 -
+
+[38;20m2026-10-19 19:22:42,107 - [TAO Toolkit] - INFO - Sending telemetry data. (entrypoint.py:355)[0m
+[38;20m2026-10-19 19:22:42,107 - [TAO Toolkit] - INFO - Sending telemetry data. (entrypoint.py:355)[0m
+2026-10-19 19:22:42,107 - TAO Toolkit - INFO - Sending telemetry data.
+[38;20m2026-10-19 19:22:42,108 - [TAO Toolkit] - INFO - Execution status: PASS (entrypoint.py:376)[0m
+[38;20m2026-10-19 19:22:42,108 - [TAO Toolkit] - INFO - Execution status: PASS (entrypoint.py:376)[0m
+2026-10-19 19:22:42,108 - TAO Toolkit - INFO - Execution status: PASS
+[38;20m2026-10-19 19:22:44,109 - [TAO Toolkit] - INFO - Log file already exists at /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json (logging.py:224)[0m
+[38;20m2026-10-19 19:22:44,109 - [TAO Toolkit] - INFO - Log file already exists at /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json (logging.py:224)[0m
+2026-10-19 19:22:44,109 - TAO Toolkit - INFO - Log file already exists at /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json
+2026-10-19 19:22:44,109 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - [CLOUD-HANDLERS][UTILS] Continuous upload monitor stopped, performing final upload
+2026-10-19 19:22:44,111 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Final upload: 16 files (3247.2 MB) to upload
+2026-10-19 19:22:44,114 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Total files to upload: 15
+2026-10-19 19:22:44,114 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Files to upload: ['train/model_epoch_004.pth', 'train/model_epoch_001.pth', 'train/status.json', 'train/classifier_model_latest.pth', 'train/lightning_logs/version_1/hparams.yaml', 'train/model_epoch_007.pth', 'train/model_epoch_000.pth', 'train/experiment.yaml', 'train/model_epoch_006.pth', 'train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0', 'train/model_epoch_003.pth', 'train/model_epoch_008.pth', 'train/model_epoch_002.pth', 'train/model_epoch_005.pth', 'train/model_epoch_009.pth']
+2026-10-19 19:22:44,114 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 1/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth (remaining: 14)
+2026-10-19 19:22:44,115 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth (295.2 MB)
+2026-10-19 19:22:46,164 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth
+2026-10-19 19:22:46,164 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth
+2026-10-19 19:22:46,174 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 2/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth (remaining: 13)
+2026-10-19 19:22:46,175 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth (295.2 MB)
+2026-10-19 19:22:48,032 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth
+2026-10-19 19:22:48,032 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth
+2026-10-19 19:22:48,033 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 3/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json (remaining: 12)
+2026-10-19 19:22:48,034 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json (0.0 MB)
+2026-10-19 19:22:48,061 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json
+2026-10-19 19:22:48,061 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json
+2026-10-19 19:22:48,064 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - File (0.01 MB) successfully uploaded but retained (under 50MB): /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json
+2026-10-19 19:22:48,064 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 4/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth (remaining: 11)
+2026-10-19 19:22:48,065 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth (295.2 MB)
+2026-10-19 19:22:50,077 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth
+2026-10-19 19:22:50,077 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth
+2026-10-19 19:22:50,084 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 5/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml (remaining: 10)
+2026-10-19 19:22:50,085 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml (0.0 MB)
+2026-10-19 19:22:50,100 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml
+2026-10-19 19:22:50,100 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml
+2026-10-19 19:22:50,106 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - File (0.00 MB) successfully uploaded but retained (under 50MB): /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/hparams.yaml
+2026-10-19 19:22:50,106 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 6/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth (remaining: 9)
+2026-10-19 19:22:50,108 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth (295.2 MB)
+2026-10-19 19:22:50,212 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Current file upload: train/model_epoch_007.pth; Current file upload Progress: 16.0 MB/295.2 MB (5.4%); Total Upload Progress: 6/16 files (37.5%), 901.6 MB/3.2 GB (27.8%), Remaining: 10 files, 2.3 GB, ETA: 0:00:15
+2026-10-19 19:22:50,264 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:50", "status": "RUNNING", "verbosity": "INFO", "message": "Current file upload: train/model_epoch_007.pth; Current file upload Progress: 16.0 MB/295.2 MB (5.4%); Total Upload Progress: 6/16 files (37.5%), 901.6 MB/3.2 GB (27.8%), Remaining: 10 files, 2.3 GB, ETA: 0:00:15"}'} sent successfully
+
+2026-10-19 19:22:51,877 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth
+2026-10-19 19:22:51,877 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth
+2026-10-19 19:22:51,878 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 7/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth (remaining: 8)
+2026-10-19 19:22:51,878 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth (295.2 MB)
+2026-10-19 19:22:53,904 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth
+2026-10-19 19:22:53,904 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth
+2026-10-19 19:22:53,905 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 8/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml (remaining: 7)
+2026-10-19 19:22:53,905 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml (0.0 MB)
+2026-10-19 19:22:53,909 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml
+2026-10-19 19:22:53,909 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml
+2026-10-19 19:22:53,910 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - File (0.00 MB) successfully uploaded but retained (under 50MB): /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/experiment.yaml
+2026-10-19 19:22:53,910 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 9/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth (remaining: 6)
+2026-10-19 19:22:53,910 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth (295.2 MB)
+2026-10-19 19:22:56,010 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth
+2026-10-19 19:22:56,010 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth
+2026-10-19 19:22:56,011 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 10/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0 (remaining: 5)
+2026-10-19 19:22:56,011 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0 -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0 (0.0 MB)
+2026-10-19 19:22:56,016 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0 to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0
+2026-10-19 19:22:56,016 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0
+2026-10-19 19:22:56,017 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - File (0.00 MB) successfully uploaded but retained (under 50MB): /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/lightning_logs/version_1/events.out.tfevents.1792437750.42e0974b460c.291.0
+2026-10-19 19:22:56,017 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 11/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth (remaining: 4)
+2026-10-19 19:22:56,018 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth (295.2 MB)
+2026-10-19 19:22:56,266 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Current file upload: train/model_epoch_003.pth; Current file upload Progress: 32.0 MB/295.2 MB (10.8%); Total Upload Progress: 11/16 files (68.8%), 1.8 GB/3.2 GB (55.5%), Remaining: 5 files, 1.4 GB, ETA: 0:00:09
+2026-10-19 19:22:56,273 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:22:56", "status": "RUNNING", "verbosity": "INFO", "message": "Current file upload: train/model_epoch_003.pth; Current file upload Progress: 32.0 MB/295.2 MB (10.8%); Total Upload Progress: 11/16 files (68.8%), 1.8 GB/3.2 GB (55.5%), Remaining: 5 files, 1.4 GB, ETA: 0:00:09"}'} sent successfully
+2026-10-19 19:22:57,993 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth
+2026-10-19 19:22:57,993 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth
+2026-10-19 19:22:57,995 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 12/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth (remaining: 3)
+2026-10-19 19:22:57,995 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth (295.2 MB)
+2026-10-19 19:23:00,009 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth
+2026-10-19 19:23:00,009 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth
+2026-10-19 19:23:00,015 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 13/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth (remaining: 2)
+2026-10-19 19:23:00,016 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth (295.2 MB)
+
+2026-10-19 19:23:02,140 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth
+2026-10-19 19:23:02,141 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth
+2026-10-19 19:23:02,142 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 14/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth (remaining: 1)
+2026-10-19 19:23:02,143 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth (295.2 MB)
+2026-10-19 19:23:02,388 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Current file upload: train/model_epoch_005.pth; Current file upload Progress: 32.0 MB/295.2 MB (10.8%); Total Upload Progress: 14/16 files (87.5%), 2.6 GB/3.2 GB (82.8%), Remaining: 2 files, 558.4 MB, ETA: 0:00:03
+2026-10-19 19:23:02,397 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:23:2", "status": "RUNNING", "verbosity": "INFO", "message": "Current file upload: train/model_epoch_005.pth; Current file upload Progress: 32.0 MB/295.2 MB (10.8%); Total Upload Progress: 14/16 files (87.5%), 2.6 GB/3.2 GB (82.8%), Remaining: 2 files, 558.4 MB, ETA: 0:00:03"}'} sent successfully
+2026-10-19 19:23:04,208 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth
+2026-10-19 19:23:04,208 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth
+2026-10-19 19:23:04,213 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Uploading file 15/15: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth (remaining: 0)
+2026-10-19 19:23:04,214 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth (295.2 MB)
+2026-10-19 19:23:06,265 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth
+2026-10-19 19:23:06,265 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Updated modification time for successfully uploaded file: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth
+2026-10-19 19:23:06,270 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_004.pth
+2026-10-19 19:23:06,271 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_001.pth
+2026-10-19 19:23:06,271 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/classifier_model_latest.pth
+2026-10-19 19:23:06,279 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_007.pth
+2026-10-19 19:23:06,282 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_000.pth
+2026-10-19 19:23:06,287 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_006.pth
+2026-10-19 19:23:06,287 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_003.pth
+2026-10-19 19:23:06,290 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_008.pth
+2026-10-19 19:23:06,291 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_002.pth
+2026-10-19 19:23:06,297 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_005.pth
+2026-10-19 19:23:06,304 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Large file (295.20 MB) successfully uploaded and removed: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/model_epoch_009.pth
+2026-10-19 19:23:06,304 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Upload completed: 15 files, 3.2 GB in 0:00:22
+2026-10-19 19:23:06,308 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:23:6", "status": "RUNNING", "verbosity": "INFO", "message": "Upload completed: 15 files, 3.2 GB in 0:00:22"}'} sent successfully
+2026-10-19 19:23:06,309 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Skipping container-side log upload for backend=local-docker. Server-side log streaming is enabled.
+[38;20m2026-10-19 19:23:06,316 - [TAO Toolkit] - INFO - train action completed successfully for classification_pyt (logging.py:191)[0m
+[38;20m2026-10-19 19:23:06,316 - [TAO Toolkit] - INFO - train action completed successfully for classification_pyt (logging.py:191)[0m
+2026-10-19 19:23:06,316 - TAO Toolkit - INFO - train action completed successfully for classification_pyt
+2026-10-19 19:23:06,323 - nvidia_tao_core.microservices.handlers.cloud_handlers.utils - INFO - Status update with data {'experiment_number': '0', 'status': '{"date": "10/19/2026", "time": "19:23:6", "status": "SUCCESS", "verbosity": "INFO", "message": "train action completed successfully for classification_pyt"}'} sent successfully
+2026-10-19 19:23:06,323 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Starting upload: /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json -> /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json (0.0 MB)
+2026-10-19 19:23:06,331 - nvidia_tao_core.microservices.handlers.cloud_handlers.progress_tracker - INFO - Upload completed: 1 files, 0.0 MB in 0:00:00
+2026-10-19 19:23:06,331 - nvidia_tao_core.microservices.utils.cloud_utils - INFO - Uploaded /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json to /results/c45a3fe8-858d-4e18-a7b5-385cc474aa90/train/status.json
+2026-10-19 19:23:11,783 - werkzeug - INFO - 172.22.0.6 - - [19/Oct/2026 19:23:11] "GET /api/v1/internal/container_job:status?results_dir=seaweedfs://tao-storage/results/c45a3fe8-858d-4e18-a7b5-385cc474aa90 HTTP/1.1" 200 -
+

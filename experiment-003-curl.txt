@@ -1,0 +1,110 @@
+# EXPERIMENTO 003 - TREINAMENTO REAL VIA CURL
+# Escopo: health, contexto, validacao, train, polling, logs, metricas e checkpoint.
+# Nao executar evaluate/export/inference neste experimento.
+
+export TAO_BASE_URL=http://100.107.81.126:8090
+export TAO_ORG=getter
+export NGC_KEY='COLE_SUA_PERSONAL_API_KEY_AQUI'
+export WORKSPACE_ID=98c4bec1-88df-423e-8a15-af78881e9742
+export DATASET_URI=seaweedfs://tao-storage/data/tao-test-classification-v1
+export BASE_EXPERIMENT_ID=469f42fe-37dc-55ff-b89b-5096477f9a87
+
+mkdir -p experiment-003-evidence
+
+# 1. Login FTMS
+TOKEN=$(curl -sS -X POST "$TAO_BASE_URL/api/v2/login" \
+  -H "Content-Type: application/json" \
+  -H "ngc_key: $NGC_KEY" \
+  -d "{\"ngc_key\":\"$NGC_KEY\",\"ngc_org_name\":\"$TAO_ORG\",\"enable_telemetry\":false}" \
+  | jq -r '.token')
+
+test -n "$TOKEN" && test "$TOKEN" != "null"
+
+# 2. Health
+curl -sS "$TAO_BASE_URL/api/v2/health" \
+  | tee experiment-003-evidence/health.json \
+  | jq .
+
+# 3. Validar workspace e dataset
+curl -sS -H "Authorization: Bearer $TOKEN" \
+  "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/workspaces/$WORKSPACE_ID" \
+  | tee experiment-003-evidence/workspace.json \
+  | jq .
+
+curl -sS -H "Authorization: Bearer $TOKEN" \
+  "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/datasets" \
+  | tee experiment-003-evidence/datasets.json \
+  | jq .
+
+# 4. Consultar schema e modelo base
+curl -sS -H "Authorization: Bearer $TOKEN" \
+  "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/jobs:schema?network_arch=classification_pyt&action=train" \
+  | tee experiment-003-evidence/train-schema.json \
+  | jq .
+
+curl -sS -H "Authorization: Bearer $TOKEN" \
+  "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/jobs:list_base_experiments?network_arch=classification_pyt" \
+  | tee experiment-003-evidence/base-experiments.json \
+  | jq .
+
+# 5. Gerar payload de treino a partir do schema local do ambiente TAO.
+# Ajuste TRAIN_SPECS_FILE se executar fora da maquina getter.
+export TRAIN_SPECS_FILE=/home/getter/tao-real-tests-20261001/train_specs.json
+python3 - "$TRAIN_SPECS_FILE" experiment-003-evidence/train-payload.json <<'PY'
+import json
+import sys
+import time
+
+spec = json.load(open(sys.argv[1], encoding="utf-8"))
+payload = {
+    "kind": "experiment",
+    "name": f"curl-experiment-003-{int(time.time())}",
+    "network_arch": "classification_pyt",
+    "encryption_key": "unittest-only",
+    "workspace": "98c4bec1-88df-423e-8a15-af78881e9742",
+    "action": "train",
+    "specs": spec,
+    "train_dataset_uris": ["seaweedfs://tao-storage/data/tao-test-classification-v1"],
+    "eval_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+    "inference_dataset_uri": "seaweedfs://tao-storage/data/tao-test-classification-v1",
+    "base_experiment_ids": ["469f42fe-37dc-55ff-b89b-5096477f9a87"],
+}
+json.dump(payload, open(sys.argv[2], "w", encoding="utf-8"), indent=2)
+PY
+
+# 6. Submeter somente o treino do Experimento 003
+curl -sS -X POST "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/jobs" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  --data-binary @experiment-003-evidence/train-payload.json \
+  | tee experiment-003-evidence/train-submit.json \
+  | jq .
+
+export JOB_ID=$(jq -r '.id' experiment-003-evidence/train-submit.json)
+test -n "$JOB_ID" && test "$JOB_ID" != "null"
+printf 'JOB_ID=%s\n' "$JOB_ID" | tee experiment-003-evidence/job-id.txt
+
+# 7. Polling ate estado terminal
+while true; do
+  curl -sS -H "Authorization: Bearer $TOKEN" \
+    "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/jobs/$JOB_ID" \
+    | tee experiment-003-evidence/train-status.json \
+    | jq '{id,name,action,status,created_on,last_modified,network_arch,metric,job_details}'
+
+  STATUS=$(jq -r '.status' experiment-003-evidence/train-status.json)
+  case "$STATUS" in
+    Done|Completed) break ;;
+    Error|Failed|Failure|Canceled|Cancelled) exit 1 ;;
+  esac
+  sleep 10
+done
+
+# 8. Logs finais
+curl -sS -H "Authorization: Bearer $TOKEN" \
+  "$TAO_BASE_URL/api/v2/orgs/$TAO_ORG/jobs/$JOB_ID:logs" \
+  | tee experiment-003-evidence/train-logs.txt
+
+# 9. Resultado tecnico
+jq -e '.status == "Done" or .status == "Completed"' \
+  experiment-003-evidence/train-status.json >/dev/null
+echo "EXPERIMENTO_003_TREINAMENTO_PASSED"

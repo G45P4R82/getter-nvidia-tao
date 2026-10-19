@@ -1,0 +1,32 @@
+{
+  "experiment": "004-training-real",
+  "status": "Done",
+  "job_id": "fb3606d6-93bc-4cbc-a060-db01dc537f24",
+  "metrics": [
+    {
+      "metric": "val_loss",
+      "values": {
+        "0": 0.5858913064002991
+      }
+    },
+    {
+      "metric": "val_acc_1",
+      "values": {
+        "0": 0.875
+      }
+    },
+    {
+      "metric": "train_loss",
+      "values": {
+        "0": 0.7383504509925842
+      }
+    }
+  ],
+  "detailed_status": {
+    "date": "10/19/2026",
+    "time": "19:46:29",
+    "message": "train action completed successfully for classification_pyt",
+    "status": "SUCCESS"
+  },
+  "evidence_dir": "experiment-004-evidence"
+}

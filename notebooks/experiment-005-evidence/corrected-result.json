@@ -1,9 +1,9 @@
 {
   "executed": true,
-  "job_id": "e9d00ced-0ef4-42df-8c0c-32de3f94798f",
+  "job_id": "87f257a2-598a-40af-84be-df63b79fffd0",
   "status": "Done",
   "job_details": {
-    "e9d00ced-0ef4-42df-8c0c-32de3f94798f": {
+    "87f257a2-598a-40af-84be-df63b79fffd0": {
       "graphical": [],
       "categorical": [],
       "kpi": [
@@ -28,13 +28,13 @@
       ],
       "epoch": 0,
       "max_epoch": 1,
-      "time_per_epoch": "0:00:01.088459",
+      "time_per_epoch": "0:00:00.906410",
       "time_per_iter": null,
       "cur_iter": null,
       "eta": "0:00:00",
       "detailed_status": {
         "date": "10/19/2026",
-        "time": "20:12:8",
+        "time": "20:16:37",
         "message": "train action completed successfully for classification_pyt",
         "status": "SUCCESS"
       },

@@ -1,0 +1,8 @@
+[
+  "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/experiment.yaml",
+  "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/lightning_logs/version_0/events.out.tfevents.1792437863.b0ca2c4d77f0.286.0",
+  "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/lightning_logs/version_0/hparams.yaml",
+  "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/result.csv",
+  "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/evaluate/status.json",
+  "results/fe1af6bc-6d28-4da2-809b-9337ef3b6603/microservices_log.txt"
+]
