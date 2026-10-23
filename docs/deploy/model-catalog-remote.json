@@ -1,0 +1,21 @@
+{
+  "models": {
+    "classification_pyt": {
+      "model_name": "classification_pyt",
+      "versions": [
+        {
+          "model_name": "classification_pyt",
+          "version": "v1",
+          "job_id": "9b181c12-352d-43e2-a935-8c7a81ba5544",
+          "artifact_uri": "",
+          "network_arch": "classification_pyt",
+          "status": "Done",
+          "metadata": {
+            "experiment": "001",
+            "source": "rest"
+          }
+        }
+      ]
+    }
+  }
+}

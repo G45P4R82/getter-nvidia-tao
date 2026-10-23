@@ -1,0 +1,80 @@
+{
+  "d389dc76-8cc8-461d-a699-1aa38d569fa3": {
+    "id": "d389dc76-8cc8-461d-a699-1aa38d569fa3",
+    "action": "train",
+    "status": "error",
+    "model_name": "yolo26-smoke",
+    "architecture": "yolo26n",
+    "dataset_path": null,
+    "dataset_uri": "seaweedfs://tao-storage/datasets/yolo26-smoke",
+    "tao_workspace_id": "98c4bec1-88df-423e-8a15-af78881e9742",
+    "tao_dataset_id": null,
+    "input_size": 128,
+    "max_epochs": 1,
+    "batch_size": 2,
+    "patience": 1,
+    "device": "0",
+    "data_yaml": "/shared-storage/datasets/yolo26-smoke/data.yaml",
+    "error": "Dataset '/shared-storage/datasets/yolo26-smoke/data.yaml' error \u274c Dataset '/shared-storage/datasets/yolo26-smoke/data.yaml' images not found, missing path '/app/images/val'\nNote dataset download directory is '/app/datasets'. You can update this in '/root/.config/Ultralytics/settings.json'"
+  },
+  "ea841930-5253-4f12-8abe-074f970dfa53": {
+    "id": "ea841930-5253-4f12-8abe-074f970dfa53",
+    "action": "train",
+    "status": "done",
+    "model_name": "yolo26-smoke",
+    "architecture": "yolo26n",
+    "dataset_path": null,
+    "dataset_uri": "seaweedfs://tao-storage/datasets/yolo26-smoke",
+    "tao_workspace_id": "98c4bec1-88df-423e-8a15-af78881e9742",
+    "tao_dataset_id": null,
+    "input_size": 128,
+    "max_epochs": 1,
+    "batch_size": 2,
+    "patience": 1,
+    "device": "0",
+    "data_yaml": "/shared-storage/ultralytics-jobs/ea841930-5253-4f12-8abe-074f970dfa53/data.yaml",
+    "version": "v1",
+    "artifact_path": "/shared-storage/models/yolo26/yolo26-smoke/best.pt",
+    "result": {
+      "model_name": "yolo26-smoke",
+      "version": "v1",
+      "backend": "ultralytics",
+      "architecture": "yolo26n",
+      "adapter_job_id": "ea841930-5253-4f12-8abe-074f970dfa53",
+      "artifact_path": "/shared-storage/models/yolo26/yolo26-smoke/best.pt",
+      "tao_workspace_id": "98c4bec1-88df-423e-8a15-af78881e9742",
+      "tao_dataset_id": null,
+      "created_at": "2026-10-22T15:24:22Z"
+    }
+  },
+  "9902408e-f190-497b-9152-6a6acb20b742": {
+    "id": "9902408e-f190-497b-9152-6a6acb20b742",
+    "action": "evaluate",
+    "status": "error",
+    "model_name": "yolo26-smoke",
+    "parent_job_id": "ea841930-5253-4f12-8abe-074f970dfa53",
+    "error": "Dataset '/shared-storage/datasets/yolo26-smoke/data.yaml' images not found, missing path '/app/images/val'\nNote dataset download directory is '/app/datasets'. You can update this in '/root/.config/Ultralytics/settings.json'"
+  },
+  "f29319b0-2630-41a9-a1c6-1ac01468f4f4": {
+    "id": "f29319b0-2630-41a9-a1c6-1ac01468f4f4",
+    "action": "evaluate",
+    "status": "done",
+    "model_name": "yolo26-smoke",
+    "parent_job_id": "ea841930-5253-4f12-8abe-074f970dfa53",
+    "result": {
+      "metrics/precision(B)": 0.028169014084507043,
+      "metrics/recall(B)": 1.0,
+      "metrics/mAP50(B)": 0.2211111111111111,
+      "metrics/mAP50-95(B)": 0.10824444444444443,
+      "fitness": 0.10824444444444443
+    }
+  },
+  "d1836b33-3525-43d3-b5b8-7fa3f274c294": {
+    "id": "d1836b33-3525-43d3-b5b8-7fa3f274c294",
+    "action": "export",
+    "status": "done",
+    "model_name": "yolo26-smoke",
+    "parent_job_id": "ea841930-5253-4f12-8abe-074f970dfa53",
+    "result": "/shared-storage/models/yolo26/yolo26-smoke/best.onnx"
+  }
+}

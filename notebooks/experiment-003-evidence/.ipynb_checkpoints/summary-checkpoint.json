@@ -1,0 +1,12 @@
+{
+  "experiment": "003",
+  "status": "PASSED",
+  "jobs": {
+    "train": "2b695d89-5372-46a0-8991-56a5672e232d",
+    "evaluate": "7e21f062-8afe-45fb-91e3-89d387ed5e74",
+    "export": "7effd182-ed9a-4810-b266-dc448432887b",
+    "gen_trt_engine": "80590b97-0f48-4c7e-89bf-70a6ed54fd13",
+    "inference": "acb7746e-cab2-493f-a852-74599dad706e"
+  },
+  "finished_at": "2026-10-19T17:58:20.590667+00:00"
+}

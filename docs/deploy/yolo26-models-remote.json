@@ -1,0 +1,20 @@
+{
+  "models": {
+    "yolo26-smoke": {
+      "model_name": "yolo26-smoke",
+      "versions": [
+        {
+          "model_name": "yolo26-smoke",
+          "version": "v1",
+          "backend": "ultralytics",
+          "architecture": "yolo26n",
+          "adapter_job_id": "ea841930-5253-4f12-8abe-074f970dfa53",
+          "artifact_path": "/shared-storage/models/yolo26/yolo26-smoke/best.pt",
+          "tao_workspace_id": "98c4bec1-88df-423e-8a15-af78881e9742",
+          "tao_dataset_id": null,
+          "created_at": "2026-10-22T15:24:22Z"
+        }
+      ]
+    }
+  }
+}

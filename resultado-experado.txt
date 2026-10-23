@@ -1,0 +1,22 @@
+Critérios de Aceitação
+O pipeline de backend converte automaticamente as anotações do banco de dados (Label Flow) para o formato padrão consumível pelo NVIDIA TAO.
+sem tarefas
+
+
+O sistema diferencia e processa com sucesso o treinamento iterativo rápido (via Engenharia) e o treinamento massivo estrutural (via P&D), aplicando Transfer Learning em ambos os cenários.
+sem tarefas
+
+
+A automação respeita o mapeamento condicional, amarrando as novas regras e treinamentos à família de SKU correspondente ditada pela integração SAP/MES.
+sem tarefas
+
+
+Rotina de validação de segurança configurada: o sistema barra automaticamente o deploy para a fábrica se a acurácia global do novo modelo (mAP) cair abaixo do limite paramétrico de segurança de 90%.
+sem tarefas
+
+
+Geração de notificação ou log claro no painel gerencial indicando o sucesso da compilação e a ativação do novo cérebro preditivo nas câmeras da linha.
+sem tarefas
+
+
+
