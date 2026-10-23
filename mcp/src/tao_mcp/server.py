@@ -11,9 +11,12 @@ from typing import Any
 from fastmcp import FastMCP
 
 from tao_mcp.client import TaoClient, TaoAPIError
+from tao_mcp.model_catalog import get_version, list_models, next_version, register
+from tao_mcp.ultralytics_client import UltralyticsClient
 
 mcp = FastMCP("tao-ftms")
 client = TaoClient()
+ultralytics = UltralyticsClient()
 
 
 def _result(value: Any) -> str:
@@ -24,6 +27,33 @@ def _validate_id(value: str, field: str) -> str:
     if not re.fullmatch(r"[0-9a-fA-F-]{8,64}", value):
         raise ValueError(f"{field} must be an ID returned by TAO")
     return value
+
+
+def _find_artifact_uri(value: Any) -> str:
+    """Find a useful model/checkpoint URI in a TAO job response when present."""
+    preferred_keys = {
+        "artifact_uri",
+        "checkpoint_uri",
+        "model_uri",
+        "output_uri",
+        "checkpoint_path",
+        "model_path",
+    }
+    if isinstance(value, dict):
+        for key in preferred_keys:
+            candidate = value.get(key)
+            if isinstance(candidate, str) and candidate:
+                return candidate
+        for child in value.values():
+            found = _find_artifact_uri(child)
+            if found:
+                return found
+    elif isinstance(value, list):
+        for child in value:
+            found = _find_artifact_uri(child)
+            if found:
+                return found
+    return ""
 
 
 @mcp.tool
@@ -100,9 +130,48 @@ def tao_list_base_experiments(network_arch: str = "") -> str:
 
 
 @mcp.tool
+def tao_list_models(model_name: str = "") -> str:
+    """List locally registered trained models and their versions."""
+    return _result({"catalog": "local", "models": list_models(model_name or None)})
+
+
+@mcp.tool
+def tao_get_model_version(model_name: str, version: str) -> str:
+    """Get one locally registered trained model version."""
+    try:
+        return _result(get_version(model_name, version))
+    except KeyError as error:
+        raise ValueError(str(error)) from error
+
+
+@mcp.tool
 def tao_list_gpu_types() -> str:
     """List GPU types available to TAO jobs."""
     return _result(client.gpu_types())
+
+
+@mcp.tool
+def tao_ultralytics_health() -> str:
+    """Check the YOLO26 Ultralytics execution adapter."""
+    return _result(ultralytics.health())
+
+
+@mcp.tool
+def tao_ultralytics_list_jobs() -> str:
+    """List jobs executed by the Ultralytics adapter."""
+    return _result(ultralytics.jobs())
+
+
+@mcp.tool
+def tao_ultralytics_list_models() -> str:
+    """List versioned models registered by the Ultralytics adapter."""
+    return _result(ultralytics.models())
+
+
+@mcp.tool
+def tao_ultralytics_get_job(job_id: str) -> str:
+    """Get an Ultralytics adapter job by ID."""
+    return _result(ultralytics.job(_validate_id(job_id, "job_id")))
 
 
 @mcp.tool
@@ -122,6 +191,64 @@ def tao_get_test_context() -> str:
             "network_arch": os.getenv("TAO_REAL_NETWORK", "classification_pyt"),
         }
     )
+
+
+@mcp.tool
+def tao_ultralytics_submit_train(
+    model_name: str,
+    dataset_path: str = "",
+    dataset_uri: str = "",
+    architecture: str = "yolo26n",
+    tao_workspace_id: str = "",
+    tao_dataset_id: str = "",
+    input_size: int = 640,
+    max_epochs: int = 1,
+    batch_size: int = 4,
+    patience: int = 20,
+    device: str = "0",
+    confirm: str = "",
+) -> str:
+    """Submit a YOLO26 training job through the Ultralytics adapter."""
+    _require_mutations()
+    if confirm != "I_CONFIRM":
+        raise PermissionError("Pass confirm='I_CONFIRM' to submit an Ultralytics job")
+    if not dataset_path and not dataset_uri:
+        raise ValueError("dataset_path or dataset_uri is required")
+    return _result(
+        ultralytics.submit_train(
+            {
+                "model_name": model_name,
+                "architecture": architecture,
+                "dataset_path": dataset_path or None,
+                "dataset_uri": dataset_uri or None,
+                "tao_workspace_id": tao_workspace_id or None,
+                "tao_dataset_id": tao_dataset_id or None,
+                "input_size": input_size,
+                "max_epochs": max_epochs,
+                "batch_size": batch_size,
+                "patience": patience,
+                "device": device,
+            }
+        )
+    )
+
+
+@mcp.tool
+def tao_ultralytics_evaluate(job_id: str, dataset_path: str = "", dataset_uri: str = "", input_size: int = 640, device: str = "0", confirm: str = "") -> str:
+    """Evaluate a completed YOLO26 adapter training job."""
+    _require_mutations()
+    if confirm != "I_CONFIRM":
+        raise PermissionError("Pass confirm='I_CONFIRM' to evaluate an Ultralytics job")
+    return _result(ultralytics.evaluate(_validate_id(job_id, "job_id"), {"dataset_path": dataset_path or None, "dataset_uri": dataset_uri or None, "input_size": input_size, "device": device}))
+
+
+@mcp.tool
+def tao_ultralytics_export(job_id: str, input_size: int = 640, device: str = "0", confirm: str = "") -> str:
+    """Export a trained YOLO26 model to ONNX through the adapter."""
+    _require_mutations()
+    if confirm != "I_CONFIRM":
+        raise PermissionError("Pass confirm='I_CONFIRM' to export an Ultralytics job")
+    return _result(ultralytics.export(_validate_id(job_id, "job_id"), {"input_size": input_size, "device": device}))
 
 
 def _require_mutations() -> None:
@@ -162,6 +289,8 @@ def tao_submit_job(
     eval_dataset_uri: str = "",
     inference_dataset_uri: str = "",
     base_experiment_ids: list[str] | None = None,
+    model_name: str = "",
+    model_version: str = "",
 ) -> str:
     """Submit a real TAO job after explicit confirmation and validation."""
     _require_mutations()
@@ -173,6 +302,23 @@ def tao_submit_job(
     _validate_id(workspace_id, "workspace_id")
     if parent_job_id:
         _validate_id(parent_job_id, "parent_job_id")
+    if model_name and not model_version:
+        raise ValueError("model_version is required when model_name is provided")
+    if model_version and not model_name:
+        raise ValueError("model_name is required when model_version is provided")
+    if model_name:
+        if action == "train":
+            raise ValueError("model_name/model_version can only select a model for non-training jobs")
+        try:
+            model = get_version(model_name, model_version)
+        except KeyError as error:
+            raise ValueError(str(error)) from error
+        registered_job_id = model.get("job_id", "")
+        if not registered_job_id:
+            raise ValueError("The selected model version has no parent TAO job")
+        if parent_job_id and parent_job_id != registered_job_id:
+            raise ValueError("parent_job_id conflicts with the selected model version")
+        parent_job_id = registered_job_id
     job_name = name or f"mcp-{network_arch}-{action}-{int(time.time())}"
     return _result(
         client.create_job(
@@ -188,6 +334,42 @@ def tao_submit_job(
             base_experiment_ids=base_experiment_ids,
         )
     )
+
+
+@mcp.tool
+def tao_register_model(
+    model_name: str,
+    job_id: str,
+    artifact_uri: str = "",
+    version: str = "",
+    metadata: dict[str, Any] | None = None,
+    confirm: str = "",
+) -> str:
+    """Register a completed TAO training job as a local versioned model."""
+    _require_mutations()
+    if confirm != "I_CONFIRM":
+        raise PermissionError("Pass confirm='I_CONFIRM' to register a model")
+    _validate_id(job_id, "job_id")
+    job = client.job(job_id)
+    status = str(job.get("status", "")) if isinstance(job, dict) else ""
+    if status not in {"Done", "Completed"}:
+        raise ValueError(f"Only completed jobs can be registered; current status is {status or 'unknown'}")
+    model_version = version or next_version(model_name)
+    if not re.fullmatch(r"v?[A-Za-z0-9._-]+", model_version):
+        raise ValueError("version must contain only letters, numbers, '.', '_' or '-'")
+    record = {
+        "model_name": model_name,
+        "version": model_version if model_version.startswith("v") else f"v{model_version}",
+        "job_id": job_id,
+        "artifact_uri": artifact_uri or _find_artifact_uri(job),
+        "network_arch": job.get("network_arch", "") if isinstance(job, dict) else "",
+        "status": status,
+        "metadata": metadata or {},
+    }
+    try:
+        return _result(register(record))
+    except KeyError as error:
+        raise ValueError(str(error)) from error
 
 
 @mcp.tool
