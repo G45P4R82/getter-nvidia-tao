@@ -37,6 +37,57 @@ Run the smoke test after the services are up:
 ./scripts/smoke-test.sh
 ```
 
+## Access from Agent Insights AKS
+
+The physical GPU host is connected to the Tailscale tailnet and runs the TAO
+FTMS API on port `8090`:
+
+```text
+GPU host: getter-System-Product-Name
+Tailscale IP: 100.107.81.126
+TAO health: /api/v2/health
+```
+
+The Agent Insights AKS cluster uses the Tailscale Kubernetes Operator egress
+proxy to reach this host without exposing the GPU machine publicly. The
+permanent Kubernetes Service is maintained in the Agent Insights repository:
+
+```text
+agent-insights-main/infra/k8s/tailscale-tao-egress.yaml
+```
+
+Workloads in the AKS cluster call TAO using the regular Kubernetes DNS name:
+
+```text
+http://tao-ftms-gpu.agent-insights.svc.cluster.local:8090/api/v2/health
+```
+
+The egress path is:
+
+```text
+AKS workload -> Tailscale Operator -> Tailscale -> GPU host -> TAO FTMS
+```
+
+The egress Service requires the `egress-proxies` ProxyGroup and targets the
+GPU host with `tailscale.com/tailnet-ip`. Confirm its status with:
+
+```bash
+export KUBECONFIG="$HOME/.kube/agent-insights-aks"
+kubectl -n agent-insights get service tao-ftms-gpu
+kubectl -n agent-insights get service tao-ftms-gpu \
+  -o jsonpath='{.status.conditions}{"\n"}'
+```
+
+The expected condition is `TailscaleEgressSvcReady=True`. The path was
+validated from a pod inside AKS and returned HTTP `200` with:
+
+```json
+["liveness","readiness"]
+```
+
+Do not place `TAO_TOKEN`, `NGC_KEY`, Tailscale OAuth credentials or auth keys
+in Git, Kubernetes manifests or this README.
+
 Stop services without deleting persistent volumes:
 
 ```bash
