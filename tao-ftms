@@ -50,6 +50,12 @@ prepare_runtime() {
   cp "$SECRETS_FILE" "$upstream_dir/secrets.json"
   chmod 600 "$upstream_dir/secrets.json"
 
+  # Add the optional YOLO adapter to the downloaded official bundle. It uses
+  # the same GPU host and SeaweedFS as FTMS, while exposing a small async API
+  # for YOLO datasets that are not native TAO catalog formats.
+  rm -rf "$upstream_dir/ultralytics_adapter"
+  cp -a "$ROOT_DIR/ultralytics_adapter" "$upstream_dir/ultralytics_adapter"
+
   # MongoDB latest currently refuses to start on the host's kernel 7.x.
   # Keep the official Compose bundle intact in Git and pin its local runtime
   # override to a MongoDB line compatible with this host.
@@ -65,6 +71,47 @@ content = content.replace(
     1,
 )
 compose_file.write_text(content)
+PY
+
+  python3 - "$upstream_dir/docker-compose.yml" <<'PY'
+from pathlib import Path
+import sys
+
+compose_file = Path(sys.argv[1])
+content = compose_file.read_text()
+if "  ultralytics_adapter:\n" not in content:
+    service = '''  ultralytics_adapter:
+    build:
+      context: .
+      dockerfile: ultralytics_adapter/Dockerfile
+    container_name: ultralytics_adapter
+    gpus: all
+    ports:
+      - "${ULTRALYTICS_ADAPTER_PORT:-9200}:9200"
+    environment:
+      ULTRALYTICS_DATA_ROOT: /shared-storage
+      ULTRALYTICS_MODEL_ROOT: /shared-storage/models
+      ULTRALYTICS_JOB_ROOT: /shared-storage/ultralytics-jobs
+      ULTRALYTICS_DEVICE: ${ULTRALYTICS_DEVICE:-0}
+      TAO_SEAWEEDFS_ENDPOINT: http://seaweedfs-s3:8333
+      TAO_SEAWEEDFS_ACCESS_KEY: ${TAO_SEAWEEDFS_ACCESS_KEY:-seaweedfs}
+      TAO_SEAWEEDFS_SECRET_KEY: ${TAO_SEAWEEDFS_SECRET_KEY:-seaweedfs123}
+      TAO_SEAWEEDFS_REGION: ${TAO_SEAWEEDFS_REGION:-us-east-1}
+    volumes:
+      - ultralytics_adapter_data:/shared-storage
+    depends_on:
+      - seaweedfs-s3
+    networks:
+      - default
+    profiles:
+      - seaweedfs
+'''
+    marker = "\nvolumes:\n"
+    if marker not in content:
+        raise SystemExit("Compose volumes section was not found")
+    content = content.replace(marker, "\n" + service + marker, 1)
+    content = content.replace("  seaweedfs_filer_data:\n", "  seaweedfs_filer_data:\n  ultralytics_adapter_data:\n", 1)
+    compose_file.write_text(content)
 PY
 
   # The workflow service needs GPU visibility to report capacity to its local
@@ -188,7 +235,7 @@ main() {
         source ./config.env
         set +a
         docker compose --profile seaweedfs up -d --force-recreate \
-          nginx tao_api_app tao_api_workflow
+          nginx tao_api_app tao_api_workflow ultralytics_adapter
       fi
       exit "$run_status"
       ;;

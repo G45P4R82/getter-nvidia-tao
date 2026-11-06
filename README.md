@@ -68,6 +68,21 @@ The egress path is:
 AKS workload -> Tailscale Operator -> Tailscale -> GPU host -> TAO FTMS
 ```
 
+The local `tao-ftms up-all` wrapper also adds the optional Ultralytics adapter
+to the GPU host. It listens on port `9200` and downloads YOLO datasets from the
+local SeaweedFS S3 service when a `seaweedfs://...` dataset URI is supplied:
+
+```text
+GPU host adapter: http://<gpu-host>:9200
+Train endpoint: POST /v1/jobs/train
+Status endpoint: GET /v1/jobs/{job_id}
+SeaweedFS S3: port 8333
+```
+
+The adapter is exposed to AKS through a separate Tailscale egress Service named
+`tao-ultralytics-gpu`. The Label Flow repository contains the corresponding
+egress manifests in `infra/k8s/tao-gpu-egress.yaml`.
+
 The egress Service requires the `egress-proxies` ProxyGroup and targets the
 GPU host with `tailscale.com/tailnet-ip`. Confirm its status with:
 
