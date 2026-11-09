@@ -1,9 +1,9 @@
 FROM nvcr.io/nvidia/tao/tao-toolkit:6.26.3-pyt
 
 WORKDIR /app
-COPY requirements.txt .
+COPY ultralytics_adapter/requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
+COPY ultralytics_adapter/ .
 
 ENV ULTRALYTICS_DATA_ROOT=/shared-storage \
     ULTRALYTICS_MODEL_ROOT=/shared-storage/models \
