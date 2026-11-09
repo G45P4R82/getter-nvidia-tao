@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 
@@ -301,6 +302,18 @@ def get_logs(job_id: str, max_chars: int = 20000) -> dict[str, Any]:
     log_path = JOB_ROOT / job_id / "train" / "results.csv"
     text = log_path.read_text(encoding="utf-8", errors="replace") if log_path.exists() else ""
     return {"job_id": job_id, "available": bool(text), "text": text[-max_chars:]}
+
+
+@app.get("/v1/jobs/{job_id}/artifact")
+def get_artifact(job_id: str):
+    with _jobs_lock:
+        job = _jobs.get(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="job not found")
+    artifact = job.get("artifact_path")
+    if not artifact or not Path(artifact).is_file():
+        raise HTTPException(status_code=404, detail="artifact not ready")
+    return FileResponse(artifact, media_type="application/octet-stream", filename="best.pt")
 
 
 @app.post("/v1/jobs/{job_id}/evaluate", status_code=202)
