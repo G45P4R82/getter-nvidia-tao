@@ -76,7 +76,7 @@ local SeaweedFS S3 service when a `seaweedfs://...` dataset URI is supplied:
 GPU host adapter: http://<gpu-host>:9200
 Train endpoint: POST /v1/jobs/train
 Status endpoint: GET /v1/jobs/{job_id}
-SeaweedFS S3: port 8333
+SeaweedFS S3: configured host port (currently 18333)
 ```
 
 The adapter is exposed to AKS through a separate Tailscale egress Service named

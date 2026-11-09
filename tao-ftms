@@ -93,7 +93,7 @@ if "  ultralytics_adapter:\n" not in content:
       ULTRALYTICS_MODEL_ROOT: /shared-storage/models
       ULTRALYTICS_JOB_ROOT: /shared-storage/ultralytics-jobs
       ULTRALYTICS_DEVICE: ${ULTRALYTICS_DEVICE:-0}
-      TAO_SEAWEEDFS_ENDPOINT: http://seaweedfs-s3:8333
+      TAO_SEAWEEDFS_ENDPOINT: http://seaweedfs-s3:${SEAWEEDFS_S3_PORT:-8333}
       TAO_SEAWEEDFS_ACCESS_KEY: ${TAO_SEAWEEDFS_ACCESS_KEY:-seaweedfs}
       TAO_SEAWEEDFS_SECRET_KEY: ${TAO_SEAWEEDFS_SECRET_KEY:-seaweedfs123}
       TAO_SEAWEEDFS_REGION: ${TAO_SEAWEEDFS_REGION:-us-east-1}
